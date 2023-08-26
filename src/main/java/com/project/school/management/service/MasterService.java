@@ -8,6 +8,7 @@ import com.project.school.management.entity.BloodGroupEntity;
 import com.project.school.management.entity.GenderEntity;
 import com.project.school.management.entity.GradeEntity;
 import com.project.school.management.entity.GradeSectionEntity;
+import com.project.school.management.entity.MasterFessType;
 import com.project.school.management.entity.MasterHoliday;
 import com.project.school.management.entity.RoleEntity;
 import com.project.school.management.request.SubjectRequest;
