@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus;
 
 import com.project.school.management.enums.ErrorCode;
 
-public class FieldAlreadyExist extends CustomException {
+public class UserNotFoundException extends CustomException {
 
-	public FieldAlreadyExist() {
-		super(ErrorCode.FIELD_ALREADY_EXIST, HttpStatus.UNAUTHORIZED);
+	public UserNotFoundException() {
+		super(ErrorCode.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
 	}
 
 }

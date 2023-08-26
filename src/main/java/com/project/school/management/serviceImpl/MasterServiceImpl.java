@@ -34,28 +34,28 @@ import com.project.school.management.response.ResponseHandler;
 import com.project.school.management.service.MasterService;
 
 @Service
-public class MasterServiceImpl implements MasterService{
-	
+public class MasterServiceImpl implements MasterService {
+
 	private static final Logger log = LoggerFactory.getLogger(MasterServiceImpl.class);
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Autowired
 	private GradeRepository gradeRepository;
-	
+
 	@Autowired
 	private GradeSectionRepository gradeSectionRepository;
-	
+
 	@Autowired
 	private GenderRepository genderRepository;
-	
+
 	@Autowired
 	private BloodGroupRepository bloodGroupRepository;
-	
+
 	@Autowired
 	private SubjectRepository subjectRepository;
-	
+
 	@Autowired
 	private MasterHolidayRepository masterHolidayRepository;
 
@@ -63,8 +63,8 @@ public class MasterServiceImpl implements MasterService{
 	public ResponseEntity<Object> saveRole(RoleEntity roleEntity) throws IOException {
 		log.info("Inside save role method");
 		HashMap<String, Object> map = new LinkedHashMap<>();
-		if(roleRepository.getByRole(roleEntity.getRole()).isPresent()) {
-			throw new InvalidRoleException("Role Already Exist");
+		if (roleRepository.getByRole(roleEntity.getRole()).isPresent()) {
+			throw new InvalidRoleException();
 		}
 		roleRepository.save(roleEntity);
 		map.put("role", roleEntity.getRole());
@@ -83,8 +83,8 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public ResponseEntity<Object> saveGrade(GradeEntity gradeEntity) throws IOException {
 		log.info("Inside save grade method");
-		if(gradeRepository.getByGrade(gradeEntity.getGrade()).isPresent()) {
-				throw new FieldAlreadyExist("Grade Already Exist");	
+		if (gradeRepository.getByGrade(gradeEntity.getGrade()).isPresent()) {
+			throw new FieldAlreadyExist();
 		}
 		gradeRepository.save(gradeEntity);
 		log.info("grade added sucessfully");
@@ -94,8 +94,8 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public ResponseEntity<Object> saveGradeSection(GradeSectionEntity gradeSecEntity) {
 		log.info("Inside save grade section method");
-		if(gradeSectionRepository.getByGradeSection(gradeSecEntity.getGradeSection()).isPresent()){
-			throw new FieldAlreadyExist("Grade Section Already Exist");
+		if (gradeSectionRepository.getByGradeSection(gradeSecEntity.getGradeSection()).isPresent()) {
+			throw new FieldAlreadyExist();
 		}
 		GradeSectionEntity sec = new GradeSectionEntity();
 		sec.setGradeSection(gradeSecEntity.getGradeSection().toUpperCase());
@@ -121,8 +121,8 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public ResponseEntity<Object> saveGender(GenderEntity genderEntity) throws IOException {
 		log.info("Inside save gender method");
-		if(genderRepository.getByGender(genderEntity.getGender().toUpperCase()).isPresent()) {
-			throw new FieldAlreadyExist("Gender Already Exist");
+		if (genderRepository.getByGender(genderEntity.getGender().toUpperCase()).isPresent()) {
+			throw new FieldAlreadyExist();
 		}
 		GenderEntity gender = new GenderEntity();
 		gender.setGender(genderEntity.getGender().toUpperCase());
@@ -134,8 +134,8 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public ResponseEntity<Object> saveBloodGroup(BloodGroupEntity bloodGroupEntity) throws IOException {
 		log.info("Inside save blood group method");
-		if(bloodGroupRepository.getByBloodGroup(bloodGroupEntity.getBloodGroup().toUpperCase()).isPresent()) {
-			throw new FieldAlreadyExist("Blood Group Already Exist");
+		if (bloodGroupRepository.getByBloodGroup(bloodGroupEntity.getBloodGroup().toUpperCase()).isPresent()) {
+			throw new FieldAlreadyExist();
 		}
 		BloodGroupEntity bloodGroup = new BloodGroupEntity();
 		bloodGroup.setBloodGroup(bloodGroupEntity.getBloodGroup().toUpperCase());
@@ -161,8 +161,8 @@ public class MasterServiceImpl implements MasterService{
 	@Override
 	public ResponseEntity<Object> saveSubject(SubjectRequest subjectRequest) throws IOException {
 		log.info("inside add subjet method");
-		if(subjectRepository.getBySubject(subjectRequest.getSubject().toUpperCase()).isPresent()) {
-			throw new FieldAlreadyExist("Subject Already Exist");
+		if (subjectRepository.getBySubject(subjectRequest.getSubject().toUpperCase()).isPresent()) {
+			throw new FieldAlreadyExist();
 		}
 		SubjectEntity subjectEntity = new SubjectEntity();
 		subjectEntity.setSubject(subjectRequest.getSubject().toUpperCase());
@@ -177,7 +177,7 @@ public class MasterServiceImpl implements MasterService{
 
 	private String generateRandom() {
 		Random random = new Random();
-		int num = random.nextInt(100, 999); 
+		int num = random.nextInt(100, 999);
 		String strNum = String.valueOf(num);
 		return strNum;
 	}
@@ -193,10 +193,10 @@ public class MasterServiceImpl implements MasterService{
 	public ResponseEntity<Object> saveHoliday(MasterHoliday masterHoliday) throws IOException {
 		log.info("++++inside add master holiday method+++");
 		MasterHoliday holiday = masterHolidayRepository.findOne(masterHoliday.getMasterHolidayName());
-		System.out.println("holiday: "+holiday);
-		if(holiday!=null) {
+		System.out.println("holiday: " + holiday);
+		if (holiday != null) {
 			log.info("++++holiday exist in master+++");
-			throw new FieldAlreadyExist("Holiday exist");
+			throw new FieldAlreadyExist();
 		}
 		log.info("++call generateHolidayId function+++");
 		String holidayId = generateHolidayId(masterHoliday);
