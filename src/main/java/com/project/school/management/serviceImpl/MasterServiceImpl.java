@@ -33,7 +33,10 @@ import com.project.school.management.request.SubjectRequest;
 import com.project.school.management.response.ResponseHandler;
 import com.project.school.management.service.MasterService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MasterServiceImpl implements MasterService {
 
 	private static final Logger log = LoggerFactory.getLogger(MasterServiceImpl.class);
