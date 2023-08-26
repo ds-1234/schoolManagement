@@ -1,24 +1,19 @@
 package com.project.school.management.service;
 
-import java.io.IOException;
+import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
-import com.project.school.management.entity.StudentEntity;
-import com.project.school.management.request.AddStudentRequest;
+import com.project.school.management.entity.UserEntity;
 import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.UserRequest;
 
-public interface UserService{
+public interface UserService {
 
-	ResponseEntity<Object> saveUserDetail(UserRequest userRequest) throws IOException;
+	UserEntity saveUserDetail(UserRequest userRequest);
 
-	ResponseEntity<Object> login(LoginRequest loginRequest) throws IOException;
+	UserEntity login(LoginRequest loginRequest);
 
-	ResponseEntity<Object> saveStudentDetail(AddStudentRequest request) throws IOException;
+	List<UserEntity> getUserList();
 
-	ResponseEntity<Object> getStudent() throws IOException;
-
-	ResponseEntity<Object> getStudent(Integer id) throws IOException;
+	UserEntity getUser(Integer id);
 
 }

@@ -1,15 +1,14 @@
 package com.project.school.management.exception;
 
-public class UserAlreadyExistException extends RuntimeException{
+import org.springframework.http.HttpStatus;
+
+import com.project.school.management.enums.ErrorCode;
+
+public class UserAlreadyExistException extends CustomException{
 	
-	private static final long serialVersionUID = 1L;
-
-	public UserAlreadyExistException(String message) {
-		super(message);
-	}
-
 	public UserAlreadyExistException() {
-		super();
+		super(ErrorCode.USER_ALREADY_EXIST, HttpStatus.UNAUTHORIZED);
 	}
+
 
 }

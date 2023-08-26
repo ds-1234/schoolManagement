@@ -1,15 +1,13 @@
 package com.project.school.management.exception;
 
-public class InvalidRoleException extends RuntimeException{
+import org.springframework.http.HttpStatus;
+
+import com.project.school.management.enums.ErrorCode;
+
+public class InvalidRoleException extends CustomException{
 	
-	private static final long serialVersionUID = 1L;
-
-	public InvalidRoleException(String message) {
-		super(message);
-	}
-
 	public InvalidRoleException() {
-		super();
+		super(ErrorCode.ROLE_DOES_NOT_EXIST, HttpStatus.UNAUTHORIZED);
 	}
 
 }

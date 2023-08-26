@@ -1,5 +1,8 @@
 package com.project.school.management.entity;
 
+import com.project.school.management.enums.Gender;
+import com.project.school.management.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,9 +32,12 @@ public class UserEntity {
 	private String userName;
 	
 	@Column(name="role", nullable=false)
-	private String role;
+	private Role role;
 	
-	@Column(name="teacher_id", nullable=true)
-	private String teacherId;
+	@Column(name="gender", nullable=false)
+	private Gender gender;
+	
+	@Column(name="name", nullable=false)
+	private String name;
 	
 }
