@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
@@ -17,37 +15,37 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="holiday_entity")
-public class HolidayEntity {
+@Table(name="expenses")
+public class AccountsExpenses {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Column(name="expense_id")
+	private String expenseId;
 	
-	@Column(name="holiday_id")
-	private String holidayId;
+	@Column(name="item_name")
+	private String itemName;
 	
-	@Column(name="holiday_name")
-	private String holidayName;
+	@Column(name="item_quantity")
+	private Integer itemQuantity;
 	
-	@Column(name="holiday_type")
-	private Integer holidayType;
+	@Column(name="amount")
+	private Long amount;
+	
+	@Column(name="purchase_source")
+	private String purchaseSource;
+	
+	@Column(name="purchase_by")
+	private String purchaseBy;
+	
+	@JsonFormat(pattern = "dd-mm-yyyy")
+	@Column(name="purchase_date")
+	private Date purchaseDate;
 	
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern = "dd-mm-yyyy")
-	@Column(name="start_date")
-	private Date startDate;
-	
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern = "dd-mm-yyyy")
-	@Column(name="end_date")
-	private Date endDate;
-	
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern = "dd-mm-yyyy")
+	@JsonFormat(pattern = "dd-mm-yyyy hh:mm")
 	@Column(name = "cratedon")
 	private Date cratedon;
-
+	
 	@PrePersist
 	protected void onCreate() {
 		cratedon = new Date();

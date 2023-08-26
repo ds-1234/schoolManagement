@@ -59,6 +59,7 @@ public class MasterServiceImpl implements MasterService{
 	@Autowired
 	private MasterHolidayRepository masterHolidayRepository;
 
+
 	@Override
 	public ResponseEntity<Object> saveRole(RoleEntity roleEntity) throws IOException {
 		log.info("Inside save role method");
