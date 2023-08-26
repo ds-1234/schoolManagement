@@ -16,11 +16,11 @@ import com.project.school.management.request.UserRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.UserService;
 
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("user")
-@Log
+@Slf4j
 public class UserController {
 
 	@Autowired
