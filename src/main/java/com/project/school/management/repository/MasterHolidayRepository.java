@@ -13,9 +13,6 @@ public interface MasterHolidayRepository extends JpaRepository<MasterHoliday, In
 	@Query(value = "Select * from master_holiday where master_holiday_name = ?1", nativeQuery = true)
 	MasterHoliday findOne(String masterHolidayName);
 
-//	@Query(value = "Select * from master_holiday where status = ?1", nativeQuery = true)
-//	List<MasterHoliday> findAllAndActive(Boolean active);
-
 	List<MasterHoliday> findByStatus(boolean status);
 
 	
