@@ -30,18 +30,21 @@ public class UserServiceImpl implements UserService {
 	public UserEntity saveUserDetail(UserRequest userRequest) {
 		UserEntity user = new UserEntity();
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-
+		String str = null;
+		str.equals("akash");
 		log.info("call function generateUserName");
 		String username = generateUserName(userRequest.getEmail(), userRequest.getPhone());
-		user.setUserName(username);
-
+		user.setFirstName(userRequest.getFirstName());
+		user.setLastName(userRequest.getLastName());
+		user.setFatherName(userRequest.getFatherName());
+		user.setMotherName(userRequest.getMotherName());
+		user.setDateOfBirth(userRequest.getDateOfBirth());
 		user.setRole(userRequest.getRole());
-
 		user.setEmail(userRequest.getEmail());
-		user.setPassword(bCrypt.encode(userRequest.getPassword()));
 		user.setPhone(userRequest.getPhone());
 		user.setGender(userRequest.getGender());
-		user.setName(userRequest.getName());
+		user.setPassword(bCrypt.encode(userRequest.getPassword()));
+		user.setUserName(username);
 
 		log.info("User save");
 		userRepository.save(user);
