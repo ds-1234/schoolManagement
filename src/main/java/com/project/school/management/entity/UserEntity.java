@@ -1,15 +1,17 @@
 package com.project.school.management.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import com.project.school.management.enums.Gender;
-import com.project.school.management.enums.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -18,8 +20,8 @@ import lombok.Data;
 @Table(name = "user_entity")
 public class UserEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Column(name = "firstName", nullable = false)
 	private String firstName;
@@ -39,19 +41,40 @@ public class UserEntity {
 	@Column(name = "dateOfBirth", nullable = false)
 	private Date dateOfBirth;
 
-	@Column(name = "role", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Address address;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Role role;
 
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "phone", nullable = true)
+	@Column(name = "phone", nullable = false)
 	private Long phone;
 
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@Column(name = "user_name", nullable = true)
+	@Column(name = "userName", nullable = false)
 	private String userName;
+
+	@Column(name = "userId", nullable = false)
+	private String userId;
+
+	@Column(name = "is_parent", nullable = true)
+	private List<String> isParent;
+
+	@Column(name = "className", nullable = true)
+	private List<String> className;
+
+	@Column(name = "section", nullable = true)
+	private List<String> section;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private School school;
+
+	@Column(name = "isActive", nullable = false)
+	private Boolean isActive;
 
 }

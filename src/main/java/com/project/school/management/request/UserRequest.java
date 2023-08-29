@@ -1,9 +1,12 @@
 package com.project.school.management.request;
 
 import java.util.Date;
+import java.util.List;
 
+import com.project.school.management.entity.Address;
+import com.project.school.management.entity.Role;
+import com.project.school.management.entity.School;
 import com.project.school.management.enums.Gender;
-import com.project.school.management.enums.Role;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,26 +20,40 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequest {
 
-	String firstName;
+	private String firstName;
 
-	String lastName;
+	private String lastName;
 
-	String fatherName;
+	private String fatherName;
 
-	String motherName;
+	private String motherName;
 
-	Gender gender;
+	private Gender gender;
 
-	Date dateOfBirth;
+	private Date dateOfBirth;
 
-	Role role;
+	private Address address;
 
-	String email;
+	private Role role;
 
-	Long phone;
+	private String email;
 
-	String password;
+	private Long phone;
 
-	String userName;
+	private String password;
+
+	private String userName;
+
+	private String userId;
+
+	private List<String> isParent;
+
+	private List<String> className;
+
+	private List<String> section;
+
+	private School school;
+
+	private Boolean isActive;
 
 }

@@ -21,7 +21,6 @@ import com.project.school.management.entity.MasterHoliday;
 import com.project.school.management.entity.RoleEntity;
 import com.project.school.management.entity.SubjectEntity;
 import com.project.school.management.exception.FieldAlreadyExist;
-import com.project.school.management.exception.InvalidRoleException;
 import com.project.school.management.repository.BloodGroupRepository;
 import com.project.school.management.repository.GenderRepository;
 import com.project.school.management.repository.GradeRepository;
@@ -62,15 +61,14 @@ public class MasterServiceImpl implements MasterService {
 	@Autowired
 	private MasterHolidayRepository masterHolidayRepository;
 
-
 	@Override
 	public ResponseEntity<Object> saveRole(RoleEntity roleEntity) throws IOException {
 		log.info("Inside save role method");
 		HashMap<String, Object> map = new LinkedHashMap<>();
-		if (roleRepository.getByRole(roleEntity.getRole()).isPresent()) {
-			throw new InvalidRoleException();
-		}
-		roleRepository.save(roleEntity);
+//		if (roleRepository.getByRole(roleEntity.getRole()).isPresent()) {
+//			throw new InvalidRoleException();
+//		}
+//		roleRepository.save(roleEntity);
 		map.put("role", roleEntity.getRole());
 		map.put("description", roleEntity.getDescription());
 		log.info("role added sucessfully");
@@ -80,8 +78,8 @@ public class MasterServiceImpl implements MasterService {
 	@Override
 	public ResponseEntity<Object> getRole() {
 		log.info("Inside get Role ");
-		List<RoleEntity> role = roleRepository.findAll();
-		return ResponseHandler.generateResponse("SUCCESS: Get Role", HttpStatus.OK, "", role);
+//		List<RoleEntity> role = roleRepository.findAll();
+		return ResponseHandler.generateResponse("SUCCESS: Get Role", HttpStatus.OK, "", "");
 	}
 
 	@Override

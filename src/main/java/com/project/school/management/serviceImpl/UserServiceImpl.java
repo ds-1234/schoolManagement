@@ -1,5 +1,6 @@
 package com.project.school.management.serviceImpl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.school.management.entity.Role;
 import com.project.school.management.entity.UserEntity;
 import com.project.school.management.exception.AccessDenied;
 import com.project.school.management.exception.InvalidArgumentException;
@@ -30,8 +32,6 @@ public class UserServiceImpl implements UserService {
 	public UserEntity saveUserDetail(UserRequest userRequest) {
 		UserEntity user = new UserEntity();
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		String str = null;
-		str.equals("akash");
 		log.info("call function generateUserName");
 		String username = generateUserName(userRequest.getEmail(), userRequest.getPhone());
 		user.setFirstName(userRequest.getFirstName());
@@ -39,13 +39,18 @@ public class UserServiceImpl implements UserService {
 		user.setFatherName(userRequest.getFatherName());
 		user.setMotherName(userRequest.getMotherName());
 		user.setDateOfBirth(userRequest.getDateOfBirth());
-		user.setRole(userRequest.getRole());
 		user.setEmail(userRequest.getEmail());
 		user.setPhone(userRequest.getPhone());
 		user.setGender(userRequest.getGender());
 		user.setPassword(bCrypt.encode(userRequest.getPassword()));
 		user.setUserName(username);
+		user.setUserId(generateUserId(userRequest.getRole()));
 
+		user.setIsActive(userRequest.getIsActive());
+
+		user.setRole(userRequest.getRole());
+		user.setSchool(userRequest.getSchool());
+		user.setSchool(userRequest.getSchool());
 		log.info("User save");
 		userRepository.save(user);
 		return user;
@@ -112,6 +117,16 @@ public class UserServiceImpl implements UserService {
 	private String sanitizeString(String input) {
 		log.info("inside sanitizeString method");
 		return input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+	}
+
+	private String generateUserId(Role role) {
+		String userId = role.getName().substring(0, 1);
+		LocalDateTime localDate = LocalDateTime.now();
+		Long count = this.userRepository.countByRole(role);
+		count++;
+		userId = userId.concat(String.valueOf(localDate.getYear())).concat(count.toString());
+		return userId;
+
 	}
 
 }
