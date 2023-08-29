@@ -1,5 +1,7 @@
 package com.project.school.management.request;
 
+import java.util.Date;
+
 import com.project.school.management.enums.Gender;
 import com.project.school.management.enums.Role;
 
@@ -13,18 +15,28 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserRequest{
-	
-	String email;
-	
-	Long phone;
-	
-	Role role;
-	
-	String password;
-	
-	String name;
-	
+public class UserRequest {
+
+	String firstName;
+
+	String lastName;
+
+	String fatherName;
+
+	String motherName;
+
 	Gender gender;
+
+	Date dateOfBirth;
+
+	Role role;
+
+	String email;
+
+	Long phone;
+
+	String password;
+
+	String userName;
 
 }

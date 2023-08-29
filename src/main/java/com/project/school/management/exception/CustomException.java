@@ -4,14 +4,12 @@ import org.springframework.http.HttpStatus;
 
 import com.project.school.management.enums.ErrorCode;
 
-public abstract class CustomException extends RuntimeException{
-	
+public abstract class CustomException extends RuntimeException {
 
 	private final ErrorCode errorCode;
-	
+
 	private final HttpStatus httpStatus;
-	
-	
+
 	public ErrorCode getErrorCode() {
 		return errorCode;
 	}
@@ -24,7 +22,7 @@ public abstract class CustomException extends RuntimeException{
 		super(String.valueOf(error));
 		this.errorCode = error;
 		this.httpStatus = statusCode;
-		
+
 	}
 
 }
