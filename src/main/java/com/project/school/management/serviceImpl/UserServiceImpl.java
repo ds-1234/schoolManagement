@@ -51,11 +51,11 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(bCrypt.encode(userRequest.getPassword()));
 		user.setUserName(username);
 		user.setUserId(generateUserId(userRequest.getRole()));
+		user.setAddress(userRequest.getAddress());
 
 		user.setIsActive(userRequest.getIsActive());
 
 		user.setRole(userRequest.getRole());
-		user.setSchool(userRequest.getSchool());
 		user.setSchool(userRequest.getSchool());
 		log.info("User save");
 		userRepository.save(user);
