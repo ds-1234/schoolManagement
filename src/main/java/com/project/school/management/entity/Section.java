@@ -8,16 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name="master_gradeSection")
-public class GradeSectionEntity {
-	
+@Data
+@Table(name = "section")
+public class Section {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(name="grade_section")
-	private String gradeSection;
+	private Long id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "description")
+	private String description;
 
 }

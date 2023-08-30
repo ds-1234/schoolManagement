@@ -1,17 +1,21 @@
 package com.project.school.management.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.project.school.management.enums.Gender;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -51,7 +55,7 @@ public class UserEntity {
 	private String email;
 
 	@Column(name = "phone", nullable = false)
-	private Long phone;
+	private String phone;
 
 	@Column(name = "password", nullable = false)
 	private String password;
@@ -65,11 +69,13 @@ public class UserEntity {
 	@Column(name = "is_parent", nullable = true)
 	private List<String> isParent;
 
-	@Column(name = "className", nullable = true)
-	private List<String> className;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "class_id", referencedColumnName = "id")
+	private List<ClassEntity> className = new ArrayList<>();
 
-	@Column(name = "section", nullable = true)
-	private List<String> section;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "section_id", referencedColumnName = "id")
+	private List<Section> section = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private School school;

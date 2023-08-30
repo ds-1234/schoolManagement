@@ -31,10 +31,4 @@ public class Address {
 	@Column(name = "country", nullable = false)
 	private String country;
 
-//	@OneToMany(mappedBy = "address")
-//	private Set<UserEntity> user;
-
-//	@OneToMany(mappedBy = "address")
-//	private Set<School> school;
-
 }

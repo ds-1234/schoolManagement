@@ -8,19 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name="master_role")
-public class RoleEntity {
-	
+@Data
+@Table(name = "subject")
+public class Subject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(name="role")
-	private String role;
-	
-	@Column(name="description")
+	private Long id;
+
+	@Column(name = "subject")
+	private String subject;
+
+	@Column(name = "description")
 	private String description;
 
 }

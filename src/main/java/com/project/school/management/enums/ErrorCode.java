@@ -14,9 +14,11 @@ public enum ErrorCode {
 
 	ACCED_DENIED,
 
+	INVALID_PHONE_NUMBER,
+
 	UNKNOWN;
 
-	private final String prefix = "UserManagement.";
+	private final String prefix = "USERMANAGEMENT.";
 
 	public String code() {
 		StringBuilder code = new StringBuilder();

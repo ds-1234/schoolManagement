@@ -13,6 +13,7 @@ import com.project.school.management.entity.Role;
 import com.project.school.management.entity.UserEntity;
 import com.project.school.management.exception.AccessDenied;
 import com.project.school.management.exception.InvalidArgumentException;
+import com.project.school.management.exception.InvalidPhoneNumberException;
 import com.project.school.management.exception.UserNotFoundException;
 import com.project.school.management.repository.UserRepository;
 import com.project.school.management.request.LoginRequest;
@@ -30,6 +31,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserEntity saveUserDetail(UserRequest userRequest) {
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
+		if (userRequest.getPhone().length() < 10) {
+			throw new InvalidPhoneNumberException();
+		}
+
 		UserEntity user = new UserEntity();
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		log.info("call function generateUserName");
@@ -59,6 +65,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserEntity login(LoginRequest loginRequest) {
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
 		if (StringUtils.isEmpty(loginRequest.getUserName()) || StringUtils.isEmpty(loginRequest.getPassword())) {
 			throw new InvalidArgumentException();
 		}
@@ -80,13 +87,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserEntity> getUserList() {
-		log.info("inside get dtudent method");
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
 		return userRepository.findAll();
 	}
 
 	@Override
 	public UserEntity getUser(Integer id) {
-		log.info("inside get student by id");
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
 		Optional<UserEntity> user = userRepository.findById(id);
 		if (user.isEmpty()) {
 			throw new UserNotFoundException();
@@ -95,8 +102,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// method to generateUserName
-	private String generateUserName(String email, Long phone) {
-		log.info("inside method generateUserName and call sanitizeString function");
+	private String generateUserName(String email, String phone) {
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
 		String[] parts = email.split("@");
 
@@ -115,11 +122,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private String sanitizeString(String input) {
-		log.info("inside sanitizeString method");
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
 		return input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 	}
 
 	private String generateUserId(Role role) {
+		log.info("Inside " + Thread.currentThread().getStackTrace()[1].getMethodName());
 		String userId = role.getName().substring(0, 1);
 		LocalDateTime localDate = LocalDateTime.now();
 		Long count = this.userRepository.countByRole(role);
