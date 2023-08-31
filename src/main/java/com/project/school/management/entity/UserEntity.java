@@ -1,17 +1,23 @@
 package com.project.school.management.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.school.management.enums.Gender;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -41,9 +47,15 @@ public class UserEntity {
 	@Column(name = "dateOfBirth", nullable = false)
 	private Date dateOfBirth;
 
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Address address;
 
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	private ClassEntity className;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Role role;
 
@@ -51,7 +63,7 @@ public class UserEntity {
 	private String email;
 
 	@Column(name = "phone", nullable = false)
-	private Long phone;
+	private String phone;
 
 	@Column(name = "password", nullable = false)
 	private String password;
@@ -65,14 +77,15 @@ public class UserEntity {
 	@Column(name = "is_parent", nullable = true)
 	private List<String> isParent;
 
-	@Column(name = "className", nullable = true)
-	private List<String> className;
-
-	@Column(name = "section", nullable = true)
-	private List<String> section;
-
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private School school;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private List<Book> book = new ArrayList<>();
 
 	@Column(name = "isActive", nullable = false)
 	private Boolean isActive;

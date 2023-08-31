@@ -1,5 +1,6 @@
 package com.project.school.management.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -14,17 +15,27 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "school")
-public class School {
+@Table(name = "book")
+public class Book {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
 
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "bookUniqueId")
+	private String bookUniqueId;
+
+	@Column(name = "bookRefId")
+	private String bookRefId;
+
+	@JsonBackReference
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Address address;
+	private UserEntity user;
 
 }

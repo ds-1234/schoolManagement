@@ -10,13 +10,16 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "role")
-public class Role {
+@Table(name = "subject")
+public class Subject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "subject")
+	private String subject;
+
+	@Column(name = "description")
+	private String description;
 
 }

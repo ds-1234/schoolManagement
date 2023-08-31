@@ -16,6 +16,9 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "houseNumber", nullable = false)
+	private String houseNumber;
+
 	@Column(name = "street", nullable = false)
 	private String street;
 
@@ -30,11 +33,5 @@ public class Address {
 
 	@Column(name = "country", nullable = false)
 	private String country;
-
-//	@OneToMany(mappedBy = "address")
-//	private Set<UserEntity> user;
-
-//	@OneToMany(mappedBy = "address")
-//	private Set<School> school;
 
 }
