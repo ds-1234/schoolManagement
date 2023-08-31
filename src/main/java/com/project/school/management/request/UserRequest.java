@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.project.school.management.entity.Address;
+import com.project.school.management.entity.Book;
 import com.project.school.management.entity.ClassEntity;
 import com.project.school.management.entity.Role;
 import com.project.school.management.entity.School;
-import com.project.school.management.entity.Section;
 import com.project.school.management.enums.Gender;
 
 import lombok.AccessLevel;
@@ -50,9 +50,9 @@ public class UserRequest {
 
 	List<String> isParent;
 
-	List<ClassEntity> className;
+	ClassEntity className;
 
-	List<Section> section;
+	List<Book> book;
 
 	School school;
 

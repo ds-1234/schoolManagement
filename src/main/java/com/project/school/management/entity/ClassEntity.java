@@ -25,11 +25,11 @@ public class ClassEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "subject_id", referencedColumnName = "id")
 	List<Subject> subject = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "section_id", referencedColumnName = "id")
 	List<Section> section = new ArrayList<>();
 
