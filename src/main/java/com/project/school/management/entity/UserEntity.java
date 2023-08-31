@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.school.management.enums.Gender;
 
 import jakarta.persistence.CascadeType;
@@ -45,9 +47,15 @@ public class UserEntity {
 	@Column(name = "dateOfBirth", nullable = false)
 	private Date dateOfBirth;
 
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Address address;
 
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	private ClassEntity className;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Role role;
 
@@ -69,16 +77,15 @@ public class UserEntity {
 	@Column(name = "is_parent", nullable = true)
 	private List<String> isParent;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "class_id", referencedColumnName = "id")
-	private List<ClassEntity> className = new ArrayList<>();
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "section_id", referencedColumnName = "id")
-	private List<Section> section = new ArrayList<>();
-
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private School school;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private List<Book> book = new ArrayList<>();
 
 	@Column(name = "isActive", nullable = false)
 	private Boolean isActive;
