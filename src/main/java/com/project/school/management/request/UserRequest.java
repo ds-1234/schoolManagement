@@ -3,7 +3,6 @@ package com.project.school.management.request;
 import java.util.Date;
 import java.util.List;
 
-import com.project.school.management.entity.Address;
 import com.project.school.management.entity.Book;
 import com.project.school.management.entity.ClassEntity;
 import com.project.school.management.entity.Role;
@@ -34,8 +33,6 @@ public class UserRequest {
 
 	Date dateOfBirth;
 
-	Address address;
-
 	Role role;
 
 	String email;
@@ -47,6 +44,18 @@ public class UserRequest {
 	String userName;
 
 	String userId;
+
+	String houseNumber;
+
+	String street;
+
+	String city;
+
+	String state;
+
+	String pinCode;
+
+	String country;
 
 	List<String> isParent;
 

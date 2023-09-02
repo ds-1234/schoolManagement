@@ -51,7 +51,13 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(bCrypt.encode(userRequest.getPassword()));
 		user.setUserName(username);
 		user.setUserId(generateUserId(userRequest.getRole()));
-		user.setAddress(userRequest.getAddress());
+		user.setHouseNumber(userRequest.getHouseNumber());
+		user.setStreet(userRequest.getStreet());
+		user.setCity(userRequest.getCity());
+		user.setState(userRequest.getState());
+		user.setPinCode(userRequest.getPinCode());
+		user.setCountry(userRequest.getCountry());
+
 		user.setClassName(userRequest.getClassName());
 		user.setBook(userRequest.getBook());
 		user.setIsActive(userRequest.getIsActive());
