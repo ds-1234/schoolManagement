@@ -16,10 +16,10 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "subject")
+	@Column(name = "subject", nullable = false)
 	private String subject;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable = false)
 	private String description;
 
 }

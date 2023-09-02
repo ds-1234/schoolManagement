@@ -47,9 +47,23 @@ public class UserEntity {
 	@Column(name = "dateOfBirth", nullable = false)
 	private Date dateOfBirth;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Address address;
+	@Column(name = "houseNumber", nullable = false)
+	private String houseNumber;
+
+	@Column(name = "street", nullable = false)
+	private String street;
+
+	@Column(name = "city", nullable = false)
+	private String city;
+
+	@Column(name = "state", nullable = false)
+	private String state;
+
+	@Column(name = "pinCode", nullable = false)
+	private String pinCode;
+
+	@Column(name = "country", nullable = false)
+	private String country;
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
