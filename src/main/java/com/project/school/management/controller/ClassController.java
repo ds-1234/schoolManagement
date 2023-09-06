@@ -23,24 +23,24 @@ public class ClassController {
 	@Autowired
 	private ClassService classService;
 
-	@PostMapping("createBook")
-	public ResponseEntity<Response> createBook(@RequestBody ClassEntity dto) {
+	@PostMapping("createClass")
+	public ResponseEntity<Response> createClass(@RequestBody ClassEntity dto) {
 		Response response = new Response();
 		response.succeed();
 		response.setData(classService.save(dto));
 		return ResponseEntity.ok().body(response);
 	}
 
-	@GetMapping("getBookList")
-	public ResponseEntity<Object> getBookList() {
+	@GetMapping("getClassList")
+	public ResponseEntity<Object> getClassList() {
 		Response response = new Response();
 		response.succeed();
 		response.setData(classService.getList());
 		return ResponseEntity.ok().body(response);
 	}
 
-	@GetMapping("getBook/{id}")
-	public ResponseEntity<Object> getBook(@PathVariable Long id) {
+	@GetMapping("getClass/{id}")
+	public ResponseEntity<Object> getClass(@PathVariable Long id) {
 		Response response = new Response();
 		response.succeed();
 		response.setData(classService.getAddress(id));
