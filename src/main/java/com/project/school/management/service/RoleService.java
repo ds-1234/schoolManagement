@@ -10,6 +10,6 @@ public interface RoleService {
 
 	List<Role> getList();
 
-	Role getAddress(Long id);
+	Role getRole(Long id);
 
 }

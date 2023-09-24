@@ -8,4 +8,6 @@ import com.project.school.management.entity.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
+	Role findByNameIgnoreCase(String name);
+
 }

@@ -3,11 +3,14 @@ package com.project.school.management.serviceImpl;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.school.management.constant.Message;
 import com.project.school.management.entity.Subject;
-import com.project.school.management.exception.DataNotExist;
+import com.project.school.management.exception.AlreadyExistException;
+import com.project.school.management.exception.NotExist;
 import com.project.school.management.repository.SubjectRepository;
 import com.project.school.management.service.SubjectService;
 
@@ -19,6 +22,9 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject save(Subject subject) {
+		if (ObjectUtils.isNotEmpty(this.subjectRepository.findBySubjectIgnoreCase(subject.getSubject()))) {
+			throw new AlreadyExistException(Message.SUBJECT_ALREADY_EXIST);
+		}
 		return this.subjectRepository.save(subject);
 	}
 
@@ -33,7 +39,7 @@ public class SubjectServiceImpl implements SubjectService {
 		if (data.isPresent()) {
 			return data.get();
 		}
-		throw new DataNotExist();
+		throw new NotExist(Message.SUBJECT_NOT_EXIST);
 	}
 
 }

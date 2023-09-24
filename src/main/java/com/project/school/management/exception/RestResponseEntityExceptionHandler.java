@@ -35,51 +35,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		return buildResponseEntity(new Response(ex), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler({ IllegalArgumentException.class })
-	public ResponseEntity<Object> illegelException(Exception ex) {
-		log.error("Exception: ", ex);
-		return buildResponseEntity(new Response(ex), HttpStatus.NOT_FOUND);
-	}
-
 	@ExceptionHandler(CustomException.class)
 	public ResponseEntity<Object> customException(CustomException ex) {
 		log.error("Exception: ", ex);
 		return buildResponseEntity(new Response(ex), ex.getHttpStatus());
-	}
-
-	@ExceptionHandler(FieldAlreadyExist.class)
-	public ResponseEntity<Object> fieldAlreadyExist(FieldAlreadyExist ex) {
-		log.error("Exception: ", ex);
-		Response response = new Response(ex);
-		return buildResponseEntity(response, ex.getHttpStatus());
-	}
-
-	@ExceptionHandler(InvalidArgumentException.class)
-	public ResponseEntity<Object> invalidArgumentException(InvalidArgumentException ex) {
-		log.error("Exception: ", ex);
-		Response response = new Response(ex);
-		return buildResponseEntity(response, ex.getHttpStatus());
-	}
-
-	@ExceptionHandler(InvalidRoleException.class)
-	public ResponseEntity<Object> invalidRoleException(InvalidRoleException ex) {
-		log.error("Exception: ", ex);
-		Response response = new Response(ex);
-		return buildResponseEntity(response, ex.getHttpStatus());
-	}
-
-	@ExceptionHandler(UserAlreadyExistException.class)
-	public ResponseEntity<Object> userAlreadyExistException(UserAlreadyExistException ex) {
-		log.error("Exception: ", ex);
-		Response response = new Response(ex);
-		return buildResponseEntity(response, ex.getHttpStatus());
-	}
-
-	@ExceptionHandler(UserNotFoundException.class)
-	public ResponseEntity<Object> userNotFoundException(UserNotFoundException ex) {
-		log.error("Exception: ", ex);
-		Response response = new Response(ex);
-		return buildResponseEntity(response, ex.getHttpStatus());
 	}
 
 	private ResponseEntity<Object> buildResponseEntity(Response response, HttpStatus status) {

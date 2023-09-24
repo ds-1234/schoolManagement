@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +16,9 @@ import com.project.school.management.entity.School;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.SchoolService;
 
-import lombok.extern.slf4j.Slf4j;
-
+@CrossOrigin
 @RestController
 @RequestMapping("school")
-@Slf4j
 public class SchoolController {
 
 	@Autowired
@@ -27,7 +26,6 @@ public class SchoolController {
 
 	@PostMapping("createSchool")
 	public ResponseEntity<Response> createSchool(@RequestBody School dto) {
-		log.info("******  API Start For save school******");
 		Response response = new Response();
 		response.succeed();
 		response.setData(schoolService.save(dto));
@@ -36,7 +34,6 @@ public class SchoolController {
 
 	@GetMapping("getSchoolList")
 	public ResponseEntity<Object> getSchoolList() throws IOException {
-		log.info("******  API Start For get school******");
 		Response response = new Response();
 		response.succeed();
 		response.setData(schoolService.getList());
@@ -45,7 +42,6 @@ public class SchoolController {
 
 	@GetMapping("getSchool/{id}")
 	public ResponseEntity<Object> getSchool(@PathVariable Long id) {
-		log.info("******  API Start For get school by id******");
 		Response response = new Response();
 		response.succeed();
 		response.setData(schoolService.getAddress(id));

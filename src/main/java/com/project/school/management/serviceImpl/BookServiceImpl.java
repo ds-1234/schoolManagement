@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.school.management.entity.Book;
-import com.project.school.management.exception.DataNotExist;
+import com.project.school.management.exception.NotExist;
 import com.project.school.management.repository.BookRepository;
 import com.project.school.management.service.BookService;
 
@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService {
 		if (data.isPresent()) {
 			return data.get();
 		}
-		throw new DataNotExist();
+		throw new NotExist();
 	}
 
 }

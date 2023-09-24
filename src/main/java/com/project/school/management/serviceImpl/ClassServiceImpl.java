@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.school.management.entity.ClassEntity;
-import com.project.school.management.exception.DataNotExist;
+import com.project.school.management.exception.NotExist;
 import com.project.school.management.repository.ClassRepository;
 import com.project.school.management.service.ClassService;
 
@@ -33,7 +33,7 @@ public class ClassServiceImpl implements ClassService {
 		if (data.isPresent()) {
 			return data.get();
 		}
-		throw new DataNotExist();
+		throw new NotExist();
 	}
 
 }

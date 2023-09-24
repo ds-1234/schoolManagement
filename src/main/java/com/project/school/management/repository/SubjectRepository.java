@@ -8,4 +8,6 @@ import com.project.school.management.entity.Subject;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
+	Subject findBySubjectIgnoreCase(String subject);
+
 }

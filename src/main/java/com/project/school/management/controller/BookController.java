@@ -2,6 +2,7 @@ package com.project.school.management.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,9 @@ import com.project.school.management.entity.Book;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.BookService;
 
-import lombok.extern.slf4j.Slf4j;
-
+@CrossOrigin
 @RestController
 @RequestMapping("book")
-@Slf4j
 public class BookController {
 
 	@Autowired
