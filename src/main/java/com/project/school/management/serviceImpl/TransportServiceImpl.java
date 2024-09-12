@@ -33,7 +33,7 @@ public class TransportServiceImpl implements TransportService{
 
 	private String generateTransportId(TransportEntity transport) {
 		String first = transport.getVehicleNumber().substring(0, 2);
-		String last = transport.getVehicleNumber().substring(transport.getTransportId().length()-2);
+		String last = transport.getVehicleNumber().substring(transport.getVehicleNumber().length()-2);
 		String combine = first +last;
 		Random random = new Random();
 		int randomNumber = 10 + random.nextInt(90);
