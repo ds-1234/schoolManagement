@@ -2,13 +2,16 @@ package com.project.school.management.serviceImpl;
 
 import java.security.DrbgParameters.NextBytes;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.school.management.dto.TransportRequestDto;
 import com.project.school.management.entity.TransportEntity;
+import com.project.school.management.exception.InvalidRequestException;
 import com.project.school.management.exception.NotExist;
 import com.project.school.management.repository.TransportRepository;
 import com.project.school.management.service.TransportService;
@@ -48,6 +51,52 @@ public class TransportServiceImpl implements TransportService{
 			return dbData.get();
 		}
 		throw new NotExist() ;
+	}
+
+	@Override
+	public TransportEntity updateTransport(TransportRequestDto transportRequestDto) {
+		Optional<TransportEntity> dbData = this.transportRepository.findById(transportRequestDto.getId());
+		if(dbData.isEmpty()) {
+			throw new InvalidRequestException("transport data not found by input request");
+		}
+		TransportEntity entity = dbData.get();
+		if(!transportRequestDto.getDriverName().isEmpty()) {
+			entity.setDriverName(transportRequestDto.getDriverName());
+		}
+		if(!transportRequestDto.getLicenseNumber().isEmpty()) {
+			entity.setLicenseNumber(transportRequestDto.getLicenseNumber());
+		}
+		if(!transportRequestDto.getPhone().isEmpty()) {
+			entity.setPhone(transportRequestDto.getPhone());
+		}
+		if(!transportRequestDto.getRouteName().isEmpty()) {
+			entity.setRouteName(transportRequestDto.getRouteName());
+		}
+		if(!transportRequestDto.getVehicleNumber().isEmpty()) {
+			entity.setVehicleNumber(transportRequestDto.getVehicleNumber());
+		}
+		return this.transportRepository.save(entity);
+	}
+
+	@Override
+	public void changeStatus(Long id) {
+		Optional<TransportEntity> dbData = this.transportRepository.findById(id);
+		if(dbData.isEmpty()) {
+			throw new NotExist("transport data not found by input request");
+		}
+		TransportEntity entity = dbData.get();
+		entity.setIsActive(false);
+		transportRepository.save(entity);
+	}
+
+	@Override
+	public Object deleteTransport(Long id) {
+		Optional<TransportEntity> dbData = this.transportRepository.findById(id);
+		if(dbData.isEmpty()) {
+			throw new NotExist("transport data not found by input request");
+		}
+		transportRepository.delete(dbData.get());
+		return "Data Deleted Successfully";
 	}
 
 }
