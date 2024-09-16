@@ -53,12 +53,12 @@ public class UserServiceImpl implements UserService {
 		user.setPinCode(userRequest.getPinCode());
 		user.setCountry(userRequest.getCountry());
 
-//		user.setClassName(userRequest.getClassName());
-//		user.setBook(userRequest.getBook());
+		user.setClassName(userRequest.getClassName());
+		user.setBook(userRequest.getBook());
 		user.setIsActive(userRequest.getIsActive());
 
 		user.setRole(userRequest.getRole());
-//		user.setSchool(userRequest.getSchool());
+		user.setSchool(userRequest.getSchool());
 		userRepository.save(user);
 		return user;
 
@@ -108,8 +108,11 @@ public class UserServiceImpl implements UserService {
 		// Concatenate the sanitized email and phone number
 		String concatenatedString = parts[0] + contact;
 
-		if (this.userRepository.findByUserName(concatenatedString).isPresent()) {
-			this.generateUserName(email, phone + 1);
+		Optional<UserEntity> userEntityContainer = this.userRepository.findByUserName(concatenatedString);
+		
+		if (userEntityContainer.isPresent()) {
+			String mobile = userEntityContainer.get().getPhone() + this.generateRandomAlphanumeric(2);
+			concatenatedString = this.generateUserName(email, mobile);
 		}
 
 		return concatenatedString;
@@ -132,5 +135,49 @@ public class UserServiceImpl implements UserService {
 	private String generateRandomAlphanumeric(int length) {
 		return RandomStringUtils.randomAlphanumeric(length);
 	}
+
+	@Override
+	public UserEntity updateUser(UserRequest userRequest) {
+
+		if (userRequest.getPhone().length() < 10) {
+			throw new InvalidArgumentException(Message.INVALID_MOBILE_NUMBER);
+		}
+
+		Optional<UserEntity> userContainer = this.userRepository.findById(userRequest.getId());
+		if(userContainer.isEmpty()) {
+			throw new UserNotFoundException();
+		}
+		UserEntity user = userContainer.get();
+		
+		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+		user.setFirstName(userRequest.getFirstName());
+		user.setLastName(userRequest.getLastName());
+		user.setFatherName(userRequest.getFatherName());
+		user.setMotherName(userRequest.getMotherName());
+		user.setDateOfBirth(userRequest.getDateOfBirth());
+		user.setEmail(userRequest.getEmail());
+		user.setPhone(userRequest.getPhone());
+		user.setGender(userRequest.getGender());
+		user.setPassword(bCrypt.encode(userRequest.getPassword()));
+		user.setUserId(this.generateUserId());
+		user.setHouseNumber(userRequest.getHouseNumber());
+		user.setStreet(userRequest.getStreet());
+		user.setCity(userRequest.getCity());
+		user.setState(userRequest.getState());
+		user.setPinCode(userRequest.getPinCode());
+		user.setCountry(userRequest.getCountry());
+
+//		user.setClassName(userRequest.getClassName());
+//		user.setBook(userRequest.getBook());
+		user.setIsActive(userRequest.getIsActive());
+
+		user.setRole(userRequest.getRole());
+//		user.setSchool(userRequest.getSchool());
+		userRepository.save(user);
+		return user;
+
+	
+	}
+	
 
 }

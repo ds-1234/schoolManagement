@@ -16,4 +16,6 @@ public interface UserService {
 
 	UserEntity getUser(Integer id);
 
+	UserEntity updateUser(UserRequest userRequest);
+
 }

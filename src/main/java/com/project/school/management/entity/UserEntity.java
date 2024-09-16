@@ -69,12 +69,12 @@ public class UserEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ClassEntity className;
 
-//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	private Role role;
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Role role;
 	
-	@Column(name = "role", nullable = false)
-	private String role;
+//	@Column(name = "role", nullable = false)
+//	private String role;
 
 	@Column(name = "email", nullable = false)
 	private String email;

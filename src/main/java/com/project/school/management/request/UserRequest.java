@@ -20,6 +20,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequest {
+	
+	Long id;
 
 	String firstName;
 
@@ -33,8 +35,8 @@ public class UserRequest {
 
 	Date dateOfBirth;
 
-//	Role role;
-	String role;
+	Role role;
+//	String role;
 
 	String email;
 
@@ -58,13 +60,13 @@ public class UserRequest {
 
 	String country;
 
-//	List<String> isParent;
+	List<String> isParent;
 
-//	ClassEntity className;
+	ClassEntity className;
 
-//	List<Book> book;
+	List<Book> book;
 
-//	School school;
+	School school;
 
 	Boolean isActive;
 

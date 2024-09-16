@@ -37,6 +37,14 @@ public class UserController {
 		response.setData(userService.saveUserDetail(userRequest));
 		return ResponseEntity.ok().body(response);
 	}
+	
+	@PostMapping("updateUser")
+	public ResponseEntity<Response> updateUser(@RequestBody UserRequest userRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updateUser(userRequest));
+		return ResponseEntity.ok().body(response);
+	}
 
 	@PostMapping("login")
 	public ResponseEntity<Response> login(@RequestBody LoginRequest loginRequest) {
