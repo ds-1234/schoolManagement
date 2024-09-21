@@ -14,7 +14,7 @@ public class Response {
 
 	private Object data;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy hh:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy HH:mm:ss")
 	private Date timestamp;
 
 	private String message;

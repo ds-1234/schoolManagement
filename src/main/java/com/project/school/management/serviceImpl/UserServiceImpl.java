@@ -167,12 +167,12 @@ public class UserServiceImpl implements UserService {
 		user.setPinCode(userRequest.getPinCode());
 		user.setCountry(userRequest.getCountry());
 
-//		user.setClassName(userRequest.getClassName());
-//		user.setBook(userRequest.getBook());
+		user.setClassName(userRequest.getClassName());
+		user.setBook(userRequest.getBook());
 		user.setIsActive(userRequest.getIsActive());
 
 		user.setRole(userRequest.getRole());
-//		user.setSchool(userRequest.getSchool());
+		user.setSchool(userRequest.getSchool());
 		userRepository.save(user);
 		return user;
 
