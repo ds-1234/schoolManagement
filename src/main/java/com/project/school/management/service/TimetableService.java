@@ -13,5 +13,7 @@ public interface TimetableService {
 
 	List<TimeTableEntity> getTimeTable();
 
+	TimeTableEntity getTimeTableById(Long id);
+
 
 }

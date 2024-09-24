@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,14 @@ public class TimeTableController {
 		Response response = new Response();
 		response.succeed();
 		response.setData(timetableService.getTimeTable());
+		return ResponseEntity.ok().body(response);
+    }
+	
+	@GetMapping("/getTimeTableById")
+    public ResponseEntity<Response> getTimeTableById(@PathVariable Long id) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(timetableService.getTimeTableById(id));
 		return ResponseEntity.ok().body(response);
     }
 
