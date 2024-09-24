@@ -3,6 +3,7 @@ package com.project.school.management.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ public class HomeworkController {
 	@Autowired
 	private HomeworkService homeworkService;
 	
-	@PostMapping("saveHomework")
+	@PostMapping(value = "saveHomework", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Response> saveHomework(@RequestBody HomeworkRequest homeworkRequest, @RequestParam("file") MultipartFile file) 
 								throws IOException
 	{

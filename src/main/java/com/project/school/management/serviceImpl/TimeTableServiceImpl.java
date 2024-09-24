@@ -1,5 +1,7 @@
 package com.project.school.management.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class TimeTableServiceImpl implements TimetableService {
 	@Override
 	public TimeTableEntity addTimetable(TimeTableEntity timeTableEntity) {
 		return timetableRepository.save(timeTableEntity);
+	}
+
+	@Override
+	public List<TimeTableEntity> getTimeTable() {
+		return this.timetableRepository.findAll();
 	}
 
 	

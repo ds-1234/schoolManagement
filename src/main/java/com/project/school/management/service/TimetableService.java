@@ -11,5 +11,7 @@ public interface TimetableService {
 
 	TimeTableEntity addTimetable(TimeTableEntity timeTableEntity);
 
+	List<TimeTableEntity> getTimeTable();
+
 
 }
