@@ -49,5 +49,13 @@ public class ExpenseCategoryController {
 		response.setData(entity);
 		return ResponseEntity.ok().body(response);
 	}
+	
+	@GetMapping("getExpenseCatById/{id}")
+	public ResponseEntity<Object> getExpenseCatById(@PathVariable Long id) throws IOException {
+		Response response = new Response();
+		response.succeed();
+		response.setData(expenseCategoryService.getExpenseCatById(id));
+		return ResponseEntity.ok().body(response);
+	}
 
 }

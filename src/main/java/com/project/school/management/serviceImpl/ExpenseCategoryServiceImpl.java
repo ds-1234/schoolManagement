@@ -62,4 +62,11 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService{
 		return entity;
 	}
 
+	@Override
+	public MasterExpenseCategoryEntity getExpenseCatById(Long id) {
+		MasterExpenseCategoryEntity entity = expenseCategoryRepository.findById(id)
+				.orElseThrow(()-> new InvalidRequestException("given id is invalid"));
+		return entity;
+	}
+
 }

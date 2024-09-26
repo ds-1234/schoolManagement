@@ -12,4 +12,6 @@ public interface ExpenseCategoryService {
 
 	MasterExpenseCategoryEntity deleteExpenseCat(Long id);
 
+	MasterExpenseCategoryEntity getExpenseCatById(Long id);
+
 }
