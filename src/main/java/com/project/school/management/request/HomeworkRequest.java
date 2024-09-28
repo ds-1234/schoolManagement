@@ -1,6 +1,7 @@
 package com.project.school.management.request;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import com.project.school.management.entity.ClassEntity;
 import com.project.school.management.entity.Subject;
@@ -16,8 +17,8 @@ public class HomeworkRequest {
 	UserEntity user;
 	ClassEntity className;
 	Subject subjectName;
-	LocalDate homeworkDate;
-	LocalDate submissionDate;
+	Date homeworkDate;
+	Date submissionDate;
 	Boolean isActive;
 
 }

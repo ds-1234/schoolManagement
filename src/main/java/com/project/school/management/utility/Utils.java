@@ -115,7 +115,7 @@ public class Utils {
         Path filePath = uploadDirPath.resolve(fileName);  // Create full file path
         Files.write(filePath, file.getBytes());
 
-        return "fileName: "+fileName + "filePath: "+ filePath;
+        return fileName +","+ filePath;
     }
 
 }

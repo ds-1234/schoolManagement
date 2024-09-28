@@ -39,10 +39,11 @@ public class HomeworkServiceImpl implements HomeworkService {
 			entity.setSubmissionDate(homeworkRequest.getSubmissionDate());
 
 			String uploadedFile = utils.uploadFile(file);
-			int firstColon = uploadedFile.indexOf(':');
-			int secondColon = uploadedFile.indexOf(':', firstColon + 1);
-			String fName = uploadedFile.substring(firstColon + 1);
-			String fPath = uploadedFile.substring(secondColon + 1);
+			String [] name = uploadedFile.split(",");
+//			int firstColon = uploadedFile.indexOf(':');
+//			int secondColon = uploadedFile.indexOf(':', firstColon + 1);
+			String fName = name[0];
+			String fPath = name[1];
 			entity.setAttachmentName(fName);
 			entity.setAttachmentPath(fPath);
 			entity.setIsActive(homeworkRequest.getIsActive());

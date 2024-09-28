@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,8 +26,8 @@ public class HomeworkController {
 	@Autowired
 	private HomeworkService homeworkService;
 	
-	@PostMapping(value = "saveHomework", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Response> saveHomework(@RequestBody HomeworkRequest homeworkRequest, @RequestParam("file") MultipartFile file) 
+	@PostMapping(value = "saveHomework")
+	public ResponseEntity<Response> saveHomework(@RequestPart HomeworkRequest homeworkRequest, @RequestPart("file") MultipartFile file) 
 								throws IOException
 	{
 		Response response = new Response();

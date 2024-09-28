@@ -1,6 +1,7 @@
 package com.project.school.management.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,10 +39,10 @@ public class HomeworkEntity {
 	private Subject subjectName;
 	
 	@Column(name = "homework_date", nullable = false)
-	private LocalDate homeworkDate;
+	private Date homeworkDate;
 	
 	@Column(name = "submission_date", nullable = false)
-	private LocalDate submissionDate;
+	private Date submissionDate;
 
 	@Column(name = "attachment_name")
 	private String attachmentName;
