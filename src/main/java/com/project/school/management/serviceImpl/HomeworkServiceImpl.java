@@ -1,6 +1,7 @@
 package com.project.school.management.serviceImpl;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -70,5 +71,10 @@ public class HomeworkServiceImpl implements HomeworkService {
 		data.setIsActive(homeworkRequest.getIsActive());
 
 		return this.homeworkRepository.save(data);
+	}
+
+	@Override
+	public List<HomeworkEntity> getHomeworkList() {
+		return homeworkRepository.findAll();
 	}
 }
