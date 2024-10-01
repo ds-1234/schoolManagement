@@ -62,7 +62,7 @@ public class UserRequest {
 
 	List<String> isParent;
 
-	ClassEntity className;
+	List<ClassEntity> className;
 
 	List<Book> book;
 

@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -72,8 +73,8 @@ public class UserEntity {
 	private String country;
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private ClassEntity className;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<ClassEntity> className = new ArrayList<>();
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -109,6 +110,10 @@ public class UserEntity {
 	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private List<Book> book = new ArrayList<>();
+	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<TimeTableEntity> timeTableEntity = new ArrayList<>();
 
 	@Column(name = "isActive", nullable = false)
 	private Boolean isActive;
