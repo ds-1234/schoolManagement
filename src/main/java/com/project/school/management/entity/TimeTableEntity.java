@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,21 +25,25 @@ public class TimeTableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-    private ClassEntity className;
+	@Column(name = "className", nullable = false)
+	private Long className;
+	
+	@Column(name = "user", nullable = false)
+	private Long user;
 
+	@Column(name = "weekDay", nullable = false)
     private String weekDay; // Instead of List<String>, now a single String
 
+	@Column(name = "startTime", nullable = false)
     private LocalTime startTime;
+   
+	@Column(name = "endTime", nullable = false)
     private LocalTime endTime;
 
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToMany(fetch = FetchType.LAZY)
-    private List<UserEntity> teacherName;  // A single user
-    
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-    @ManyToMany(fetch = FetchType.LAZY)
-	List<Subject> subject = new ArrayList<>();
+	@Column(name = "subject", nullable = false)
+	private List<Long> subject = new ArrayList<>();
+	
+	@Column(name = "isActive", nullable = false)
+	private Boolean isActive;
 	
 }

@@ -24,8 +24,8 @@ public class DataLoader implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.roleRepository.save(new Role(Long.valueOf(1), "Guest"));
-		Role role = this.roleRepository.save(new Role(Long.valueOf(2), "Admin"));
+		this.roleRepository.save(new Role(Long.valueOf(1), "Guest", true));
+		Role role = this.roleRepository.save(new Role(Long.valueOf(2), "Admin", true));
 		this.userRepository.save(saveData(role));
 	}
 
@@ -33,7 +33,7 @@ public class DataLoader implements CommandLineRunner{
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		UserEntity userEntity = UserEntity.builder().id(Long.valueOf(1)).firstName("Admin").lastName("").fatherName("").motherName("").userId("admin")
 				.dateOfBirth(new Date()).houseNumber("").street("").city("").state("").pinCode("").country("").userName("admin")
-				.gender(Gender.Male).role(role).email("admin@gmail.com").phone("1234567890").password(bCrypt.encode("Admin@123")).isActive(true).build();
+				.gender(Gender.Male).role(Long.valueOf(1)).email("admin@gmail.com").phone("1234567890").password(bCrypt.encode("Admin@123")).isActive(true).build();
 		return userEntity;
 	}
 

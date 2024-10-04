@@ -1,5 +1,6 @@
 package com.project.school.management.request;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +36,7 @@ public class UserRequest {
 
 	Date dateOfBirth;
 
-	Role role;
-//	String role;
+	Long role;
 
 	String email;
 
@@ -62,11 +62,11 @@ public class UserRequest {
 
 	List<String> isParent;
 
-	List<ClassEntity> className;
+	List<Long> className = new ArrayList<>();;
 
-	List<Book> book;
+	List<Long> book = new ArrayList<>();
 
-	School school;
+	Long school;
 
 	Boolean isActive;
 

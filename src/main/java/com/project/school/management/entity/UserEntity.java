@@ -72,16 +72,12 @@ public class UserEntity {
 	@Column(name = "country", nullable = false)
 	private String country;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<ClassEntity> className = new ArrayList<>();
+	@Column(name = "className", nullable = true)
+	private List<Long> className = new ArrayList<>();
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Role role;
 	
-//	@Column(name = "role", nullable = false)
-//	private String role;
+	@Column(name = "role", nullable = true)
+	private Long role;
 
 	@Column(name = "email", nullable = false)
 	private String email;
@@ -99,21 +95,16 @@ public class UserEntity {
 	private String userId;
 
 	@Column(name = "is_parent", nullable = true)
-	private List<String> isParent;
+	private List<Long> isParent;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private School school;
+	@Column(name = "school", nullable = true)
+	private Long school;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private List<Book> book = new ArrayList<>();
+	@Column(name = "book", nullable = true)
+	private List<Long> book = new ArrayList<>();
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<TimeTableEntity> timeTableEntity = new ArrayList<>();
+	@Column(name = "timeTable", nullable = true)
+	private List<Long> timeTableEntity = new ArrayList<>();
 
 	@Column(name = "isActive", nullable = false)
 	private Boolean isActive;

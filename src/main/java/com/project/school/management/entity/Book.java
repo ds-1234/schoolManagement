@@ -46,13 +46,13 @@ public class Book {
 
 	@Column(name = "allotedEndtDate")
 	private Date allotedEndtDate;
+	
+	@Column(name = "user")
+	private Long user;
 
 	@Column(name = "isActive")
 	private Boolean isActive;
 
-	@JsonBackReference
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private UserEntity user;
+	
 
 }

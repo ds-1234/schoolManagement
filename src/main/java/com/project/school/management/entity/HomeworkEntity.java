@@ -1,6 +1,5 @@
 package com.project.school.management.entity;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,17 +25,14 @@ public class HomeworkEntity {
 	@Column(name = "homework_id", nullable = false)
 	private String homeworkId;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private UserEntity user;
+	@Column(name = "user", nullable = false)
+	private Long user;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private ClassEntity className;
+	@Column(name = "className", nullable = false)
+	private Long className;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Subject subjectName;
+	@Column(name = "subject", nullable = false)
+	private Long subject;
 	
 	@Column(name = "homework_date", nullable = false)
 	private Date homeworkDate;

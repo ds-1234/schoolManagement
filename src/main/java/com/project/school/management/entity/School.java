@@ -36,5 +36,10 @@ public class School {
 
 	@Column(name = "country", nullable = false)
 	private String country;
+	
+	@Column(name = "isActive", nullable = false)
+	private Boolean isActive;
+	
+	
 
 }

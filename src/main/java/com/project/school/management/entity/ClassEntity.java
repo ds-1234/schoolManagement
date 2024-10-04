@@ -26,19 +26,13 @@ public class ClassEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-//	@OneToOne(cascade = CascadeType.MERGE)
-//	@JoinColumn(name = "section_id", referencedColumnName = "id")
-//	Section section;
-
 	@Column(name = "section", nullable = false)
 	private String section;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-	@ManyToMany(fetch = FetchType.LAZY)
-	List<Subject> subject = new ArrayList<>();
+	@Column(name = "subject", nullable = false)
+	private List<Long> subject = new ArrayList<>();
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-	@ManyToMany(fetch = FetchType.LAZY)
-	List<UserEntity> userEntity = new ArrayList<>();
+	@Column(name = "isActive", nullable = false)
+	private Boolean isActive;
 
 }

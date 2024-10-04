@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class HomeworkRequest {
 	Long id;
-	UserEntity user;
-	ClassEntity className;
-	Subject subjectName;
+	Long user;
+	Long className;
+	Long subject;
 	Date homeworkDate;
 	Date submissionDate;
 	Boolean isActive;
