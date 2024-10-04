@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.school.management.entity.TimeTableEntity;
-import com.project.school.management.request.TimeTableRequest;
 import com.project.school.management.response.Response;
-import com.project.school.management.response.TimetableResponse;
 import com.project.school.management.service.TimetableService;
 
 @RestController @CrossOrigin

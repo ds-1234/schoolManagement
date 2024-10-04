@@ -28,8 +28,8 @@ public class TimeTableEntity {
 	@Column(name = "className", nullable = false)
 	private Long className;
 	
-	@Column(name = "user", nullable = false)
-	private Long user;
+	@Column(name = "userId", nullable = false)
+	private Long userId;
 
 	@Column(name = "weekDay", nullable = false)
     private String weekDay; // Instead of List<String>, now a single String

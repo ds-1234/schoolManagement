@@ -47,8 +47,8 @@ public class Book {
 	@Column(name = "allotedEndtDate")
 	private Date allotedEndtDate;
 	
-	@Column(name = "user")
-	private Long user;
+	@Column(name = "userId")
+	private Long userId;
 
 	@Column(name = "isActive")
 	private Boolean isActive;

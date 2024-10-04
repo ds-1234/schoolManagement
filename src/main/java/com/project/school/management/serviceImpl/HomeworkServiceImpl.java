@@ -33,7 +33,7 @@ public class HomeworkServiceImpl implements HomeworkService {
 			String generatedId = utils.generateRandomId();
 			entity.setHomeworkId("HW" + generatedId);
 
-			entity.setUser(homeworkRequest.getUser());
+			entity.setUserId(homeworkRequest.getUser());
 			entity.setClassName(homeworkRequest.getClassName());
 			entity.setSubject(homeworkRequest.getSubject());
 			entity.setHomeworkDate(homeworkRequest.getHomeworkDate());

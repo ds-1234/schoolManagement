@@ -25,8 +25,8 @@ public class HomeworkEntity {
 	@Column(name = "homework_id", nullable = false)
 	private String homeworkId;
 	
-	@Column(name = "user", nullable = false)
-	private Long user;
+	@Column(name = "userId", nullable = false)
+	private Long userId;
 	
 	@Column(name = "className", nullable = false)
 	private Long className;
