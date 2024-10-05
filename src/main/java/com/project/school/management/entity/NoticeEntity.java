@@ -28,8 +28,8 @@ public class NoticeEntity {
 	@Column(name = "notice_details", nullable = false)
 	private String noticeDetails;
 	
-	@Column(name = "posted_by", nullable = false)
-	private String postedBy;
+	@Column(name = "user_id", nullable = false)
+	private Long userId;
 	
 	@Column(name = "notice_date", nullable = false)
 	private Date noticeDate;
@@ -37,8 +37,10 @@ public class NoticeEntity {
 	@Column(name = "notice_id", nullable = false)
 	private String noticeId;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Role role;
+	@Column(name = "role", nullable = false)
+	private Long role;
+	
+	@Column(name = "status")
+	private Boolean isActive;
 
 }
