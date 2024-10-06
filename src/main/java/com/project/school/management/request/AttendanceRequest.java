@@ -1,6 +1,8 @@
 package com.project.school.management.request;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.Data;
 @Data
@@ -8,14 +10,12 @@ public class AttendanceRequest {
 	
 	Long id;
 	
-	Long studentId;
+    Long teacher;
 	
-    Long teacherId;
-	
-	Long classId;
+	Long className;
 	
 	Date attendanceDate;
 	
-	String attendanceStatus;
+	Map<String, String> attendenceStatus = new HashMap();
 
 }

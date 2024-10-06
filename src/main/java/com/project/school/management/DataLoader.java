@@ -24,16 +24,20 @@ public class DataLoader implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.roleRepository.save(new Role(Long.valueOf(1), "Guest", true));
-		Role role = this.roleRepository.save(new Role(Long.valueOf(2), "Admin", true));
-		this.userRepository.save(saveData(role));
+		
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(1), "Guest", true))));
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(2), "Admin", true))));
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(3), "Student", true))));
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(4), "Teacher", true))));
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(5), "Parents", true))));
 	}
 
 	private UserEntity saveData(Role role) {
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		UserEntity userEntity = UserEntity.builder().id(Long.valueOf(1)).firstName("Admin").lastName("").fatherName("").motherName("").userId("admin")
-				.dateOfBirth(new Date()).houseNumber("").street("").city("").state("").pinCode("").country("").userName("admin")
-				.gender(Gender.Male).role(Long.valueOf(1)).email("admin@gmail.com").phone("1234567890").password(bCrypt.encode("Admin@123")).isActive(true).build();
+		UserEntity userEntity = UserEntity.builder().id(Long.valueOf(1)).firstName("Admin").lastName("").fatherName("").motherName("")
+				.userId(role.getName()).dateOfBirth(new Date()).houseNumber("").street("").city("").state("").pinCode("")
+				.country("").userName(role.getName().toLowerCase()).gender(Gender.Male).role(role.getId()).email(role.getName().toLowerCase() +"@gmail.com")
+				.phone("1234567890").password(bCrypt.encode(role.getName() +"@123")).isActive(true).build();
 		return userEntity;
 	}
 

@@ -25,22 +25,22 @@ public class AttendanceServiceImpl implements AttendanceService{
 	public AttendanceEntity saveAttendance(AttendanceRequest attendanceRequest) {
 		AttendanceEntity entity = new AttendanceEntity();
 		if(Objects.isNull(attendanceRequest.getId())) {
-			entity.setUserStudentId(attendanceRequest.getStudentId());
-			entity.setUserTeacherId(attendanceRequest.getTeacherId());
+			entity.setTeacher(attendanceRequest.getTeacher());
 			entity.setAttendanceDate(attendanceRequest.getAttendanceDate());
 			String attendanceId = utils.generateRandomId();
 			entity.setAttendanceId("AD"+attendanceId);
-			entity.setAttendanceStatus(attendanceRequest.getAttendanceStatus());
-			entity.setClassId(attendanceRequest.getClassId());
+			entity.setClassName(attendanceRequest.getClassName());
+			entity.setAttendenceStatus(attendanceRequest.getAttendenceStatus().toString());
 			return attendanceRepository.save(entity);
 		}else {
 			AttendanceEntity dbAttendanceEntity = attendanceRepository.findById(attendanceRequest.getId())
 					.orElseThrow(()-> new InvalidArgumentException("Given id is invalid"));
-			dbAttendanceEntity.setAttendanceStatus(attendanceRequest.getAttendanceStatus());
+			dbAttendanceEntity.setAttendenceStatus(attendanceRequest.getAttendenceStatus().toString());
 			return attendanceRepository.save(dbAttendanceEntity);
 		}
 		
 	}
+
 
 	@Override
 	public List<AttendanceEntity> getAttendanceList() {

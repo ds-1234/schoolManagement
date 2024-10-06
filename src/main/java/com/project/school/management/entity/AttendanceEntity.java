@@ -21,20 +21,16 @@ public class AttendanceEntity {
 	@Column(name = "attendance_id", nullable = false)
 	private String attendanceId;
 	
-	@Column(name = "user_student_id", nullable = false)
-    private Long userStudentId;
+	@Column(name = "teacher", nullable = false)
+    private Long teacher;
 	
-	@Column(name = "user_teacher_id", nullable = false)
-    private Long userTeacherId;
-	
-	@Column(name = "class_id", nullable = false)
-	private Long classId;
+	@Column(name = "className", nullable = false)
+	private Long className;
 	
 	@Column(name = "attendance_date", nullable = false)
 	private Date attendanceDate;
 	
 	//Present, Absent, Half-Day, Holiday, Medical
-	@Column(name = "attendance_status", nullable = false)
-	private String attendanceStatus;
-
+	@Column(name = "attendenceStatus",columnDefinition="text", length=10485760, nullable = false)
+	private String attendenceStatus;
 }
