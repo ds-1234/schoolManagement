@@ -32,7 +32,7 @@ public class SportsServiceImpl implements SportsService{
 			String sportsName = utils.capitalizeFirstCharacter(sportsRequest.getSportsName());
 			entity.setSportsName(sportsName);
 			
-			entity.setCoachName(sportsRequest.getCoachName());
+			entity.setUserId(sportsRequest.getUserId());
 			entity.setStartedYear(sportsRequest.getStartedYear());
 			entity.setIsActive(sportsRequest.getIsActive());
 			return sportsRepository.save(entity);
@@ -42,7 +42,7 @@ public class SportsServiceImpl implements SportsService{
 			String sportsName = utils.capitalizeFirstCharacter(sportsRequest.getSportsName());
 			dbdata.setSportsName(sportsName);
 			
-			dbdata.setCoachName(sportsRequest.getCoachName());
+			dbdata.setUserId(sportsRequest.getUserId());
 			dbdata.setStartedYear(sportsRequest.getStartedYear());
 			dbdata.setIsActive(sportsRequest.getIsActive());
 			return sportsRepository.save(dbdata);

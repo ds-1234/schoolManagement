@@ -25,9 +25,8 @@ public class PlayersEntity {
 	@Column(name = "players_id", nullable = false)
 	private String playersId;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity playersName;
+	@Column(name = "user_id", nullable = false)
+    private Long userId;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)

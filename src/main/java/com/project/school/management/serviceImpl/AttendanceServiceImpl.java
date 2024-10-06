@@ -25,13 +25,13 @@ public class AttendanceServiceImpl implements AttendanceService{
 	public AttendanceEntity saveAttendance(AttendanceRequest attendanceRequest) {
 		AttendanceEntity entity = new AttendanceEntity();
 		if(Objects.isNull(attendanceRequest.getId())) {
-			entity.setStudent(attendanceRequest.getStudent());
-			entity.setTeacher(attendanceRequest.getTeacher());
+			entity.setUserStudentId(attendanceRequest.getStudentId());
+			entity.setUserTeacherId(attendanceRequest.getTeacherId());
 			entity.setAttendanceDate(attendanceRequest.getAttendanceDate());
 			String attendanceId = utils.generateRandomId();
 			entity.setAttendanceId("AD"+attendanceId);
 			entity.setAttendanceStatus(attendanceRequest.getAttendanceStatus());
-			entity.setClassName(attendanceRequest.getClassName());
+			entity.setClassId(attendanceRequest.getClassId());
 			return attendanceRepository.save(entity);
 		}else {
 			AttendanceEntity dbAttendanceEntity = attendanceRepository.findById(attendanceRequest.getId())

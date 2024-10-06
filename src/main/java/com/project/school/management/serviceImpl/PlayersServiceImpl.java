@@ -27,7 +27,7 @@ public class PlayersServiceImpl implements PlayersService{
 			String playerId = utils.generateRandomId();
 			entity.setPlayersId("PL"+playerId);
 			
-			entity.setPlayersName(playersRequest.getPlayersName());
+			entity.setUserId(playersRequest.getUserId());
 			entity.setSportsName(playersRequest.getSportsName());
 			entity.setDateOfJoin(playersRequest.getDateOfJoin());
 			entity.setIsActive(playersRequest.getIsActive());
@@ -35,7 +35,7 @@ public class PlayersServiceImpl implements PlayersService{
 		}else {
 			PlayersEntity dbData = playersRepository.findById(playersRequest.getId())
 					.orElseThrow(()-> new InvalidArgumentException("Given Id is invalid"));
-			dbData.setPlayersName(playersRequest.getPlayersName());
+			dbData.setUserId(playersRequest.getUserId());
 			dbData.setSportsName(playersRequest.getSportsName());
 			dbData.setDateOfJoin(playersRequest.getDateOfJoin());
 			dbData.setIsActive(playersRequest.getIsActive());
@@ -60,7 +60,7 @@ public class PlayersServiceImpl implements PlayersService{
 		PlayersEntity dbData = playersRepository.findById(id)
 				.orElseThrow(()-> new InvalidArgumentException("Given Id is invalid or empty"));
 		playersRepository.delete(dbData);
-		return dbData.getPlayersName().getFirstName()+" "+dbData.getPlayersName().getLastName()+" is deleted successfully";
+		return dbData.getPlayersId()+" is deleted successfully";
 	}
 
 }

@@ -2,20 +2,17 @@ package com.project.school.management.request;
 
 import java.util.Date;
 
-import com.project.school.management.entity.ClassEntity;
-import com.project.school.management.entity.UserEntity;
-
 import lombok.Data;
 @Data
 public class AttendanceRequest {
 	
 	Long id;
 	
-	UserEntity student;
+	Long studentId;
 	
-    UserEntity teacher;
+    Long teacherId;
 	
-	ClassEntity className;
+	Long classId;
 	
 	Date attendanceDate;
 	

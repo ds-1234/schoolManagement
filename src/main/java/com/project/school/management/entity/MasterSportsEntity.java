@@ -29,9 +29,8 @@ public class MasterSportsEntity {
 	@Column(name = "sports_name", nullable = false)
 	private String sportsName;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity coachName;
+	@Column(name = "user_id", nullable = false)
+    private Long userId;
 	
 	@Column(name = "started_year", nullable = false)
 	private String startedYear;

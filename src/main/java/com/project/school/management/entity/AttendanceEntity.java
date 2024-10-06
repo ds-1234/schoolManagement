@@ -2,15 +2,11 @@ package com.project.school.management.entity;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,17 +21,14 @@ public class AttendanceEntity {
 	@Column(name = "attendance_id", nullable = false)
 	private String attendanceId;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity student;
+	@Column(name = "user_student_id", nullable = false)
+    private Long userStudentId;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity teacher;
+	@Column(name = "user_teacher_id", nullable = false)
+    private Long userTeacherId;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	private ClassEntity className;
+	@Column(name = "class_id", nullable = false)
+	private Long classId;
 	
 	@Column(name = "attendance_date", nullable = false)
 	private Date attendanceDate;
