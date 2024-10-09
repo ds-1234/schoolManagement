@@ -8,6 +8,7 @@ import lombok.Data;
 public class FeesCollectionRequest {
 
 	Long id;
+	Long userId;
 	Long feesGroupNameId;
 	BigDecimal feeAmount;
 	String paymentType;
