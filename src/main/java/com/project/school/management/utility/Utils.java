@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -37,6 +38,12 @@ public class Utils {
 
     // Compile the pattern for reuse
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+    
+ // Define characters to be used in the password
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
+    
+    // SecureRandom for cryptographically strong random numbers
+    private static final SecureRandom random = new SecureRandom();
 	
 	public String generateUniqueId(String string) {
 		log.info("++++inside generate holiday method+++");
@@ -116,6 +123,19 @@ public class Utils {
         Files.write(filePath, file.getBytes());
 
         return fileName +","+ filePath;
+    }
+    
+    // Generate random password
+    public String generateRandomPassword() {
+    	int length =7;
+        StringBuilder password = new StringBuilder(length);
+        
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            password.append(CHARACTERS.charAt(index));
+        }
+        
+        return password.toString();
     }
 
 }

@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.school.management.request.AcademicDetailsRequest;
 import com.project.school.management.request.LoginRequest;
+import com.project.school.management.request.OfficeDetailsRequest;
+import com.project.school.management.request.PreviousSchoolDetailsRequest;
+import com.project.school.management.request.StudentBasicDetailsRequest;
+import com.project.school.management.request.TransportDetailsRequest;
 import com.project.school.management.request.UserRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.UserService;
@@ -70,5 +75,52 @@ public class UserController {
 		return ResponseEntity.ok().body(response);
 
 	}
+	
+	@PostMapping("addStudentBasicDetails")
+	public ResponseEntity<Response> addStudentBasicDetails(@RequestBody StudentBasicDetailsRequest basicDetailsRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.addStudentBasicDetails(basicDetailsRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("updateAcademicDetails")
+	public ResponseEntity<Response> updateAcademicDetails(@RequestBody AcademicDetailsRequest academicDetailsRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updateAcademicDetails(academicDetailsRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("updateOfficeDetails")
+	public ResponseEntity<Response> updateOfficeDetails(@RequestBody OfficeDetailsRequest officeDetailsRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updateOfficeDetails(officeDetailsRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("updateTransportDetails")
+	public ResponseEntity<Response> updateTransportDetails(@RequestBody TransportDetailsRequest transportDetailsRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updateTransportDetails(transportDetailsRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("updatePreSchoolDetails")
+	public ResponseEntity<Response> updatePreSchoolDetails(@RequestBody PreviousSchoolDetailsRequest previousSchoolDetailsRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updatePreSchoolDetails(previousSchoolDetailsRequest));
+		return ResponseEntity.ok().body(response);
+	}
 
+	@GetMapping("getStudentDetails/{userId}")
+	public ResponseEntity<Response> getStudentDetails(@PathVariable String userId) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.getStudentDetails(userId));
+		return ResponseEntity.ok().body(response);
+	}
 }

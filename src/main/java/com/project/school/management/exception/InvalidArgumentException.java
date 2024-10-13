@@ -6,6 +6,10 @@ import com.project.school.management.enums.ErrorCode;
 
 public class InvalidArgumentException extends CustomException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final String message;
 
 	public InvalidArgumentException() {
@@ -16,6 +20,11 @@ public class InvalidArgumentException extends CustomException {
 	public InvalidArgumentException(String message) {
 		super(ErrorCode.INVALID_ARGUMENT, HttpStatus.BAD_REQUEST);
 		this.message = message;
+	}
+
+	public InvalidArgumentException(ErrorCode error, HttpStatus statusCode) {
+		super(ErrorCode.USER_NOT_FOUND, statusCode.BAD_REQUEST);
+		this.message = "";	
 	}
 
 }

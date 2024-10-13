@@ -4,21 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.school.management.enums.Gender;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,77 +28,114 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "firstName", nullable = false)
+	@Column(name = "firstName")
 	private String firstName;
 
-	@Column(name = "lastName", nullable = false)
+	@Column(name = "lastName")
 	private String lastName;
 
-	@Column(name = "fatherName", nullable = false)
+	@Column(name = "fatherName")
 	private String fatherName;
 
-	@Column(name = "motherName", nullable = false)
+	@Column(name = "motherName")
 	private String motherName;
 
-	@Column(name = "gender", nullable = false)
+	@Column(name = "gender")
 	private Gender gender;
 
-	@Column(name = "dateOfBirth", nullable = false)
+	@Column(name = "dateOfBirth")
 	private Date dateOfBirth;
 
-	@Column(name = "houseNumber", nullable = false)
+	@Column(name = "houseNumber")
 	private String houseNumber;
 
-	@Column(name = "street", nullable = false)
+	@Column(name = "street")
 	private String street;
 
-	@Column(name = "city", nullable = false)
+	@Column(name = "city")
 	private String city;
 
-	@Column(name = "state", nullable = false)
+	@Column(name = "state")
 	private String state;
 
-	@Column(name = "pinCode", nullable = false)
+	@Column(name = "pinCode")
 	private String pinCode;
 
-	@Column(name = "country", nullable = false)
+	@Column(name = "country")
 	private String country;
 
-	@Column(name = "className", nullable = true)
+	@Column(name = "className")
 	private List<Long> className = new ArrayList<>();
 
 	
-	@Column(name = "role", nullable = true)
+	@Column(name = "role")
 	private Long role;
 
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
 
-	@Column(name = "phone", nullable = false)
+	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
-	@Column(name = "userName", nullable = false)
+	@Column(name = "userName")
 	private String userName;
 
-	@Column(name = "userId", nullable = false)
+	@Column(name = "userId")
 	private String userId;
 
-	@Column(name = "is_parent", nullable = true)
+	@Column(name = "is_parent")
 	private List<Long> isParent;
 
-	@Column(name = "school", nullable = true)
+	@Column(name = "school")
 	private Long school;
 
-	@Column(name = "book", nullable = true)
+	@Column(name = "book")
 	private List<Long> book = new ArrayList<>();
 	
-	@Column(name = "timeTable", nullable = true)
+	@Column(name = "timeTable")
 	private List<Long> timeTableEntity = new ArrayList<>();
 
-	@Column(name = "isActive", nullable = false)
+	@Column(name = "isActive")
 	private Boolean isActive;
+	
+	@Column(name = "blood_group")
+	private String bloodGroup;
+	
+	@Column(name = "relegion")
+	private String relegion;
+	
+	@Column(name = "caste_category")
+	private String casteCategory;
+	
+	@Column(name = "academic_year")
+	private String academicYear;
+	
+	@Column(name = "roll_number")
+	private Long rollNumber;
+	
+	@Column(name = "admission_date")
+	private Date admissionDate;
+	
+	@Column(name = "admission_number")
+	private String admissionNumber;
+	
+	@Column(name = "route_name")
+	private Long routeName;
+	
+	@Column(name = "pickup_point")
+	private String pickupPoint;
+	
+	@Column(name = "pre_school_name")
+	private String previousSchoolName;
+	
+	@Column(name = "pre_school_address")
+	private String preSchoolAddress;
+	
+	@Column(name = "pre_school_leaving_session")
+	private String preSchoolLeavingSession;
+	
 
 }
