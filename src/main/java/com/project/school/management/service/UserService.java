@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.school.management.entity.UserEntity;
 import com.project.school.management.request.AcademicDetailsRequest;
+import com.project.school.management.request.HostelDetailsRequest;
 import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.OfficeDetailsRequest;
 import com.project.school.management.request.PreviousSchoolDetailsRequest;
@@ -34,5 +35,7 @@ public interface UserService {
 	UserEntity updatePreSchoolDetails(PreviousSchoolDetailsRequest previousSchoolDetailsRequest);
 
 	UserEntity getStudentDetails(String userId);
+
+	UserEntity updateHostelDetails(HostelDetailsRequest hostelDetailsRequest);
 
 }

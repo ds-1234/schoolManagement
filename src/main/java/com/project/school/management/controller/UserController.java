@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.school.management.request.AcademicDetailsRequest;
+import com.project.school.management.request.HostelDetailsRequest;
 import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.OfficeDetailsRequest;
 import com.project.school.management.request.PreviousSchoolDetailsRequest;
@@ -105,6 +106,14 @@ public class UserController {
 		Response response = new Response();
 		response.succeed();
 		response.setData(userService.updateTransportDetails(transportDetailsRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("updateHostelDetails")
+	public ResponseEntity<Response> updateHostelDetails(@RequestBody HostelDetailsRequest hostelDetailsRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updateHostelDetails(hostelDetailsRequest));
 		return ResponseEntity.ok().body(response);
 	}
 	

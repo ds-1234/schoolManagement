@@ -21,6 +21,7 @@ import com.project.school.management.exception.InvalidPhoneException;
 import com.project.school.management.exception.UserNotFoundException;
 import com.project.school.management.repository.UserRepository;
 import com.project.school.management.request.AcademicDetailsRequest;
+import com.project.school.management.request.HostelDetailsRequest;
 import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.OfficeDetailsRequest;
 import com.project.school.management.request.PreviousSchoolDetailsRequest;
@@ -266,10 +267,10 @@ public class UserServiceImpl implements UserService {
 		entity.setCountry(basicDetailsRequest.getCountry());
 		entity.setBloodGroup(basicDetailsRequest.getBloodGroup());
 		
-		if(Objects.isNull(basicDetailsRequest.getRelegion())) {
-			throw new InvalidArgumentException("Relegion is empty");
+		if(Objects.isNull(basicDetailsRequest.getReligion())) {
+			throw new InvalidArgumentException("Religion is empty");
 		}
-		entity.setRelegion(basicDetailsRequest.getRelegion());
+		entity.setRelegion(basicDetailsRequest.getReligion());
 		
 		if(Objects.isNull(basicDetailsRequest.getCasteCategory())) {
 			throw new InvalidArgumentException("Caste Category is empty");
@@ -299,10 +300,10 @@ public class UserServiceImpl implements UserService {
 		}
 		dbdata.setSchool(academicDetailsRequest.getSchoolBranch());
 		
-		if(Objects.isNull(academicDetailsRequest.getClasse())) {
+		if(Objects.isNull(academicDetailsRequest.getClassName())) {
 			throw new InvalidArgumentException("Class is empty");
 		}
-		dbdata.setClassName(academicDetailsRequest.getClasse());
+		dbdata.setClassName(academicDetailsRequest.getClassName());
 		
 		if(Objects.isNull(academicDetailsRequest.getAcademicYear())) {
 			throw new InvalidArgumentException("Academic year is empty");
@@ -384,6 +385,24 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidArgumentException(ErrorCode.USER_NOT_FOUND, HttpStatus.BAD_REQUEST);
 		}
 		return dbdata;
+	}
+
+	@Override
+	public UserEntity updateHostelDetails(HostelDetailsRequest hostelDetailsRequest) {
+		UserEntity dbdata = userRepository.findByUserId(hostelDetailsRequest.getUserId());
+		if(Objects.isNull(dbdata)) {
+			throw new InvalidArgumentException(ErrorCode.USER_NOT_FOUND, HttpStatus.BAD_REQUEST);
+		}
+		if(Objects.isNull(hostelDetailsRequest.getBuildingName())) {
+			throw new InvalidArgumentException("Building Name is empty");
+		}
+		dbdata.setBuildingName(hostelDetailsRequest.getBuildingName());
+		
+		if(Objects.isNull(hostelDetailsRequest.getRoomNumber())) {
+			throw new InvalidArgumentException("Room number is empty");
+		}
+		dbdata.setRoomNumber(hostelDetailsRequest.getRoomNumber());
+		return userRepository.save(dbdata);
 	}
 	
 

@@ -10,7 +10,7 @@ public class AcademicDetailsRequest {
 	
 	String userId;
 	Long schoolBranch;
-	List<Long> classe = new ArrayList<>();
+	List<Long> className = new ArrayList<>();
 	String academicYear;
 	Long rollNumber;
 

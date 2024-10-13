@@ -137,5 +137,11 @@ public class UserEntity {
 	@Column(name = "pre_school_leaving_session")
 	private String preSchoolLeavingSession;
 	
+	@Column(name = "building_name")
+	private Long buildingName;
+	
+	@Column(name = "room_number")
+	private Long roomNumber;
+	
 
 }

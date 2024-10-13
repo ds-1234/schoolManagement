@@ -41,7 +41,7 @@ public class StudentBasicDetailsRequest {
 	
 	String bloodGroup;
 	
-	String relegion;
+	String religion;
 	
 	String casteCategory;
 
