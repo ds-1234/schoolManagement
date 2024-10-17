@@ -281,9 +281,9 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidArgumentException("Role is empty");
 		}
 		entity.setRole(basicDetailsRequest.getRole());
-		
+		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		String randomPassword = utils.generateRandomPassword();
-		entity.setPassword(randomPassword);
+		entity.setPassword(bCrypt.encode(randomPassword) );
 		entity.setUserName(generateUserName(basicDetailsRequest.getEmail(), basicDetailsRequest.getPhone()));
 		entity.setUserId(this.generateUserId());
 		return userRepository.save(entity);
@@ -374,7 +374,7 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidArgumentException("Previous School Leaving Session is empty");
 		}
 		dbdata.setPreSchoolLeavingSession(previousSchoolDetailsRequest.getPreSchoolLeavingSession());
-		dbdata.setIsActive(previousSchoolDetailsRequest.getStatus());
+//		dbdata.setIsActive(previousSchoolDetailsRequest.getStatus());
 		return userRepository.save(dbdata);
 	}
 
