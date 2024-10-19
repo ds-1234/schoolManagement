@@ -9,7 +9,7 @@ import lombok.Data;
 public class AcademicDetailsRequest {
 	
 	String userId;
-	Long schoolBranch;
+	Long school;
 	List<Long> className = new ArrayList<>();
 	String academicYear;
 	Long rollNumber;

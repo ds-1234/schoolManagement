@@ -195,6 +195,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserEntity addStudentBasicDetails(StudentBasicDetailsRequest basicDetailsRequest) {
+		if(Objects.isNull(basicDetailsRequest.getUserId()) ) {
 		UserEntity entity = new UserEntity();
 		//BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		if(Objects.isNull(basicDetailsRequest.getFirstName())) {
@@ -270,7 +271,7 @@ public class UserServiceImpl implements UserService {
 		if(Objects.isNull(basicDetailsRequest.getReligion())) {
 			throw new InvalidArgumentException("Religion is empty");
 		}
-		entity.setRelegion(basicDetailsRequest.getReligion());
+		entity.setReligion(basicDetailsRequest.getReligion());
 		
 		if(Objects.isNull(basicDetailsRequest.getCasteCategory())) {
 			throw new InvalidArgumentException("Caste Category is empty");
@@ -281,12 +282,39 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidArgumentException("Role is empty");
 		}
 		entity.setRole(basicDetailsRequest.getRole());
-		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		String randomPassword = utils.generateRandomPassword();
-		entity.setPassword(bCrypt.encode(randomPassword) );
-		entity.setUserName(generateUserName(basicDetailsRequest.getEmail(), basicDetailsRequest.getPhone()));
-		entity.setUserId(this.generateUserId());
-		return userRepository.save(entity);
+		
+			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+			String randomPassword = utils.generateRandomPassword();
+			entity.setPassword(bCrypt.encode(randomPassword) );
+			entity.setUserName(generateUserName(basicDetailsRequest.getEmail(), basicDetailsRequest.getPhone()));
+			entity.setUserId(this.generateUserId());
+			return userRepository.save(entity);
+		}else {
+			UserEntity dbData = userRepository.findByUserId(basicDetailsRequest.getUserId());
+			if(!Objects.isNull(dbData)) {
+				dbData.setFirstName(basicDetailsRequest.getFirstName());
+				dbData.setLastName(basicDetailsRequest.getLastName());
+				dbData.setEmail(basicDetailsRequest.getEmail());
+				dbData.setPhone(basicDetailsRequest.getPhone());
+				dbData.setFatherName(basicDetailsRequest.getFatherName());
+				dbData.setMotherName(basicDetailsRequest.getMotherName());
+				dbData.setGender(basicDetailsRequest.getGender());
+				dbData.setDateOfBirth(basicDetailsRequest.getDateOfBirth());
+				dbData.setHouseNumber(basicDetailsRequest.getHouseNumber());
+				dbData.setCity(basicDetailsRequest.getCity());
+				dbData.setStreet(basicDetailsRequest.getStreet());
+				dbData.setState(basicDetailsRequest.getState());
+				dbData.setPinCode(basicDetailsRequest.getPinCode());
+				dbData.setCountry(basicDetailsRequest.getCountry());
+				dbData.setBloodGroup(basicDetailsRequest.getBloodGroup());
+				dbData.setReligion(basicDetailsRequest.getReligion());
+				dbData.setCasteCategory(basicDetailsRequest.getCasteCategory());
+				dbData.setRole(basicDetailsRequest.getRole());
+				
+			}
+			return userRepository.save(dbData);
+		}
+		
 	}
 
 	@Override
@@ -295,10 +323,10 @@ public class UserServiceImpl implements UserService {
 		if(Objects.isNull(dbdata)) {
 			throw new InvalidArgumentException(ErrorCode.USER_NOT_FOUND, HttpStatus.BAD_REQUEST);
 		}
-		if(Objects.isNull(academicDetailsRequest.getSchoolBranch())) {
+		if(Objects.isNull(academicDetailsRequest.getSchool())) {
 			throw new InvalidArgumentException("School Branch is empty");
 		}
-		dbdata.setSchool(academicDetailsRequest.getSchoolBranch());
+		dbdata.setSchool(academicDetailsRequest.getSchool());
 		
 		if(Objects.isNull(academicDetailsRequest.getClassName())) {
 			throw new InvalidArgumentException("Class is empty");

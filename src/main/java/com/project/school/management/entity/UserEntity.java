@@ -105,7 +105,7 @@ public class UserEntity {
 	private String bloodGroup;
 	
 	@Column(name = "relegion")
-	private String relegion;
+	private String religion;
 	
 	@Column(name = "caste_category")
 	private String casteCategory;

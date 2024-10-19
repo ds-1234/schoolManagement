@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class StudentBasicDetailsRequest {
 	
+	String userId;
+	
 	String firstName;
 
 	String lastName;
