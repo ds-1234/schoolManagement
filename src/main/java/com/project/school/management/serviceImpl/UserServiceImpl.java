@@ -285,7 +285,7 @@ public class UserServiceImpl implements UserService {
 		
 			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 			String randomPassword = utils.generateRandomPassword();
-			entity.setPassword(bCrypt.encode(randomPassword) );
+			entity.setPassword(bCrypt.encode(randomPassword));
 			entity.setUserName(generateUserName(basicDetailsRequest.getEmail(), basicDetailsRequest.getPhone()));
 			entity.setUserId(this.generateUserId());
 			return userRepository.save(entity);

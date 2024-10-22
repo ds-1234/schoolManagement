@@ -1,14 +1,16 @@
 package com.project.school.management.serviceImpl;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.school.management.entity.EventCategoryEntity;
 import com.project.school.management.entity.EventEntity;
 import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.repository.EventRepository;
@@ -38,14 +40,75 @@ public class EventServiceImpl implements EventService{
 			Long lastId = eventRepository.findMaxId();
 			long newId = (lastId == null || lastId == 0) ? 1 : lastId + 1;
 			entity.setId(newId);
+//			String uploadedFile = utils.uploadFile(files);
+//			String [] name = uploadedFile.split(",");
+//			String fName = name[0];
+//			String fPath = name[1];
+//			entity.setAttachmentName(fName);
+//			entity.setAttachmentPath(fPath);
 			return eventRepository.save(entity);
 		} else {
 			EventEntity dbData = eventRepository.findById(eventRequest.getId())
 					.orElseThrow(() -> new InvalidArgumentException("given id is invalid"));
 			objectMapper.updateValue(dbData, eventRequest);
+//			String uploadedFile = utils.uploadFile(files);
+//			String [] name = uploadedFile.split(",");
+//			String fName = name[0];
+//			String fPath = name[1];
+//			dbData.setAttachmentName(fName);
+//			dbData.setAttachmentPath(fPath);
 			return eventRepository.save(dbData);
 
 		}
+	}
+
+	@Override
+	public List<EventEntity> getEventList() {
+		return eventRepository.findAll();
+	}
+
+	@Override
+	public EventEntity getEventById(Long id) {
+		EventEntity dbData = eventRepository.findById(id)
+				.orElseThrow(() -> new InvalidArgumentException("given id is invalid"));
+		return dbData;
+	}
+
+	@Override
+	public Object deleteEvent(Long id) {
+		EventEntity dbData = eventRepository.findById(id)
+				.orElseThrow(() -> new InvalidArgumentException("given id is invalid"));
+		eventRepository.delete(dbData);
+		return dbData.getEventTitle()+ " is deleted successfully";
+	}
+
+	@Override
+	public List<EventEntity> getEventListByCatId(Long catId) {
+		List<EventEntity> list = eventRepository.findByCatId(catId);
+		return list;
+	}
+
+	@Override
+	public List<EventEntity> getEventByCalandarType(String type, LocalDate date, Integer month,
+			Integer year, String dateRange) {
+		List<EventEntity> result = new ArrayList<>();
+		if ("month".equalsIgnoreCase(type) && month != null && year != null) {
+			result = eventRepository.findByMonthAndYear(month, year);
+		} else if ("week".equalsIgnoreCase(type) && dateRange != null) {
+			String[] dates = dateRange.split(" : ");
+
+			// Output the results
+			String startDate = dates[0].trim();
+			String endDate = dates[1].trim();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate stDate = LocalDate.parse(startDate, formatter);
+			LocalDate enDate = LocalDate.parse(endDate, formatter);
+			result = eventRepository.findByWeek(stDate, enDate);
+		} else if ("date".equalsIgnoreCase(type) && date != null) {
+			result = eventRepository.findByDate(date);
+		}
+
+		return result;
 	}
 
 }

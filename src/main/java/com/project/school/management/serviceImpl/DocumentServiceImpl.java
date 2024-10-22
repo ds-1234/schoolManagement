@@ -1,16 +1,13 @@
 package com.project.school.management.serviceImpl;
 
-import java.util.Objects;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.school.management.entity.DocumentEntity;
-import com.project.school.management.entity.UserEntity;
-import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.repository.DocumentRepository;
-import com.project.school.management.repository.UserRepository;
 import com.project.school.management.service.DocumentService;
 import com.project.school.management.utility.Utils;
 
@@ -22,9 +19,6 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	@Autowired
 	private DocumentRepository documentRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Override
 	public void saveDocument(MultipartFile[] files, String id) {
@@ -39,12 +33,6 @@ public class DocumentServiceImpl implements DocumentService {
 				documentEntity.setAttachmentPath(fPath);
 				documentEntity.setIsActive(true);
 				documentEntity.setUserId(id);
-				UserEntity userData = userRepository.findByUserId(id);
-				if(Objects.isNull(userData)) {
-					throw new InvalidArgumentException("given id is invalid");
-				}
-				userData.setIsActive(true);
-				userRepository.save(userData);
 				this.documentRepository.save(documentEntity);
 			}
 		}catch(Exception ex) {
@@ -52,6 +40,11 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 		
 		
+	}
+
+	@Override
+	public List<DocumentEntity> getDocument(String id) {
+		return this.documentRepository.findByUserId(id);
 	}
 
 }

@@ -39,6 +39,12 @@ public class EventEntity {
 	@Column(name = "message", length=2000)
 	private String message;
 	
+//	@Column(name = "attachment_name")
+//	private String attachmentName;
+//	
+//	@Column(name = "attachment_path")
+//	private String attachmentPath;
+	
 	@Column(name = "status")
 	private Boolean isActive;
 
