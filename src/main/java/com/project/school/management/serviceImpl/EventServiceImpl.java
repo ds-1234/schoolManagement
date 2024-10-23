@@ -40,23 +40,11 @@ public class EventServiceImpl implements EventService{
 			Long lastId = eventRepository.findMaxId();
 			long newId = (lastId == null || lastId == 0) ? 1 : lastId + 1;
 			entity.setId(newId);
-//			String uploadedFile = utils.uploadFile(files);
-//			String [] name = uploadedFile.split(",");
-//			String fName = name[0];
-//			String fPath = name[1];
-//			entity.setAttachmentName(fName);
-//			entity.setAttachmentPath(fPath);
 			return eventRepository.save(entity);
 		} else {
 			EventEntity dbData = eventRepository.findById(eventRequest.getId())
 					.orElseThrow(() -> new InvalidArgumentException("given id is invalid"));
 			objectMapper.updateValue(dbData, eventRequest);
-//			String uploadedFile = utils.uploadFile(files);
-//			String [] name = uploadedFile.split(",");
-//			String fName = name[0];
-//			String fPath = name[1];
-//			dbData.setAttachmentName(fName);
-//			dbData.setAttachmentPath(fPath);
 			return eventRepository.save(dbData);
 
 		}

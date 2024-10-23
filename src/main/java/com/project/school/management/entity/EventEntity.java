@@ -1,6 +1,7 @@
 package com.project.school.management.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +20,13 @@ public class EventEntity {
 	private String eventTitle;
 	
 	@Column(name = "event_for")
-	private Long role;
+	private List<Long> role;
+	
+	@Column(name = "user_id")
+	private List<Long> user;
+	
+	@Column(name = "class")
+	private List<Long> className;
 	
 	@Column(name = "event_category")
 	private Long eventCategory;
