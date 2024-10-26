@@ -19,6 +19,9 @@ public class EventCategoryEntity {
 	@Column(name = "event_category_id")
 	private String eventCategoryId;
 	
+	@Column(name = "event_cat_color_code")
+	private String eventCatColorCode;
+	
 	@Column(name = "status")
 	private Boolean isActive;
 

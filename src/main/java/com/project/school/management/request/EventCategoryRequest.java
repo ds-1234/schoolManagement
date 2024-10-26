@@ -8,6 +8,8 @@ public class EventCategoryRequest {
 	Long id;
 
 	String eventCategoryTitle;
+	
+	String eventCatColorCode;
 
 	Boolean isActive;
 

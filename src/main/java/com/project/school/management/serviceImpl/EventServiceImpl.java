@@ -35,6 +35,13 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public EventEntity saveEvent(EventRequest eventRequest) throws IOException {
+		if(Objects.isNull(eventRequest.getEventTitle()) || Objects.isNull(eventRequest.getEventCategory())) {
+			throw new InvalidArgumentException("Event title or Event Category is empty");
+		}
+		if(Objects.isNull(eventRequest.getStartDate()) || Objects.isNull(eventRequest.getEndDate())
+				|| Objects.isNull(eventRequest.getStartTime()) || Objects.isNull(eventRequest.getEndTime())) {
+			throw new InvalidArgumentException("Event Date or Time is empty");
+		}
 		if (Objects.isNull(eventRequest.getId())) {
 			EventEntity entity = objectMapper.convertValue(eventRequest, EventEntity.class);
 			Long lastId = eventRepository.findMaxId();
