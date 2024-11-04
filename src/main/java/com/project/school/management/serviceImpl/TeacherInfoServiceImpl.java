@@ -37,12 +37,12 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@Override
 	@Transactional
 	public TeacherInfoDto createTeacherInfo(TeacherInfoDto dto) {
-		if (ObjectUtils.isNotEmpty(teacherInfoRepository.findByTeacherId(dto.getTeacherId()))) {
-			throw new AlreadyExistException();
+		if (ObjectUtils.isNotEmpty(dto.getWorkExperience())) {
+			workExperienceRepository.saveAll(dto.getWorkExperience());
 		}
-		
-		workExperienceRepository.saveAll(dto.getWorkExperience());
-		qualificationRepository.saveAll(dto.getQualificationList());
+		if (ObjectUtils.isNotEmpty(dto.getQualificationList())) {
+			qualificationRepository.saveAll(dto.getQualificationList());
+		}
 
 		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
 
