@@ -38,14 +38,28 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@Transactional
 	public TeacherInfoDto createTeacherInfo(TeacherInfoDto dto) {
 		if (ObjectUtils.isNotEmpty(dto.getWorkExperience())) {
+			List<WrokExperience> wrokExperienceList =  workExperienceRepository.findByTeacherId(dto.getTeacherId());
+			if(ObjectUtils.isNotEmpty(wrokExperienceList)) {
+				workExperienceRepository.deleteAll(wrokExperienceList);
+			}
 			workExperienceRepository.saveAll(dto.getWorkExperience());
 		}
 		if (ObjectUtils.isNotEmpty(dto.getQualificationList())) {
+			List<Qualification> qualificationList =  qualificationRepository.findByTeacherId(dto.getTeacherId());
+			if(ObjectUtils.isNotEmpty(qualificationList)) {
+				qualificationRepository.deleteAll(qualificationList);
+			}
 			qualificationRepository.saveAll(dto.getQualificationList());
 		}
 
 		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
 
+		TeacherInfoEntity teacherInfoEntity = teacherInfoRepository.findByTeacherId(dto.getTeacherId());
+		
+		if(ObjectUtils.isNotEmpty(teacherInfoEntity)) {
+			teacherInfoRepository.delete(teacherInfoEntity);
+		}
+		
 		teacherInfoRepository.save(entity);
 
 		return dto;
