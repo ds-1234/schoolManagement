@@ -31,7 +31,7 @@ public class TeacherInfoDto {
 
 	private String pan;
 
-	private Date accountNumber;
+	private String accountNumber;
 
 	private String accountName;
 

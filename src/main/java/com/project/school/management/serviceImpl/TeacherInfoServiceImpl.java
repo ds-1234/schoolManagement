@@ -52,13 +52,16 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 			qualificationRepository.saveAll(dto.getQualificationList());
 		}
 
-		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
-
+		
 		TeacherInfoEntity teacherInfoEntity = teacherInfoRepository.findByTeacherId(dto.getTeacherId());
 		
-		if(ObjectUtils.isNotEmpty(teacherInfoEntity)) {
-			teacherInfoRepository.delete(teacherInfoEntity);
-		}
+		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
+
+		entity.setId(teacherInfoEntity.getId());
+		
+//		if(ObjectUtils.isNotEmpty(teacherInfoEntity)) {
+//			teacherInfoRepository.delete(teacherInfoEntity);
+//		}
 		
 		teacherInfoRepository.save(entity);
 
