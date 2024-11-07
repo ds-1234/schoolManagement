@@ -3,6 +3,7 @@ package com.project.school.management.serviceImpl;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +58,10 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		
 		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
 
-		entity.setId(teacherInfoEntity.getId());
+		if(ObjectUtils.isNotEmpty(teacherInfoEntity) && StringUtils.isNotEmpty(teacherInfoEntity.getId().toString())) {
+			entity.setId(teacherInfoEntity.getId());
+		}
+		
 		
 //		if(ObjectUtils.isNotEmpty(teacherInfoEntity)) {
 //			teacherInfoRepository.delete(teacherInfoEntity);
@@ -77,8 +81,14 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		List<Qualification> qualificationList= qualificationRepository.findByTeacherId(id);
 		
 		teacherInfoDto = objectMapper.convertValue(entity, TeacherInfoDto.class);
-		teacherInfoDto.setQualificationList(qualificationList);
-		teacherInfoDto.setWorkExperience(wrokExperienceList);
+		if(ObjectUtils.isNotEmpty(qualificationList)) {
+			teacherInfoDto.setQualificationList(qualificationList);
+		}
+		
+		if(ObjectUtils.isNotEmpty(wrokExperienceList)) {
+			teacherInfoDto.setWorkExperience(wrokExperienceList);
+		}
+		
 		return teacherInfoDto;
 		
 	}
