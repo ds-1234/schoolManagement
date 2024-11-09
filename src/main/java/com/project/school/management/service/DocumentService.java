@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.school.management.dto.IdDto;
 import com.project.school.management.entity.DocumentEntity;
 
 public interface DocumentService {
 
-	void saveDocument(MultipartFile[] files, String id);
+	void saveDocument(MultipartFile file,String filesName, String id);
 	
 	List<DocumentEntity> getDocument(String id);
+
+	void deleteDocument(IdDto id);
 
 }

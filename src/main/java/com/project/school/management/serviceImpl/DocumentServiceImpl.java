@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.school.management.dto.IdDto;
 import com.project.school.management.entity.DocumentEntity;
 import com.project.school.management.repository.DocumentRepository;
 import com.project.school.management.service.DocumentService;
@@ -21,9 +22,9 @@ public class DocumentServiceImpl implements DocumentService {
 	private DocumentRepository documentRepository;
 	
 	@Override
-	public void saveDocument(MultipartFile[] files, String id) {
+	public void saveDocument(MultipartFile file, String filesName, String id) {
 		try {
-			for(MultipartFile file : files) {
+//			for(MultipartFile file : files) {
 				DocumentEntity documentEntity = new DocumentEntity();
 				String uploadedFile = utils.uploadFile(file);
 				String [] name = uploadedFile.split(",");
@@ -33,8 +34,9 @@ public class DocumentServiceImpl implements DocumentService {
 				documentEntity.setAttachmentPath(fPath);
 				documentEntity.setIsActive(true);
 				documentEntity.setUserId(id);
+				documentEntity.setDocumentName(filesName);
 				this.documentRepository.save(documentEntity);
-			}
+//			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -45,6 +47,12 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public List<DocumentEntity> getDocument(String id) {
 		return this.documentRepository.findByUserId(id);
+	}
+
+	@Override
+	public void deleteDocument(IdDto id) {
+		this.documentRepository.deleteById(id.getId());
+		
 	}
 
 }
