@@ -18,6 +18,7 @@ import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.OfficeDetailsRequest;
 import com.project.school.management.request.PreviousSchoolDetailsRequest;
 import com.project.school.management.request.StudentBasicDetailsRequest;
+import com.project.school.management.request.StudentPromotionRequest;
 import com.project.school.management.request.TransportDetailsRequest;
 import com.project.school.management.request.UserRequest;
 import com.project.school.management.response.Response;
@@ -130,6 +131,14 @@ public class UserController {
 		Response response = new Response();
 		response.succeed();
 		response.setData(userService.getStudentDetails(userId));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("studentPromotion")
+	public ResponseEntity<Response> updateStudentPromotion(@RequestBody StudentPromotionRequest studentPromotionRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(userService.updatePreSchoolDetails(studentPromotionRequest));
 		return ResponseEntity.ok().body(response);
 	}
 }

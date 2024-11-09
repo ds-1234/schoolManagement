@@ -3,6 +3,7 @@ package com.project.school.management.serviceImpl;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -26,6 +27,7 @@ import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.OfficeDetailsRequest;
 import com.project.school.management.request.PreviousSchoolDetailsRequest;
 import com.project.school.management.request.StudentBasicDetailsRequest;
+import com.project.school.management.request.StudentPromotionRequest;
 import com.project.school.management.request.TransportDetailsRequest;
 import com.project.school.management.request.UserRequest;
 import com.project.school.management.service.UserService;
@@ -431,6 +433,16 @@ public class UserServiceImpl implements UserService {
 		}
 		dbdata.setRoomNumber(hostelDetailsRequest.getRoomNumber());
 		return userRepository.save(dbdata);
+	}
+
+	@Override
+	public Object updatePreSchoolDetails(StudentPromotionRequest studentPromotionRequest) {
+		
+		 List<Long> userIds = studentPromotionRequest.getUsers().stream()
+                 .map(UserEntity::getId)
+                 .collect(Collectors.toList());
+		 userRepository.updateStudentPromotion(userIds, studentPromotionRequest.getPromotedSession(), studentPromotionRequest.getClassName());
+		return "Session updated successfully";
 	}
 	
 

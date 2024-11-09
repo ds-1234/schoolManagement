@@ -9,6 +9,7 @@ import com.project.school.management.request.LoginRequest;
 import com.project.school.management.request.OfficeDetailsRequest;
 import com.project.school.management.request.PreviousSchoolDetailsRequest;
 import com.project.school.management.request.StudentBasicDetailsRequest;
+import com.project.school.management.request.StudentPromotionRequest;
 import com.project.school.management.request.TransportDetailsRequest;
 import com.project.school.management.request.UserRequest;
 
@@ -37,5 +38,7 @@ public interface UserService {
 	UserEntity getStudentDetails(String userId);
 
 	UserEntity updateHostelDetails(HostelDetailsRequest hostelDetailsRequest);
+
+	Object updatePreSchoolDetails(StudentPromotionRequest studentPromotionRequest);
 
 }
