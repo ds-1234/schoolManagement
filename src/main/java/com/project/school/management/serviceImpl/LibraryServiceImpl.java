@@ -62,4 +62,10 @@ public class LibraryServiceImpl implements LibraryService{
 		return groupedByUserId;
 	}
 
+	@Override
+	public LibraryEntity getBookIssuedById(Long id) throws IOException {
+		return libraryRepository.findById(id)
+				.orElseThrow(()-> new InvalidArgumentException("Data not present by given id"));
+	}
+
 }

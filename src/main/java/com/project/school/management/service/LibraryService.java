@@ -13,4 +13,6 @@ public interface LibraryService {
 
 	Map<String, List<LibraryEntity>> getBookIssued() throws IOException;
 
+	LibraryEntity getBookIssuedById(Long id) throws IOException;
+
 }
