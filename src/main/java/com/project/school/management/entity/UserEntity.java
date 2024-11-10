@@ -143,5 +143,14 @@ public class UserEntity {
 	@Column(name = "room_number")
 	private Long roomNumber;
 	
+	@Column(name = "siblings")
+	private List<Long> siblings;
+	
+	@Column(name = "known_allergies")
+	private List<String> knownAllergies;
+	
+	@Column(name = "medications")
+	private List<String> medications;
+	
 
 }

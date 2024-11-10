@@ -362,6 +362,9 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidArgumentException("Admission date is empty");
 		}
 		dbdata.setAdmissionDate(officeDetailsRequest.getAdmissionDate());
+		dbdata.setSiblings(officeDetailsRequest.getSiblings());
+		dbdata.setKnownAllergies(officeDetailsRequest.getKnownAllergies());
+		dbdata.setMedications(officeDetailsRequest.getMedications());
 		return userRepository.save(dbdata);
 	}
 
