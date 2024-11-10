@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.school.management.request.AttendanceRequest;
+import com.project.school.management.request.StaffAttendanceRequest;
+import com.project.school.management.request.StaffAttendanceStatusRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.AttendanceService;
 
@@ -55,5 +57,37 @@ public class AttendanceController {
 //		response.setData(attendanceService.deleteAttendance(id));
 //		return ResponseEntity.ok().body(response);
 //	}
+	
+	@PostMapping("saveStaffAttendanceStatus")
+	public ResponseEntity<Response> saveStaffAttendanceStatus(@RequestBody StaffAttendanceStatusRequest staffAttendanceStatusRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(attendanceService.saveStaffAttendanceStatus(staffAttendanceStatusRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getStaffAttendanceStatus")
+	public ResponseEntity<Object> getStaffAttendanceStatus() throws IOException {
+		Response response = new Response();
+		response.succeed();
+		response.setData(attendanceService.getStaffAttendanceStatus());
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("saveStaffAttendance")
+	public ResponseEntity<Response> saveStaffAttendance(@RequestBody StaffAttendanceRequest staffAttendanceRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(attendanceService.saveStaffAttendanceStatus(staffAttendanceRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getStaffAttendance")
+	public ResponseEntity<Object> getStaffAttendance() throws IOException {
+		Response response = new Response();
+		response.succeed();
+		response.setData(attendanceService.getStaffAttendance());
+		return ResponseEntity.ok().body(response);
+	}
 
 }
