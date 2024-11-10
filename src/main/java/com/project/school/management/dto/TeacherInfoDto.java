@@ -28,10 +28,12 @@ public class TeacherInfoDto {
 	private String previousSchool;
 
 	private String aadhar;
+	
+	private String languages;
 
 	private String pan;
 
-	private String accountNumber;
+	private Date accountNumber;
 
 	private String accountName;
 

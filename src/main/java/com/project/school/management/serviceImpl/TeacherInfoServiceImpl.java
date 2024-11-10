@@ -3,7 +3,6 @@ package com.project.school.management.serviceImpl;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,42 +37,22 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@Override
 	@Transactional
 	public TeacherInfoDto createTeacherInfo(TeacherInfoDto dto) {
-		if (ObjectUtils.isNotEmpty(dto.getWorkExperience())) {
-			List<WrokExperience> wrokExperienceList =  workExperienceRepository.findByTeacherId(dto.getTeacherId());
-			if(ObjectUtils.isNotEmpty(wrokExperienceList)) {
-				workExperienceRepository.deleteAll(wrokExperienceList);
-			}
-			workExperienceRepository.saveAll(dto.getWorkExperience());
-		}
-		if (ObjectUtils.isNotEmpty(dto.getQualificationList())) {
-			List<Qualification> qualificationList =  qualificationRepository.findByTeacherId(dto.getTeacherId());
-			if(ObjectUtils.isNotEmpty(qualificationList)) {
-				qualificationRepository.deleteAll(qualificationList);
-			}
-			qualificationRepository.saveAll(dto.getQualificationList());
-		}
-
-		
-		TeacherInfoEntity teacherInfoEntity = teacherInfoRepository.findByTeacherId(dto.getTeacherId());
-		
-		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
-
-		if(ObjectUtils.isNotEmpty(teacherInfoEntity) && StringUtils.isNotEmpty(teacherInfoEntity.getId().toString())) {
-			entity.setId(teacherInfoEntity.getId());
-		}
-		
-		
-//		if(ObjectUtils.isNotEmpty(teacherInfoEntity)) {
-//			teacherInfoRepository.delete(teacherInfoEntity);
+//		if (ObjectUtils.isNotEmpty(teacherInfoRepository.findByTeacherId(dto.getTeacherId()))) {
+//			throw new AlreadyExistException();
 //		}
 		
+		workExperienceRepository.saveAll(dto.getWorkExperience());
+		qualificationRepository.saveAll(dto.getQualificationList());
+
+		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
+
 		teacherInfoRepository.save(entity);
 
 		return dto;
 	}
 
 	@Override
-	public TeacherInfoDto createTeacherInfo(String id) {
+	public TeacherInfoDto getTeacherInfo(String id) {
 		TeacherInfoDto teacherInfoDto = new TeacherInfoDto();
 		
 		TeacherInfoEntity entity= teacherInfoRepository.findByTeacherId(id);
@@ -81,14 +60,8 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		List<Qualification> qualificationList= qualificationRepository.findByTeacherId(id);
 		
 		teacherInfoDto = objectMapper.convertValue(entity, TeacherInfoDto.class);
-		if(ObjectUtils.isNotEmpty(qualificationList)) {
-			teacherInfoDto.setQualificationList(qualificationList);
-		}
-		
-		if(ObjectUtils.isNotEmpty(wrokExperienceList)) {
-			teacherInfoDto.setWorkExperience(wrokExperienceList);
-		}
-		
+		teacherInfoDto.setQualificationList(qualificationList);
+		teacherInfoDto.setWorkExperience(wrokExperienceList);
 		return teacherInfoDto;
 		
 	}

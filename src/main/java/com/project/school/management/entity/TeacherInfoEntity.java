@@ -22,31 +22,34 @@ public class TeacherInfoEntity {
 	@Column(name = "Teacher ids", nullable = false)
 	private String teacherId;
 
-	@Column(name = "Marital Status", nullable = true)
+	@Column(name = "Marital Status", nullable = false)
 	private String maritalStatus;
 
 	@Column(name = "Previous School", nullable = true)
 	private String previousSchool;
 
-	@Column(name = "aadhar card number", nullable = true)
+	@Column(name = "aadhar card number", nullable = false)
 	private String aadhar;
+	
+	@Column(name = "languages", nullable = false)
+	private String languages;
 
-	@Column(name = "pan", nullable = true)
+	@Column(name = "pan", nullable = false)
 	private String pan;
 
-	@Column(name = "account number", nullable = true)
+	@Column(name = "account number", nullable = false)
 	private String accountNumber;
 
-	@Column(name = "account name ", nullable = true)
+	@Column(name = "account name ", nullable = false)
 	private String accountName;
 
-	@Column(name = "bank name", nullable = true)
+	@Column(name = "bank name", nullable = false)
 	private String bankName;
 
-	@Column(name = "IFSC code", nullable = true)
+	@Column(name = "IFSC code", nullable = false)
 	private String ifsc;
 
-	@Column(name = "branch name", nullable = true)
+	@Column(name = "branch name", nullable = false)
 	private String branchName;
 
 }

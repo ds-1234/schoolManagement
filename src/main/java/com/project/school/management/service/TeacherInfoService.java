@@ -7,6 +7,6 @@ public interface TeacherInfoService {
 
 	TeacherInfoDto createTeacherInfo(TeacherInfoDto dto);
 
-	TeacherInfoDto createTeacherInfo(String id);
+	TeacherInfoDto getTeacherInfo(String id);
 
 }

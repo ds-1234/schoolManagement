@@ -35,7 +35,7 @@ public class TeacherInfoController {
 	public ResponseEntity<Object> getTeacherInfo(@PathVariable String id) {
 		Response response = new Response();
 		response.succeed();
-		response.setData(teacherInfoService.createTeacherInfo(id));
+		response.setData(teacherInfoService.getTeacherInfo(id));
 		return ResponseEntity.ok().body(response);
 
 	}
