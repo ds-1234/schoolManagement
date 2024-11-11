@@ -10,6 +10,7 @@ public class BookIssueRequest {
 	Date issuedDate;
 	Date returnDate;
 	String bookNumber;
+	Long bookMapping;
 	Boolean isActive;
 
 }

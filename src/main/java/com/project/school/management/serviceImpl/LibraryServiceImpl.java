@@ -48,7 +48,7 @@ public class LibraryServiceImpl implements LibraryService{
 			long newId = (lastId == null || lastId == 0) ? 1 : lastId + 1;
 			entity.setId(newId);
 			String bookId = utils.generateRandomId();
-			entity.setBookId("LB"+bookId);
+			entity.setIssueId("LB"+bookId);
 			
 		}
 		return libraryRepository.save(entity);

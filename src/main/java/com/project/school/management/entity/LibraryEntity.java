@@ -18,8 +18,8 @@ public class LibraryEntity {
 	@Column(name = "user_id")
 	private String userId;
 	
-	@Column(name = "book_id")
-	private String bookId;
+	@Column(name = "issue_id")
+	private String issueId;
 
 	@Column(name = "issued_date")
 	private Date issuedDate;
@@ -32,4 +32,7 @@ public class LibraryEntity {
 	
 	@Column(name = "status")
 	private Boolean isActive;
+	
+	@Column(name = "book_mapping")
+	private Long bookMapping;
 }
