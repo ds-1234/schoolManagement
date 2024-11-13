@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
 		user.setState(userRequest.getState());
 		user.setPinCode(userRequest.getPinCode());
 		user.setCountry(userRequest.getCountry());
+		user.setIsParent(userRequest.getIsParent());
 
 		user.setClassName(userRequest.getClassName());
 		user.setBook(userRequest.getBook());

@@ -60,7 +60,7 @@ public class UserRequest {
 
 	String country;
 
-	List<String> isParent;
+	List<Long> isParent;
 
 	List<Long> className = new ArrayList<>();;
 
