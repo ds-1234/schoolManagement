@@ -50,7 +50,15 @@ public class UserServiceImpl implements UserService {
 
 		UserEntity user = new UserEntity();
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		String username = generateUserName(userRequest.getEmail(), userRequest.getPhone());
+		String username = null;
+		if(Objects.isNull(userRequest.getUserName())) {
+			username = generateUserName(userRequest.getEmail(), userRequest.getPhone());
+			user.setUserName(username);
+		}else {
+			user.setUserName(userRequest.getUserName());
+		}
+		
+		user.setId(userRequest.getId());
 		user.setFirstName(userRequest.getFirstName());
 		user.setLastName(userRequest.getLastName());
 		user.setFatherName(userRequest.getFatherName());
@@ -60,8 +68,11 @@ public class UserServiceImpl implements UserService {
 		user.setPhone(userRequest.getPhone());
 		user.setGender(userRequest.getGender());
 		user.setPassword(bCrypt.encode(userRequest.getPassword()));
-		user.setUserName(username);
-		user.setUserId(this.generateUserId());
+		if(Objects.isNull(userRequest.getUserId())) {
+			user.setUserId(this.generateUserId());
+		}else {
+			user.setUserId(userRequest.getUserId());
+		}
 		user.setHouseNumber(userRequest.getHouseNumber());
 		user.setStreet(userRequest.getStreet());
 		user.setCity(userRequest.getCity());
