@@ -19,37 +19,37 @@ public class TeacherInfoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "Teacher ids", nullable = false)
+	@Column(name = "Teacher ids")
 	private String teacherId;
 
-	@Column(name = "Marital Status", nullable = false)
+	@Column(name = "Marital Status")
 	private String maritalStatus;
 
-	@Column(name = "Previous School", nullable = true)
+	@Column(name = "Previous School")
 	private String previousSchool;
 
-	@Column(name = "aadhar card number", nullable = false)
+	@Column(name = "aadhar card number")
 	private String aadhar;
 	
-	@Column(name = "languages", nullable = false)
+	@Column(name = "languages")
 	private String languages;
 
-	@Column(name = "pan", nullable = false)
+	@Column(name = "pan")
 	private String pan;
 
-	@Column(name = "account number", nullable = false)
+	@Column(name = "account number")
 	private String accountNumber;
 
-	@Column(name = "account name ", nullable = false)
+	@Column(name = "account name ")
 	private String accountName;
 
-	@Column(name = "bank name", nullable = false)
+	@Column(name = "bank name")
 	private String bankName;
 
-	@Column(name = "IFSC code", nullable = false)
+	@Column(name = "IFSC code")
 	private String ifsc;
 
-	@Column(name = "branch name", nullable = false)
+	@Column(name = "branch name")
 	private String branchName;
 
 }
