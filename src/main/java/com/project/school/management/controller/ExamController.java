@@ -1,14 +1,18 @@
 package com.project.school.management.controller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.school.management.exception.InvalidRequestException;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.ExamService;
@@ -37,6 +41,50 @@ public class ExamController {
 		Response response = new Response();
 		response.succeed();
 		response.setData(examService.getExam());
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getExamById/{id}")
+	public ResponseEntity<Response> getExamById(@PathVariable Long id) {
+		if(Objects.isNull(id)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getExamById(id));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getSubjectFromExamListById/{id}")
+	public ResponseEntity<Response> getSubjectFromExamListById(@PathVariable Long id) {
+		if(Objects.isNull(id)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getSubjectFromExamListById(id));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("deleteExam/{id}")
+	public ResponseEntity<Response> deleteExam(@PathVariable Long id) {
+		if(Objects.isNull(id)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.deleteExam(id));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("deleteSubjectFromExamList/{id}")
+	public ResponseEntity<Response> deleteSubjectFromExamList(@PathVariable Long id) {
+		if(Objects.isNull(id)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.deleteSubjectFromExamList(id));
 		return ResponseEntity.ok().body(response);
 	}
 

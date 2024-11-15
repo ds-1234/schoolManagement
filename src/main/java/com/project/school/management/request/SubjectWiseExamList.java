@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class SubjectWiseExamList {
+	Long id;
 	Date examDate;
 	Long subject;
 	LocalTime startTime;

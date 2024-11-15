@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ExamScheduleRequest {
+	Long id;
 	Long className;
 	Long examName;
 	List<SubjectWiseExamList> subjectWiseExamList;
