@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.school.management.exception.InvalidRequestException;
+import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.ExamService;
@@ -87,5 +89,56 @@ public class ExamController {
 		response.setData(examService.deleteSubjectFromExamList(id));
 		return ResponseEntity.ok().body(response);
 	}
+	
+	
+	@PostMapping("saveExamResult")
+	public ResponseEntity<Response> saveExamResult(@RequestBody @Validated  ExamResultRequest examResultRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.saveExamResult(examResultRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getExamResult")
+	public ResponseEntity<Response> getExamResult() {
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getExamResult());
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getExamListByTeacherId/{teacherId}")
+	public ResponseEntity<Response> getExamListByTeacherId(@PathVariable Long teacherId) {
+		if(Objects.isNull(teacherId)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getExamListByTeacherId(teacherId));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getExamListByStudentId/{studentId}")
+	public ResponseEntity<Response> getExamListByStudentId(@PathVariable Long studentId) {
+		if(Objects.isNull(studentId)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getExamListByStudentId(studentId));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getExamResultById/{id}")
+	public ResponseEntity<Response> getExamResultById(@PathVariable Long id) {
+		if(Objects.isNull(id)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getExamResultById(id));
+		return ResponseEntity.ok().body(response);
+	}
+	
 
 }

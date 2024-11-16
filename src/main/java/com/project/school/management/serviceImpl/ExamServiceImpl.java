@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.school.management.entity.ExamEntity;
+import com.project.school.management.entity.ExamResultEntity;
 import com.project.school.management.entity.SubjectWiseExamEntity;
 import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.repository.ExamRepository;
+import com.project.school.management.repository.ExamResultRepository;
 import com.project.school.management.repository.SubjectWiseExamRepository;
+import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.request.SubjectWiseExamList;
 import com.project.school.management.service.ExamService;
@@ -23,6 +26,9 @@ public class ExamServiceImpl implements ExamService{
 	
 	@Autowired
 	private SubjectWiseExamRepository subjectWiseExamRepository;
+	
+	@Autowired
+	private ExamResultRepository examResultRepository;
 
 	@Override
 	public ExamEntity saveExam(ExamScheduleRequest examScheduleRequest) {
@@ -85,6 +91,52 @@ public class ExamServiceImpl implements ExamService{
 	public SubjectWiseExamEntity getSubjectFromExamListById(Long id) {
 		return subjectWiseExamRepository.findById(id)
 				.orElseThrow(()-> new InvalidArgumentException("Given id is invalid or data not present"));
+	}
+
+	@Override
+	public ExamResultEntity saveExamResult(ExamResultRequest examResultRequest) {
+		ExamResultEntity entity = new ExamResultEntity();
+		if(Objects.isNull(examResultRequest.getId())) {
+			entity.setClassName(examResultRequest.getClassName());
+			entity.setRemarks(examResultRequest.getRemarks());
+			entity.setStudentId(examResultRequest.getStudentId());
+			entity.setSubjectId(examResultRequest.getSubject());
+			entity.setSubjectMarks(examResultRequest.getSubjectMarks());
+			entity.setTeacherId(examResultRequest.getTeacherid());
+			entity.setIsActive(examResultRequest.getIsActive());
+			return examResultRepository.save(entity);
+		}else {
+			entity.setId(examResultRequest.getId());
+			entity.setClassName(examResultRequest.getClassName());
+			entity.setRemarks(examResultRequest.getRemarks());
+			entity.setStudentId(examResultRequest.getStudentId());
+			entity.setSubjectId(examResultRequest.getSubject());
+			entity.setSubjectMarks(examResultRequest.getSubjectMarks());
+			entity.setTeacherId(examResultRequest.getTeacherid());
+			entity.setIsActive(examResultRequest.getIsActive());
+			return examResultRepository.save(entity);
+		}
+	}
+
+	@Override
+	public List<ExamResultEntity> getExamResult() {
+		return examResultRepository.findAll();
+	}
+
+	@Override
+	public List<ExamResultEntity> getExamListByTeacherId(Long teacherId) {
+		return examResultRepository.findAllByTeacherId(teacherId);
+	}
+
+	@Override
+	public List<ExamResultEntity> getExamListByStudentId(Long studentId) {
+		return examResultRepository.findAllByStudentId(studentId);
+	}
+
+	@Override
+	public ExamResultEntity getExamResultById(Long id) {
+		return examResultRepository.findById(id).
+				orElseThrow(()-> new InvalidArgumentException("Data is empty or id is invalid"));
 	}
 
 }
