@@ -9,8 +9,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "WrokExperience")
-public class WrokExperience {
+@Table(name = "work_experience")
+public class WorkExperience {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

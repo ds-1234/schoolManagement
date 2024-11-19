@@ -471,12 +471,6 @@ public class UserServiceImpl implements UserService {
 		 
 		 
 		return map;
-		
-//		 List<Long> userIds = studentPromotionRequest.getUsers().stream()
-//                 .map(UserEntity::getId)
-//                 .collect(Collectors.toList());
-//		 userRepository.updateStudentPromotion(userIds, studentPromotionRequest.getPromotedSession(), studentPromotionRequest.getClassName());
-//		return "Session updated successfully";
 	}
 	
 

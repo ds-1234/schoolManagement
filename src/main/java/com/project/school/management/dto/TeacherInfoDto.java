@@ -1,16 +1,11 @@
 package com.project.school.management.dto;
 
-import java.util.Date;
 import java.util.List;
 
 import com.project.school.management.entity.ClassSubjectEntity;
 import com.project.school.management.entity.Qualification;
-import com.project.school.management.entity.WrokExperience;
+import com.project.school.management.entity.WorkExperience;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
@@ -26,7 +21,7 @@ public class TeacherInfoDto {
 	
 	private List<ClassSubjectEntity> classSubjectEntity;
 
-	private List<WrokExperience> workExperience;
+	private List<WorkExperience> workExperience;
 
 	private String previousSchool;
 	

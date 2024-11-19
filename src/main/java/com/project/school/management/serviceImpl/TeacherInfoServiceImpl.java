@@ -11,7 +11,7 @@ import com.project.school.management.dto.TeacherInfoDto;
 import com.project.school.management.entity.ClassSubjectEntity;
 import com.project.school.management.entity.Qualification;
 import com.project.school.management.entity.TeacherInfoEntity;
-import com.project.school.management.entity.WrokExperience;
+import com.project.school.management.entity.WorkExperience;
 import com.project.school.management.repository.ClassSubjectRepository;
 import com.project.school.management.repository.QualificationRepository;
 import com.project.school.management.repository.TeacherInfoRepository;
@@ -67,7 +67,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		TeacherInfoDto teacherInfoDto = new TeacherInfoDto();
 		
 		TeacherInfoEntity entity= teacherInfoRepository.findByTeacherId(id);
-		List<WrokExperience> wrokExperienceList = workExperienceRepository.findByTeacherId(id);
+		List<WorkExperience> wrokExperienceList = workExperienceRepository.findByTeacherId(id);
 		List<Qualification> qualificationList= qualificationRepository.findByTeacherId(id);
 		List<ClassSubjectEntity> classSubjectList= classSubjectRepository.findByTeacherId(id);
 		
