@@ -33,6 +33,9 @@ public class TeacherInfoEntity {
 	
 	@Column(name = "languages")
 	private String languages;
+	
+	@Column(name = "designation")
+	private Long designation;
 
 	@Column(name = "pan")
 	private String pan;
@@ -51,5 +54,8 @@ public class TeacherInfoEntity {
 
 	@Column(name = "branch name")
 	private String branchName;
+	
+	@Column(name = "department")
+	private Long department;
 
 }

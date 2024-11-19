@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.school.management.dto.TeacherInfoDto;
+import com.project.school.management.entity.ClassSubjectEntity;
 import com.project.school.management.entity.Qualification;
 import com.project.school.management.entity.TeacherInfoEntity;
 import com.project.school.management.entity.WrokExperience;
-import com.project.school.management.exception.AlreadyExistException;
+import com.project.school.management.repository.ClassSubjectRepository;
 import com.project.school.management.repository.QualificationRepository;
 import com.project.school.management.repository.TeacherInfoRepository;
 import com.project.school.management.repository.WorkExperienceRepository;
@@ -30,6 +31,9 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 
 	@Autowired
 	private QualificationRepository qualificationRepository;
+	
+	@Autowired
+	private ClassSubjectRepository classSubjectRepository;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -42,6 +46,10 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		}
 		if(ObjectUtils.isNotEmpty(dto.getQualificationList())) {
 			qualificationRepository.saveAll(dto.getQualificationList());
+		}
+		
+		if(ObjectUtils.isNotEmpty(dto.getClassSubjectEntity())) {
+			classSubjectRepository.saveAll(dto.getClassSubjectEntity());
 		}
 		
 		workExperienceRepository.saveAll(dto.getWorkExperience());
@@ -61,10 +69,12 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		TeacherInfoEntity entity= teacherInfoRepository.findByTeacherId(id);
 		List<WrokExperience> wrokExperienceList = workExperienceRepository.findByTeacherId(id);
 		List<Qualification> qualificationList= qualificationRepository.findByTeacherId(id);
+		List<ClassSubjectEntity> classSubjectList= classSubjectRepository.findByTeacherId(id);
 		
 		teacherInfoDto = objectMapper.convertValue(entity, TeacherInfoDto.class);
 		teacherInfoDto.setQualificationList(qualificationList);
 		teacherInfoDto.setWorkExperience(wrokExperienceList);
+		teacherInfoDto.setClassSubjectEntity(classSubjectList);
 		return teacherInfoDto;
 		
 	}

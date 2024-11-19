@@ -3,6 +3,7 @@ package com.project.school.management.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.project.school.management.entity.ClassSubjectEntity;
 import com.project.school.management.entity.Qualification;
 import com.project.school.management.entity.WrokExperience;
 
@@ -22,10 +23,14 @@ public class TeacherInfoDto {
 	private String maritalStatus;
 
 	private List<Qualification> qualificationList;
+	
+	private List<ClassSubjectEntity> classSubjectEntity;
 
 	private List<WrokExperience> workExperience;
 
 	private String previousSchool;
+	
+	private Long designation;
 
 	private String aadhar;
 	
@@ -42,5 +47,7 @@ public class TeacherInfoDto {
 	private String ifsc;
 
 	private String branchName;
+	
+	private Long department;
 
 }
