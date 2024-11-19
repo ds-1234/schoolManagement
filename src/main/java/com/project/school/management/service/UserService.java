@@ -39,6 +39,6 @@ public interface UserService {
 
 	UserEntity updateHostelDetails(HostelDetailsRequest hostelDetailsRequest);
 
-	Object updatePreSchoolDetails(StudentPromotionRequest studentPromotionRequest);
+	Object updateStudentPromotion(StudentPromotionRequest studentPromotionRequest);
 
 }

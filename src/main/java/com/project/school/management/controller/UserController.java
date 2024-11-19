@@ -138,7 +138,7 @@ public class UserController {
 	public ResponseEntity<Response> updateStudentPromotion(@RequestBody StudentPromotionRequest studentPromotionRequest) {
 		Response response = new Response();
 		response.succeed();
-		response.setData(userService.updatePreSchoolDetails(studentPromotionRequest));
+		response.setData(userService.updateStudentPromotion(studentPromotionRequest));
 		return ResponseEntity.ok().body(response);
 	}
 }

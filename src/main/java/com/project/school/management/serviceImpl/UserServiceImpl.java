@@ -1,9 +1,10 @@
 package com.project.school.management.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -421,6 +422,7 @@ public class UserServiceImpl implements UserService {
 		dbdata.setPreSchoolLeavingSession(previousSchoolDetailsRequest.getPreSchoolLeavingSession());
 //		dbdata.setIsActive(previousSchoolDetailsRequest.getStatus());
 		return userRepository.save(dbdata);
+		
 	}
 
 	@Override
@@ -451,13 +453,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Object updatePreSchoolDetails(StudentPromotionRequest studentPromotionRequest) {
+	public Object updateStudentPromotion(StudentPromotionRequest studentPromotionRequest) {
+		Map<Long, String> map = new HashMap<>();
+		if(ObjectUtils.isNotEmpty(studentPromotionRequest) && ObjectUtils.isNotEmpty(studentPromotionRequest.getUsers())) {
+			studentPromotionRequest.getUsers().stream().forEach(x->{
+				Optional<UserEntity> userContainer = userRepository.findById(x.getId());
+				if(userContainer.isPresent()) {
+					userContainer.get().setClassName(studentPromotionRequest.getClassName());
+					userContainer.get().setAcademicYear(studentPromotionRequest.getPromotedSession());
+					userRepository.save(userContainer.get());
+					map.put(x.getId(), "Success");
+				}else {
+					map.put(x.getId(), "Failed");
+				}
+			 });
+		}
+		 
+		 
+		return map;
 		
-		 List<Long> userIds = studentPromotionRequest.getUsers().stream()
-                 .map(UserEntity::getId)
-                 .collect(Collectors.toList());
-		 userRepository.updateStudentPromotion(userIds, studentPromotionRequest.getPromotedSession(), studentPromotionRequest.getClassName());
-		return "Session updated successfully";
+//		 List<Long> userIds = studentPromotionRequest.getUsers().stream()
+//                 .map(UserEntity::getId)
+//                 .collect(Collectors.toList());
+//		 userRepository.updateStudentPromotion(userIds, studentPromotionRequest.getPromotedSession(), studentPromotionRequest.getClassName());
+//		return "Session updated successfully";
 	}
 	
 
