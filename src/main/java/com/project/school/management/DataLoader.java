@@ -35,8 +35,8 @@ public class DataLoader implements CommandLineRunner{
 	private UserEntity saveData(Role role) {
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		UserEntity userEntity = UserEntity.builder().id(role.getId()).firstName("Admin").lastName("").fatherName("").motherName("")
-				.userId(role.getName()).dateOfBirth(new Date()).houseNumber("").street("").city("").state("").pinCode("")
-				.country("").userName(role.getName().toLowerCase()).gender(Gender.Male).role(role.getId()).email(role.getName().toLowerCase() +"@gmail.com")
+				.userId(role.getName()).dateOfBirth(new Date()).houseNumber("").street("").city(null).state(null).pinCode("")
+				.country(null).userName(role.getName().toLowerCase()).gender(Gender.Male).role(role.getId()).email(role.getName().toLowerCase() +"@gmail.com")
 				.phone("1234567890").password(bCrypt.encode(role.getName() +"@123")).isActive(true).build();
 		return userEntity;
 	}

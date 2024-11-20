@@ -33,13 +33,13 @@ public class StudentBasicDetailsRequest {
 
 	String street;
 
-	String city;
+	Long city;
 
-	String state;
+	Long state;
 
 	String pinCode;
 
-	String country;
+	Long country;
 	
 	String bloodGroup;
 	

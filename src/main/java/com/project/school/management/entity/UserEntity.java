@@ -53,16 +53,16 @@ public class UserEntity {
 	private String street;
 
 	@Column(name = "city")
-	private String city;
+	private Long city;
 
 	@Column(name = "state")
-	private String state;
+	private Long state;
 
 	@Column(name = "pinCode")
 	private String pinCode;
 
 	@Column(name = "country")
-	private String country;
+	private Long country;
 
 	@Column(name = "className")
 	private List<Long> className = new ArrayList<>();
