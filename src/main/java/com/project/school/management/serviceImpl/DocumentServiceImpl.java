@@ -22,7 +22,7 @@ public class DocumentServiceImpl implements DocumentService {
 	private DocumentRepository documentRepository;
 	
 	@Override
-	public void saveDocument(MultipartFile file, String filesName, String id) {
+	public void saveDocument(MultipartFile file, String filesName, String id,String moduleName,Long moduleId) {
 		try {
 //			for(MultipartFile file : files) {
 				DocumentEntity documentEntity = new DocumentEntity();
@@ -34,6 +34,8 @@ public class DocumentServiceImpl implements DocumentService {
 				documentEntity.setAttachmentPath(fPath);
 				documentEntity.setIsActive(true);
 				documentEntity.setUserId(id);
+				documentEntity.setModuleName(moduleName);
+				documentEntity.setModuleId(moduleId);
 				documentEntity.setDocumentName(filesName);
 				this.documentRepository.save(documentEntity);
 //			}

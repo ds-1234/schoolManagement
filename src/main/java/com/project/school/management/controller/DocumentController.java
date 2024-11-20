@@ -28,12 +28,13 @@ public class DocumentController {
 
 	
 	@PostMapping(value = "saveDocument/{id}")
-	public ResponseEntity<Response> saveDocument(@RequestParam("file") MultipartFile file,@RequestParam("filesName") String filesName, @PathVariable String id) 
+	public ResponseEntity<Response> saveDocument(@RequestParam("file") MultipartFile file,@RequestParam("filesName") String filesName,
+			@RequestParam("moduleName") String moduleName,@RequestParam("moduleId") Long moduleId, @PathVariable String id) 
 								throws IOException
 	{
 		Response response = new Response();
 		response.succeed();
-		documentService.saveDocument(file,filesName, id);
+		documentService.saveDocument(file,filesName, id,moduleName,moduleId);
 		return ResponseEntity.ok().body(response);
 	}
 	

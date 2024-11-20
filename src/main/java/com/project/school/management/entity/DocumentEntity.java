@@ -29,6 +29,12 @@ public class DocumentEntity {
 	@Column(name = "document_name")
 	private String documentName;
 	
+	@Column(name = "module_name")
+	private String moduleName;
+	
+	@Column(name = "module_id")
+	private Long moduleId;
+	
 	@Column(name = "status", nullable = false)
 	private Boolean isActive;
 }

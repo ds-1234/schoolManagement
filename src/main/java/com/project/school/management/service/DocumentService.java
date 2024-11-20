@@ -9,7 +9,7 @@ import com.project.school.management.entity.DocumentEntity;
 
 public interface DocumentService {
 
-	void saveDocument(MultipartFile file,String filesName, String id);
+	void saveDocument(MultipartFile file,String filesName, String id,String moduleName,Long moduleId);
 	
 	List<DocumentEntity> getDocument(String id);
 
