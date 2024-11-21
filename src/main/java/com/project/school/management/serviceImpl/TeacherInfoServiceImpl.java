@@ -51,9 +51,6 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		if(ObjectUtils.isNotEmpty(dto.getClassSubjectEntity())) {
 			classSubjectRepository.saveAll(dto.getClassSubjectEntity());
 		}
-		
-		workExperienceRepository.saveAll(dto.getWorkExperience());
-		qualificationRepository.saveAll(dto.getQualificationList());
 
 		TeacherInfoEntity entity = objectMapper.convertValue(dto, TeacherInfoEntity.class);
 

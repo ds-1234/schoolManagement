@@ -32,6 +32,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Object> {
 	@Query(value = "UPDATE user_entity SET academic_year = :promotedSession, class_name = :className WHERE id IN :userIds", nativeQuery = true)
 	public void updateStudentPromotion(List<Long> userIds, String promotedSession, List<Long> className);
 
+	@Query(value = "SELECT u.role, u.is_active, COUNT(u) FROM user_entity u GROUP BY u.role, u.is_active", nativeQuery = true)
+	public List<Object[]> getUserCountByRoleAndStatus();
+
 	//public void updateStudentPromotion(List<Long> userIds, String promotedSession, List<Long> className);
 
 }
