@@ -55,6 +55,7 @@ public class ExamServiceImpl implements ExamService{
 			subjectExamList.add(examData);
 		}
 		entity.setSubjectWiseExamList(subjectExamList);
+		entity.setExamType(examScheduleRequest.getExamType());
 		
 		return examRepository.save(entity);
 	}

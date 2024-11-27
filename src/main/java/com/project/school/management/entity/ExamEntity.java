@@ -35,5 +35,9 @@ public class ExamEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "exam_entity_id")
     private List<SubjectWiseExamEntity> subjectWiseExamList;
+	
+	@NonNull
+    @Column(name = "exam_type")
+    private Long examType;
 
 }
