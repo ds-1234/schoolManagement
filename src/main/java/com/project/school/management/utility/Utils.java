@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -137,5 +139,11 @@ public class Utils {
         
         return password.toString();
     }
+    
+    public Period dateDuration(LocalDate startDate, LocalDate endDate) {
+            Period period = Period.between(startDate, endDate);
+			return period;
+
+        }
 
 }

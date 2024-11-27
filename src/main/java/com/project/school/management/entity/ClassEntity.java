@@ -29,6 +29,9 @@ public class ClassEntity {
 	@Column(name = "section", nullable = false)
 	private String section;
 	
+	@Column(name = "primaryTeacher", nullable = false)
+	private Long primaryTeacher;
+	
 	@Column(name = "subject", nullable = false)
 	private List<Long> subject = new ArrayList<>();
 	
