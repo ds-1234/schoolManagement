@@ -21,6 +21,4 @@ public class Message {
 	public static final String LEAVE_APPROVED = "APPROVED";
 	
 	public static final String LEAVE_REJECTED = "REJECTED";
-	
-	public static final Integer SAME_DAY = 1;
 }

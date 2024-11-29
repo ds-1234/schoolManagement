@@ -1,6 +1,6 @@
 -- Table: public.states
 
--- DROP TABLE IF EXISTS public.states;
+DROP TABLE IF EXISTS public.states;
 
 CREATE TABLE IF NOT EXISTS public.states
 (

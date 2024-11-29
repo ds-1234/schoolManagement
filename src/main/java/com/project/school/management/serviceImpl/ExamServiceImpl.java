@@ -55,7 +55,6 @@ public class ExamServiceImpl implements ExamService{
 			subjectExamList.add(examData);
 		}
 		entity.setSubjectWiseExamList(subjectExamList);
-		entity.setExamType(examScheduleRequest.getExamType());
 		
 		return examRepository.save(entity);
 	}
@@ -97,26 +96,18 @@ public class ExamServiceImpl implements ExamService{
 	@Override
 	public ExamResultEntity saveExamResult(ExamResultRequest examResultRequest) {
 		ExamResultEntity entity = new ExamResultEntity();
-		if(Objects.isNull(examResultRequest.getId())) {
-			entity.setClassName(examResultRequest.getClassName());
-			entity.setRemarks(examResultRequest.getRemarks());
-			entity.setStudentId(examResultRequest.getStudentId());
-			entity.setSubjectId(examResultRequest.getSubject());
-			entity.setSubjectMarks(examResultRequest.getSubjectMarks());
-			entity.setTeacherId(examResultRequest.getTeacherid());
-			entity.setIsActive(examResultRequest.getIsActive());
-			return examResultRepository.save(entity);
-		}else {
+		if(!Objects.isNull(examResultRequest.getId())) {
 			entity.setId(examResultRequest.getId());
-			entity.setClassName(examResultRequest.getClassName());
-			entity.setRemarks(examResultRequest.getRemarks());
-			entity.setStudentId(examResultRequest.getStudentId());
-			entity.setSubjectId(examResultRequest.getSubject());
-			entity.setSubjectMarks(examResultRequest.getSubjectMarks());
-			entity.setTeacherId(examResultRequest.getTeacherid());
-			entity.setIsActive(examResultRequest.getIsActive());
-			return examResultRepository.save(entity);
 		}
+		entity.setClassName(examResultRequest.getClassName());
+		entity.setRemarks(examResultRequest.getRemarks());
+		entity.setStudentId(examResultRequest.getStudentId());
+		entity.setSubjectId(examResultRequest.getSubject());
+		entity.setSubjectMarks(examResultRequest.getSubjectMarks());
+		entity.setTeacherId(examResultRequest.getTeacherid());
+		entity.setIsActive(examResultRequest.getIsActive());
+		entity.setExamType(examResultRequest.getExamType());
+		return examResultRepository.save(entity);
 	}
 
 	@Override

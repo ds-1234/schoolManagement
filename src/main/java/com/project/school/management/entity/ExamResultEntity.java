@@ -40,5 +40,8 @@ public class ExamResultEntity {
 	@Column(name = "status")
 	private Boolean isActive;
 	
+	@Column(name = "exam_type")
+	private Long examType;
+	
 
 }

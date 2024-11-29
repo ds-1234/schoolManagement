@@ -30,6 +30,9 @@ public class ExamResultRequest {
 	@NonNull
 	Boolean isActive;
 	
+	@NonNull
+	Long examType;
+	
 	String remarks;
 
 }

@@ -1,6 +1,6 @@
 -- Table: public.countries
 
--- DROP TABLE IF EXISTS public.countries;
+DROP TABLE IF EXISTS public.countries;
 
 --CREATE SCRIPT
 

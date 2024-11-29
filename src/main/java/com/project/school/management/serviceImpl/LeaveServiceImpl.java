@@ -88,11 +88,7 @@ public class LeaveServiceImpl implements LeavesService{
 		entity.setLeaveStartDate(leaveApplicationRequest.getLeaveStartDate());
 		entity.setLeaveEndDate(leaveApplicationRequest.getLeaveEndDate());
 		Period period = utils.dateDuration(leaveApplicationRequest.getLeaveStartDate(), leaveApplicationRequest.getLeaveEndDate());
-		if(period.getDays()==0) {
-			entity.setLeaveDayDuration(Message.SAME_DAY);
-		}else {
-			entity.setLeaveDayDuration(period.getDays());
-		}
+		entity.setLeaveDayDuration(period.getDays()+1);
 		entity.setLeaveReason(leaveApplicationRequest.getLeaveReason());
 		entity.setLeaveStatus(Message.LEAVE_PENDING);
 		entity.setRollOrEmployeeId(leaveApplicationRequest.getRollOrEmployeeId());

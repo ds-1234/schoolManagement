@@ -12,6 +12,5 @@ public class ExamScheduleRequest {
 	Long className;
 	Long examName;
 	List<SubjectWiseExamList> subjectWiseExamList;
-	Long examType;
 
 }
