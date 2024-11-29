@@ -16,6 +16,8 @@
 	<description>Project for School Management</description>
 	<properties>
 		<java.version>17</java.version>
+		<maven.wagon.http.ssl.insecure>true</maven.wagon.http.ssl.insecure>
+		<maven.wagon.http.ssl.allowall>true</maven.wagon.http.ssl.allowall>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -110,7 +112,11 @@
 			<artifactId>jakarta.mail</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>9.16.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
