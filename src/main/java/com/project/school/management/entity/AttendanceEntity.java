@@ -1,12 +1,16 @@
 package com.project.school.management.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -31,6 +35,10 @@ public class AttendanceEntity {
 	private Date attendanceDate;
 	
 	//Present, Absent, Half-Day, Holiday, Medical
-	@Column(name = "attendenceStatus",columnDefinition="text", length=10485760, nullable = false)
-	private String attendenceStatus;
+//	@Column(name = "attendenceStatus",columnDefinition="text", length=10485760, nullable = false)
+//	private String attendenceStatus;
+	@ElementCollection
+    @CollectionTable(name = "attendance_status", joinColumns = @JoinColumn(name = "attendance_id"))
+    @Column(name = "attendance_status")
+    private List<AttendanceStatus> attendanceStatusList;
 }

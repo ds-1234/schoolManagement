@@ -53,12 +53,12 @@ public class AttendanceServiceImpl implements AttendanceService{
 			String attendanceId = utils.generateRandomId();
 			entity.setAttendanceId("AD"+attendanceId);
 			entity.setClassName(attendanceRequest.getClassName());
-			entity.setAttendenceStatus(attendanceRequest.getAttendenceStatus().toString());
+			entity.setAttendanceStatusList(attendanceRequest.getAttendanceStatusList());
 			return attendanceRepository.save(entity);
 		}else {
 			AttendanceEntity dbAttendanceEntity = attendanceRepository.findById(attendanceRequest.getId())
 					.orElseThrow(()-> new InvalidArgumentException("Given id is invalid"));
-			dbAttendanceEntity.setAttendenceStatus(attendanceRequest.getAttendenceStatus().toString());
+			dbAttendanceEntity.setAttendanceStatusList(attendanceRequest.getAttendanceStatusList());
 			return attendanceRepository.save(dbAttendanceEntity);
 		}
 		
