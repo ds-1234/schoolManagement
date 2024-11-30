@@ -107,14 +107,16 @@ public class ExamController {
 		return ResponseEntity.ok().body(response);
 	}
 	
-	@GetMapping("getExamListByTeacherId/{teacherId}")
-	public ResponseEntity<Response> getExamListByTeacherId(@PathVariable Long teacherId) {
-		if(Objects.isNull(teacherId)) {
+	@GetMapping("getExamListByTeacherId/{teacherId}/{examType}/{className}")
+	public ResponseEntity<Response> getExamListByTeacherId(@PathVariable Long teacherId,
+			@PathVariable Long examType, 
+			@PathVariable Long className) {
+		if(Objects.isNull(teacherId) || Objects.isNull(examType) || Objects.isNull(className)) {
 			throw new InvalidRequestException("Given id is null or empty");
 		}
 		Response response = new Response();
 		response.succeed();
-		response.setData(examService.getExamListByTeacherId(teacherId));
+		response.setData(examService.getExamListByTeacherId(teacherId, examType, className));
 		return ResponseEntity.ok().body(response);
 	}
 	

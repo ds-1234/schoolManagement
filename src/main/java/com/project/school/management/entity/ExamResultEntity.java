@@ -10,7 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name="exam_result")
 public class ExamResultEntity {
@@ -18,9 +19,6 @@ public class ExamResultEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "student_id")
-	private Long studentId;
 	
 	@Column(name = "teacher_id")
 	private Long teacherId;
@@ -30,12 +28,6 @@ public class ExamResultEntity {
 	
 	@Column(name = "subject_id")
 	private Long subjectId;
-	
-	@Column(name = "subject_marks")
-	private String subjectMarks;
-	
-	@Column(name = "remarks")
-	private String remarks;
 	
 	@Column(name = "status")
 	private Boolean isActive;

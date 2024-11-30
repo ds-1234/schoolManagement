@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.school.management.entity.ExamEntity;
 import com.project.school.management.entity.ExamResultEntity;
+import com.project.school.management.entity.StudentMarksEntity;
 import com.project.school.management.entity.SubjectWiseExamEntity;
 import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
@@ -24,9 +25,9 @@ public interface ExamService {
 
 	ExamResultEntity saveExamResult(ExamResultRequest examResultRequest);
 
-	List<ExamResultEntity> getExamResult();
+	List<StudentMarksEntity> getExamResult();
 
-	List<ExamResultEntity> getExamListByTeacherId(Long teacherId);
+	List<StudentMarksEntity> getExamListByTeacherId(Long teacherId, Long examType, Long className);
 
 	List<ExamResultEntity> getExamListByStudentId(Long studentId);
 

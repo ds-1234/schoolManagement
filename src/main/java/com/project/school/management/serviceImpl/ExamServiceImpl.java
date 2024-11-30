@@ -7,12 +7,15 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.school.management.dto.StudentMarksDto;
 import com.project.school.management.entity.ExamEntity;
 import com.project.school.management.entity.ExamResultEntity;
+import com.project.school.management.entity.StudentMarksEntity;
 import com.project.school.management.entity.SubjectWiseExamEntity;
 import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.repository.ExamRepository;
 import com.project.school.management.repository.ExamResultRepository;
+import com.project.school.management.repository.StudentMarksRepository;
 import com.project.school.management.repository.SubjectWiseExamRepository;
 import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
@@ -29,6 +32,9 @@ public class ExamServiceImpl implements ExamService{
 	
 	@Autowired
 	private ExamResultRepository examResultRepository;
+	
+	@Autowired
+	private StudentMarksRepository studentMarksRepository;
 
 	@Override
 	public ExamEntity saveExam(ExamScheduleRequest examScheduleRequest) {
@@ -96,33 +102,40 @@ public class ExamServiceImpl implements ExamService{
 	@Override
 	public ExamResultEntity saveExamResult(ExamResultRequest examResultRequest) {
 		ExamResultEntity entity = new ExamResultEntity();
-		if(!Objects.isNull(examResultRequest.getId())) {
-			entity.setId(examResultRequest.getId());
-		}
-		entity.setClassName(examResultRequest.getClassName());
-		entity.setRemarks(examResultRequest.getRemarks());
-		entity.setStudentId(examResultRequest.getStudentId());
-		entity.setSubjectId(examResultRequest.getSubject());
-		entity.setSubjectMarks(examResultRequest.getSubjectMarks());
 		entity.setTeacherId(examResultRequest.getTeacherid());
+		entity.setClassName(examResultRequest.getClassName());
+		entity.setSubjectId(examResultRequest.getSubject());
 		entity.setIsActive(examResultRequest.getIsActive());
 		entity.setExamType(examResultRequest.getExamType());
-		return examResultRepository.save(entity);
+		
+		ExamResultEntity savedExamResult = examResultRepository.save(entity);
+		
+		 for (StudentMarksDto studentMarksDto : examResultRequest.getStudentMarksMapping()) {
+			 StudentMarksEntity studentMarks = new StudentMarksEntity();
+	            studentMarks.setStudentId(studentMarksDto.getStudentId());
+	            studentMarks.setExamMarks(studentMarksDto.getExamMarks());
+	            studentMarks.setRemarks(studentMarksDto.getRemarks());
+	            studentMarks.setExamData(savedExamResult);
+	            studentMarksRepository.save(studentMarks);
+	        }
+		return savedExamResult;
+		
 	}
 
 	@Override
-	public List<ExamResultEntity> getExamResult() {
-		return examResultRepository.findAll();
+	public List<StudentMarksEntity> getExamResult() {
+		return studentMarksRepository.findAll();
 	}
 
 	@Override
-	public List<ExamResultEntity> getExamListByTeacherId(Long teacherId) {
-		return examResultRepository.findAllByTeacherId(teacherId);
+	public List<StudentMarksEntity> getExamListByTeacherId(Long teacherId, Long examType, Long className) {
+		ExamResultEntity entity =  examResultRepository.findByTeacherIdAndExamTypeIdAndClassName(teacherId, examType, className);
+		return studentMarksRepository.findAllByExamResultId(entity.getId());
 	}
 
 	@Override
 	public List<ExamResultEntity> getExamListByStudentId(Long studentId) {
-		return examResultRepository.findAllByStudentId(studentId);
+		return examResultRepository.findAll();
 	}
 
 	@Override
