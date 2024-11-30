@@ -17,6 +17,7 @@ import com.project.school.management.repository.LeaveApplicationRepository;
 import com.project.school.management.repository.LeavesRepository;
 import com.project.school.management.request.LeaveApplicationRequest;
 import com.project.school.management.request.LeaveRequest;
+import com.project.school.management.request.UpdateLeavesStatusRequest;
 import com.project.school.management.service.LeavesService;
 import com.project.school.management.utility.Utils;
 @Service
@@ -107,18 +108,18 @@ public class LeaveServiceImpl implements LeavesService{
 	}
 
 	@Override
-	public String updateLeaves(Long id, String leaveStatus) {
-		LeaveApplicationEntity dbData = leaveApplicationRepository.findById(id).orElseThrow(()-> new InvalidArgumentException("Data is not present by given id"));
-		if(leaveStatus.equalsIgnoreCase("Approved")) {
+	public LeaveApplicationEntity updateLeaves(UpdateLeavesStatusRequest updateLeavesStatusRequest) {
+		LeaveApplicationEntity dbData = leaveApplicationRepository.findById(updateLeavesStatusRequest.getId()).orElseThrow(()-> new InvalidArgumentException("Data is not present by given id"));
+		if(updateLeavesStatusRequest.getLeaveStatus().equalsIgnoreCase("Approved")) {
 			dbData.setLeaveStatus(Message.LEAVE_APPROVED);
-		}else if(leaveStatus.equalsIgnoreCase("Rejected")) {
+		}else if(updateLeavesStatusRequest.getLeaveStatus().equalsIgnoreCase("Rejected")) {
 			dbData.setLeaveStatus(Message.LEAVE_REJECTED);
+			dbData.setLeaveRejectionReason(updateLeavesStatusRequest.getLeaveRejectionReason());
 		}else {
-			dbData.setLeaveStatus(leaveStatus);
+			dbData.setLeaveStatus(updateLeavesStatusRequest.getLeaveStatus());
 		}
-		
 		leaveApplicationRepository.save(dbData);
-		return "Data updated successfully";
+		return dbData;
 	}
 
 }

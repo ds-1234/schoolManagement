@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.request.LeaveApplicationRequest;
 import com.project.school.management.request.LeaveRequest;
+import com.project.school.management.request.UpdateLeavesStatusRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.LeavesService;
 
@@ -93,11 +94,11 @@ public class LeaveController {
 		return ResponseEntity.ok().body(response);
 	}
 	
-	@PostMapping("updateLeavesStatus/{id}")
-	public ResponseEntity<Response> updateLeaves(@PathVariable Long id, @RequestParam String leaveStatus) {
+	@PostMapping("updateLeavesStatus")
+	public ResponseEntity<Response> updateLeaves(@RequestBody UpdateLeavesStatusRequest updateLeavesStatusRequest) {
 		Response response = new Response();
 		response.succeed();
-		response.setData(leavesService.updateLeaves(id, leaveStatus));
+		response.setData(leavesService.updateLeaves(updateLeavesStatusRequest));
 		return ResponseEntity.ok().body(response);
 	}
 

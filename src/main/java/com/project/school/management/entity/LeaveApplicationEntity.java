@@ -53,5 +53,8 @@ public class LeaveApplicationEntity {
 	
 	@Column(name = "leave_status", nullable = false)
 	private String leaveStatus;
+	
+	@Column(name = "leave_rejection_reason", nullable = false)
+	private String leaveRejectionReason;
 
 }

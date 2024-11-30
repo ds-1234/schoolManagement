@@ -6,6 +6,7 @@ import com.project.school.management.entity.LeaveApplicationEntity;
 import com.project.school.management.entity.LeaveEntity;
 import com.project.school.management.request.LeaveApplicationRequest;
 import com.project.school.management.request.LeaveRequest;
+import com.project.school.management.request.UpdateLeavesStatusRequest;
 
 public interface LeavesService {
 
@@ -23,6 +24,6 @@ public interface LeavesService {
 
 	LeaveApplicationEntity getLeavesApplicationById(Long id);
 
-	String updateLeaves(Long id, String leaveStatus);
+	LeaveApplicationEntity updateLeaves(UpdateLeavesStatusRequest updateLeavesStatusRequest);
 
 }
