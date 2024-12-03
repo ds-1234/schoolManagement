@@ -39,5 +39,23 @@ public class TeacherInfoController {
 		return ResponseEntity.ok().body(response);
 
 	}
+	
+	@GetMapping("getClassSubjectInfo/{id}")
+	public ResponseEntity<Object> getClassSubjectInfo(@PathVariable String id) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(teacherInfoService.getClassSubjectInfo(id));
+		return ResponseEntity.ok().body(response);
+
+	}
+	
+	@GetMapping("getClassSubjectInfoData")
+	public ResponseEntity<Object> getClassSubjectInfoData() {
+		Response response = new Response();
+		response.succeed();
+		response.setData(teacherInfoService.getClassSubjectInfoData());
+		return ResponseEntity.ok().body(response);
+
+	}
 
 }

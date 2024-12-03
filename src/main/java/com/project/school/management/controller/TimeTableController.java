@@ -25,7 +25,7 @@ public class TimeTableController {
 	private TimetableService timetableService;
 	
 	@PostMapping("/addTimeTable")
-    public ResponseEntity<Response> addTimetable(@RequestBody TimeTableEntity timeTableEntity) {
+    public ResponseEntity<Response> addTimetable(@RequestBody List<TimeTableEntity> timeTableEntity) {
 		Response response = new Response();
 		response.succeed();
 		response.setData(timetableService.addTimetable(timeTableEntity));

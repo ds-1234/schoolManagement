@@ -6,7 +6,7 @@ import com.project.school.management.entity.TimeTableEntity;
 
 public interface TimetableService {
 
-	TimeTableEntity addTimetable(TimeTableEntity timeTableEntity);
+	List<TimeTableEntity> addTimetable(List<TimeTableEntity> timeTableEntity);
 
 	List<TimeTableEntity> getTimeTable();
 

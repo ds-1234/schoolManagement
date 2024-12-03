@@ -11,5 +11,7 @@ import com.project.school.management.entity.ClassSubjectEntity;
 public interface ClassSubjectRepository extends JpaRepository<ClassSubjectEntity, Long> {
 
 	List<ClassSubjectEntity> findByTeacherId(String id);
+	
+	List<ClassSubjectEntity> findByClassId(String id);
 
 }

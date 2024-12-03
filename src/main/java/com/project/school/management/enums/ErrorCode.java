@@ -19,6 +19,8 @@ public enum ErrorCode {
 	INVALID_PHONE_NUMBER,
 
 	DATA_ALREADY_EXIST,
+	
+	INACTIVE_USER,
 
 	UNKNOWN;
 

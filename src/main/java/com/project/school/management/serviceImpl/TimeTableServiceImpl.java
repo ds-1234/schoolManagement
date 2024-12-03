@@ -22,8 +22,8 @@ public class TimeTableServiceImpl implements TimetableService {
     private ObjectMapper objectMapper;
 
 	@Override
-	public TimeTableEntity addTimetable(TimeTableEntity timeTableEntity) {
-		return timetableRepository.save(timeTableEntity);
+	public List<TimeTableEntity> addTimetable(List<TimeTableEntity> timeTableEntity) {
+		return timetableRepository.saveAll(timeTableEntity);
 	}
 
 	@Override

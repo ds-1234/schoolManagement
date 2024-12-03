@@ -18,6 +18,7 @@ import com.project.school.management.constant.Message;
 import com.project.school.management.entity.UserEntity;
 import com.project.school.management.enums.ErrorCode;
 import com.project.school.management.exception.AccessDenied;
+import com.project.school.management.exception.InactiveUserException;
 import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.exception.InvalidPhoneException;
 import com.project.school.management.exception.UserNotFoundException;
@@ -101,6 +102,10 @@ public class UserServiceImpl implements UserService {
 		UserEntity opUser = userRepository.findByUserId(loginRequest.getUserName());
 		if (ObjectUtils.isEmpty(opUser) ) {
 			throw new UserNotFoundException();
+		}
+		
+		if (ObjectUtils.isEmpty(opUser.getIsActive()) || !opUser.getIsActive() ) {
+			throw new InactiveUserException();
 		}
 //		UserEntity dbUser = opUser.get();
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
