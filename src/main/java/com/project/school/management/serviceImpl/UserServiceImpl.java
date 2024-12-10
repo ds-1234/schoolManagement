@@ -183,7 +183,6 @@ public class UserServiceImpl implements UserService {
 		}
 		UserEntity user = userContainer.get();
 		
-		//BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		user.setFirstName(userRequest.getFirstName());
 		user.setLastName(userRequest.getLastName());
 		user.setFatherName(userRequest.getFatherName());
@@ -192,8 +191,6 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userRequest.getEmail());
 		user.setPhone(userRequest.getPhone());
 		user.setGender(userRequest.getGender());
-		//user.setPassword(bCrypt.encode(userRequest.getPassword()));
-		//user.setUserId(this.generateUserId());
 		user.setHouseNumber(userRequest.getHouseNumber());
 		user.setStreet(userRequest.getStreet());
 		user.setCity(userRequest.getCity());

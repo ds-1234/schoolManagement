@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.school.management.exception.InvalidRequestException;
 import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
+import com.project.school.management.request.UpdateExamScheduleRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.ExamService;
 
@@ -35,6 +36,17 @@ public class ExamController {
 		Response response = new Response();
 		response.succeed();
 		response.setData(examService.saveExam(examScheduleRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@PostMapping("updateExam")
+	public ResponseEntity<Response> updateExam(@RequestBody UpdateExamScheduleRequest updateExamScheduleRequest) {
+		if(Objects.isNull(updateExamScheduleRequest.getId())) {
+			throw new InvalidRequestException("Given Id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.updateExam(updateExamScheduleRequest));
 		return ResponseEntity.ok().body(response);
 	}
 	

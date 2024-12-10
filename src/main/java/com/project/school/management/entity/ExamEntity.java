@@ -1,5 +1,6 @@
 package com.project.school.management.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import io.micrometer.common.lang.NonNull;
@@ -30,6 +31,10 @@ public class ExamEntity {
 	@NonNull
     @Column(name = "exam_name")
     private Long examName;
+	
+	@NonNull
+    @Column(name = "created_date")
+    private LocalDate createdDate;
 
 	@Size(min =1)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

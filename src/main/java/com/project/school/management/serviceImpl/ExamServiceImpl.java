@@ -1,5 +1,6 @@
 package com.project.school.management.serviceImpl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import com.project.school.management.repository.SubjectWiseExamRepository;
 import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.request.SubjectWiseExamList;
+import com.project.school.management.request.UpdateExamScheduleRequest;
 import com.project.school.management.service.ExamService;
 @Service
 public class ExamServiceImpl implements ExamService{
@@ -44,6 +46,7 @@ public class ExamServiceImpl implements ExamService{
 		}
 		entity.setClassName(examScheduleRequest.getClassName());
 		entity.setExamName(examScheduleRequest.getExamName());
+		entity.setCreatedDate(LocalDate.now());
 		List<SubjectWiseExamList> list = examScheduleRequest.getSubjectWiseExamList();
 		List<SubjectWiseExamEntity> subjectExamList = new ArrayList<>();
 		for(SubjectWiseExamList data :list) {
@@ -81,8 +84,12 @@ public class ExamServiceImpl implements ExamService{
 	public Object deleteExam(Long id) {
 		ExamEntity entity = examRepository.findById(id).
 				orElseThrow(()-> new InvalidArgumentException("Given id is invalid or data not present"));
-		examRepository.delete(entity);
-		return "Exam deleted successfully..";
+		if(entity.getSubjectWiseExamList().isEmpty()) {
+			examRepository.delete(entity);
+			return "Exam deleted successfully..";
+		}
+		return "Please delete exam list first, linked with exam schedule";
+		
 	}
 
 	@Override
@@ -143,5 +150,23 @@ public class ExamServiceImpl implements ExamService{
 		return examResultRepository.findById(id).
 				orElseThrow(()-> new InvalidArgumentException("Data is empty or id is invalid"));
 	}
+	
+	@Override
+	public ExamEntity updateExam(UpdateExamScheduleRequest updateExamScheduleRequest) {
+		ExamEntity entity = examRepository.findById(updateExamScheduleRequest.getId()).orElseThrow(()->  new IllegalArgumentException("Data no present by given Id"));
+		List<SubjectWiseExamEntity> subjectList = entity.getSubjectWiseExamList();
+		SubjectWiseExamEntity newAddedExam = new SubjectWiseExamEntity();
+		newAddedExam.setSubject(updateExamScheduleRequest.getSubjectWiseExamList().getSubject());
+		newAddedExam.setStartTime(updateExamScheduleRequest.getSubjectWiseExamList().getStartTime());
+		newAddedExam.setEndTime(updateExamScheduleRequest.getSubjectWiseExamList().getEndTime());
+		newAddedExam.setMinMarks(updateExamScheduleRequest.getSubjectWiseExamList().getMinMarks());
+		newAddedExam.setMaxMarks(updateExamScheduleRequest.getSubjectWiseExamList().getMaxMarks());
+		newAddedExam.setExamDate(updateExamScheduleRequest.getSubjectWiseExamList().getExamDate());
+		newAddedExam.setDuration(updateExamScheduleRequest.getSubjectWiseExamList().getDuration());
+		subjectList.add(newAddedExam);
+		entity.setSubjectWiseExamList(subjectList);
+		return examRepository.save(entity);
+	}
+
 
 }
