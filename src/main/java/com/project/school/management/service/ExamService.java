@@ -8,6 +8,7 @@ import com.project.school.management.entity.StudentMarksEntity;
 import com.project.school.management.entity.SubjectWiseExamEntity;
 import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
+import com.project.school.management.request.StudentExamResultRequest;
 import com.project.school.management.request.UpdateExamScheduleRequest;
 
 public interface ExamService {
@@ -32,7 +33,7 @@ public interface ExamService {
 
 	List<ExamResultEntity> getExamListByStudentId(Long studentId);
 
-	ExamResultEntity getExamResultById(Long id);
+	StudentMarksEntity getExamResultById(StudentExamResultRequest studentExamResultRequest);
 
 	ExamEntity updateExam(UpdateExamScheduleRequest updateExamScheduleRequest);
 

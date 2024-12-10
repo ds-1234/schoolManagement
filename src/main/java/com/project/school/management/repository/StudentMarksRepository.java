@@ -13,5 +13,8 @@ public interface StudentMarksRepository extends JpaRepository<StudentMarksEntity
 	@Query(value = "select * from student_marks", nativeQuery = true)
 	List<StudentMarksEntity> findAllByExamResultId(Long id);
 
+	@Query(value = "Select * from student_marks where id=:id and student_id=:studentId", nativeQuery = true)
+	StudentMarksEntity getByIdAndStudentId(Long id, Long studentId);
+
 
 }

@@ -20,6 +20,7 @@ import com.project.school.management.repository.StudentMarksRepository;
 import com.project.school.management.repository.SubjectWiseExamRepository;
 import com.project.school.management.request.ExamResultRequest;
 import com.project.school.management.request.ExamScheduleRequest;
+import com.project.school.management.request.StudentExamResultRequest;
 import com.project.school.management.request.SubjectWiseExamList;
 import com.project.school.management.request.UpdateExamScheduleRequest;
 import com.project.school.management.service.ExamService;
@@ -146,9 +147,8 @@ public class ExamServiceImpl implements ExamService{
 	}
 
 	@Override
-	public ExamResultEntity getExamResultById(Long id) {
-		return examResultRepository.findById(id).
-				orElseThrow(()-> new InvalidArgumentException("Data is empty or id is invalid"));
+	public StudentMarksEntity getExamResultById(StudentExamResultRequest studentExamResultRequest) {
+		return studentMarksRepository.getByIdAndStudentId(studentExamResultRequest.getId(), studentExamResultRequest.getStudentId()); 
 	}
 	
 	@Override
