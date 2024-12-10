@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ExamResultRequest {
-	
+	@NonNull
+	Long id;
 	
 	@NonNull
 	Long teacherid;

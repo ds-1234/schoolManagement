@@ -110,6 +110,7 @@ public class ExamServiceImpl implements ExamService{
 	@Override
 	public ExamResultEntity saveExamResult(ExamResultRequest examResultRequest) {
 		ExamResultEntity entity = new ExamResultEntity();
+		entity.setId(examResultRequest.getId());
 		entity.setTeacherId(examResultRequest.getTeacherid());
 		entity.setClassName(examResultRequest.getClassName());
 		entity.setSubjectId(examResultRequest.getSubject());
@@ -120,6 +121,7 @@ public class ExamServiceImpl implements ExamService{
 		
 		 for (StudentMarksDto studentMarksDto : examResultRequest.getStudentMarksMapping()) {
 			 StudentMarksEntity studentMarks = new StudentMarksEntity();
+			 	studentMarks.setId(studentMarksDto.getId());
 	            studentMarks.setStudentId(studentMarksDto.getStudentId());
 	            studentMarks.setExamMarks(studentMarksDto.getExamMarks());
 	            studentMarks.setRemarks(studentMarksDto.getRemarks());
