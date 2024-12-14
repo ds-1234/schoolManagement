@@ -2,7 +2,9 @@ package com.project.school.management.serviceImpl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +16,22 @@ import com.project.school.management.entity.ExamResultEntity;
 import com.project.school.management.entity.StudentMarksEntity;
 import com.project.school.management.entity.SubjectWiseExamEntity;
 import com.project.school.management.exception.InvalidArgumentException;
+import com.project.school.management.repository.CustomRepository;
 import com.project.school.management.repository.ExamRepository;
 import com.project.school.management.repository.ExamResultRepository;
 import com.project.school.management.repository.StudentMarksRepository;
 import com.project.school.management.repository.SubjectWiseExamRepository;
 import com.project.school.management.request.ExamResultRequest;
+import com.project.school.management.request.ExamResultRequestForAdmin;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.request.StudentExamResultRequest;
 import com.project.school.management.request.SubjectWiseExamList;
 import com.project.school.management.request.UpdateExamScheduleRequest;
+import com.project.school.management.response.ExamResultResponseForAdmin;
+import com.project.school.management.response.ExamResultResponseForAdmin.SubjectResult;
 import com.project.school.management.service.ExamService;
+
+import jakarta.persistence.Tuple;
 @Service
 public class ExamServiceImpl implements ExamService{
 	
@@ -38,6 +46,9 @@ public class ExamServiceImpl implements ExamService{
 	
 	@Autowired
 	private StudentMarksRepository studentMarksRepository;
+	
+//	@Autowired
+//	private CustomRepository customRepository;
 
 	@Override
 	public ExamEntity saveExam(ExamScheduleRequest examScheduleRequest) {
@@ -168,6 +179,30 @@ public class ExamServiceImpl implements ExamService{
 		subjectList.add(newAddedExam);
 		entity.setSubjectWiseExamList(subjectList);
 		return examRepository.save(entity);
+	}
+
+	@Override
+	public Map<String, List<SubjectResult>> getExamResultForAdmin(ExamResultRequestForAdmin examResultRequestForAdmin) {
+		List<Tuple> results = examResultRepository.findStudentResults(
+	            examResultRequestForAdmin.getClassName(),
+	            examResultRequestForAdmin.getExamType());
+
+	    Map<String, List<SubjectResult>> resultMap = new HashMap<>();
+
+	    for (Tuple tuple : results) {
+	        String firstName = tuple.get("first_name", String.class);
+	        String lastName = tuple.get("last_name", String.class);
+	        String subjectName = tuple.get("subject", String.class);
+	        Long examMarks = tuple.get("exam_marks", Long.class);
+	        String remarks = tuple.get("remarks", String.class);
+
+	        String fullName = firstName + " " + lastName;
+	        SubjectResult subjectResult = new SubjectResult(subjectName, examMarks, remarks);
+
+	        resultMap.computeIfAbsent(fullName, k -> new ArrayList<>()).add(subjectResult);
+	    }
+
+	    return resultMap;
 	}
 
 

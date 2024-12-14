@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.school.management.exception.InvalidRequestException;
 import com.project.school.management.request.ExamResultRequest;
+import com.project.school.management.request.ExamResultRequestForAdmin;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.request.StudentExamResultRequest;
 import com.project.school.management.request.UpdateExamScheduleRequest;
@@ -152,6 +153,17 @@ public class ExamController {
 		Response response = new Response();
 		response.succeed();
 		response.setData(examService.getExamResultById(studentExamResultRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getExamResultForAdmin")
+	public ResponseEntity<Response> getExamResultForAdmin(@RequestBody ExamResultRequestForAdmin examResultRequestForAdmin ) {
+		if(Objects.isNull(examResultRequestForAdmin)) {
+			throw new InvalidRequestException("Given id is null or empty");
+		}
+		Response response = new Response();
+		response.succeed();
+		response.setData(examService.getExamResultForAdmin(examResultRequestForAdmin));
 		return ResponseEntity.ok().body(response);
 	}
 	

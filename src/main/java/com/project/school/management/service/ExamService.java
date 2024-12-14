@@ -1,15 +1,18 @@
 package com.project.school.management.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.project.school.management.entity.ExamEntity;
 import com.project.school.management.entity.ExamResultEntity;
 import com.project.school.management.entity.StudentMarksEntity;
 import com.project.school.management.entity.SubjectWiseExamEntity;
 import com.project.school.management.request.ExamResultRequest;
+import com.project.school.management.request.ExamResultRequestForAdmin;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.request.StudentExamResultRequest;
 import com.project.school.management.request.UpdateExamScheduleRequest;
+import com.project.school.management.response.ExamResultResponseForAdmin;
 
 public interface ExamService {
 
@@ -36,5 +39,7 @@ public interface ExamService {
 	StudentMarksEntity getExamResultById(StudentExamResultRequest studentExamResultRequest);
 
 	ExamEntity updateExam(UpdateExamScheduleRequest updateExamScheduleRequest);
+
+	Map<String, List<ExamResultResponseForAdmin.SubjectResult>> getExamResultForAdmin(ExamResultRequestForAdmin examResultRequestForAdmin);
 
 }
