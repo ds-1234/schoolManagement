@@ -12,9 +12,15 @@ import org.springframework.stereotype.Service;
 import com.project.school.management.constant.Message;
 import com.project.school.management.entity.LeaveApplicationEntity;
 import com.project.school.management.entity.LeaveEntity;
+import com.project.school.management.entity.Role;
+import com.project.school.management.entity.UserEntity;
+import com.project.school.management.entity.UserLeaveCounterEntity;
 import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.repository.LeaveApplicationRepository;
+import com.project.school.management.repository.LeaveCounterRepository;
 import com.project.school.management.repository.LeavesRepository;
+import com.project.school.management.repository.RoleRepository;
+import com.project.school.management.repository.UserRepository;
 import com.project.school.management.request.LeaveApplicationRequest;
 import com.project.school.management.request.LeaveRequest;
 import com.project.school.management.request.UpdateLeavesStatusRequest;
@@ -31,6 +37,15 @@ public class LeaveServiceImpl implements LeavesService{
 	
 	@Autowired
 	private LeaveApplicationRepository leaveApplicationRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private LeaveCounterRepository leaveCounterRepository;
 
 	@Override
 	public LeaveEntity saveLeaves(LeaveRequest leaveRequest) {
@@ -112,6 +127,17 @@ public class LeaveServiceImpl implements LeavesService{
 		LeaveApplicationEntity dbData = leaveApplicationRepository.findById(updateLeavesStatusRequest.getId()).orElseThrow(()-> new InvalidArgumentException("Data is not present by given id"));
 		if(updateLeavesStatusRequest.getLeaveStatus().equalsIgnoreCase("Approved")) {
 			dbData.setLeaveStatus(Message.LEAVE_APPROVED);
+			UserEntity entity = userRepository.findById(dbData.getSenderId())
+					.orElseThrow(()-> new InvalidArgumentException("Data is not available by senderId"));
+			Role role = roleRepository.findById(entity.getRole())
+					.orElseThrow(()-> new InvalidArgumentException("Data not present by given role id"));
+			if((!role.getName().equalsIgnoreCase("student")) || (!role.getName().equalsIgnoreCase("students"))) {
+				UserLeaveCounterEntity assignedLeaves = leaveCounterRepository.findByStaffIdAndLeaveTypes(dbData.getSenderId(), dbData.getLeaveType());
+				Long finalCount = assignedLeaves.getLeaveCount()-dbData.getLeaveDayDuration();
+				assignedLeaves.setLeaveCount(finalCount);
+				leaveCounterRepository.save(assignedLeaves);
+			}
+			
 		}else if(updateLeavesStatusRequest.getLeaveStatus().equalsIgnoreCase("Rejected")) {
 			dbData.setLeaveStatus(Message.LEAVE_REJECTED);
 			dbData.setLeaveRejectionReason(updateLeavesStatusRequest.getLeaveRejectionReason());

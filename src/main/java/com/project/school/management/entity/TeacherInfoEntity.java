@@ -3,6 +3,8 @@ package com.project.school.management.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.project.school.management.dto.LeaveCounterDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,5 +59,23 @@ public class TeacherInfoEntity {
 	
 	@Column(name = "department")
 	private Long department;
+	
+	@Column(name = "epf_number")
+	private String epfNumber;
+	
+	@Column(name = "basic_salary")
+	private String basicSalary;
+	
+	@Column(name = "contract_type")
+	private String contractType;
+	
+	@Column(name = "work_shift")
+	private String workShift;
+	
+	@Column(name = "work_location")
+	private String workLocation;
+	
+	@Column(name = "employee_number")
+	private String employeeNumber;
 
 }
