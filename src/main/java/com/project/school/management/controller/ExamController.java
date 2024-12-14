@@ -156,7 +156,7 @@ public class ExamController {
 		return ResponseEntity.ok().body(response);
 	}
 	
-	@GetMapping("getExamResultForAdmin")
+	@PostMapping("getExamResultForAdmin")
 	public ResponseEntity<Response> getExamResultForAdmin(@RequestBody ExamResultRequestForAdmin examResultRequestForAdmin ) {
 		if(Objects.isNull(examResultRequestForAdmin)) {
 			throw new InvalidRequestException("Given id is null or empty");
