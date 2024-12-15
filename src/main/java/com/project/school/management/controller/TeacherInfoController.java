@@ -40,6 +40,15 @@ public class TeacherInfoController {
 
 	}
 	
+	@GetMapping("getTeacherInfoList")
+	public ResponseEntity<Object> getTeacherInfoList() {
+		Response response = new Response();
+		response.succeed();
+		response.setData(teacherInfoService.getTeacherInfoList());
+		return ResponseEntity.ok().body(response);
+
+	}
+	
 	@GetMapping("getClassSubjectInfo/{id}")
 	public ResponseEntity<Object> getClassSubjectInfo(@PathVariable String id) {
 		Response response = new Response();

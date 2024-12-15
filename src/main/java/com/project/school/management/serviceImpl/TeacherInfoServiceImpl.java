@@ -86,4 +86,9 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		return classSubjectRepository.findAll();
 	}
 
+	@Override
+	public List<TeacherInfoEntity> getTeacherInfoList() {
+		return teacherInfoRepository.findAll();
+	}
+
 }
