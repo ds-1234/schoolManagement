@@ -48,7 +48,7 @@ public class LeaveApplicationEntity {
 	@Column(name = "appliedOn", nullable = false)
 	private LocalDate appliedOn;
 	
-	@Column(name = "leave_reason", nullable = false)
+	@Column(name = "leave_reason")
 	private String leaveReason;
 	
 	@Column(name = "leave_status", nullable = false)
