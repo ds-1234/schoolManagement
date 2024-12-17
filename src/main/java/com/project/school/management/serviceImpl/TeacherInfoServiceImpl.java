@@ -67,11 +67,12 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		List<WorkExperience> wrokExperienceList = workExperienceRepository.findByTeacherId(id);
 		List<Qualification> qualificationList= qualificationRepository.findByTeacherId(id);
 		List<ClassSubjectEntity> classSubjectList= classSubjectRepository.findByTeacherId(id);
-		
-		teacherInfoDto = objectMapper.convertValue(entity, TeacherInfoDto.class);
-		teacherInfoDto.setQualificationList(qualificationList);
-		teacherInfoDto.setWorkExperience(wrokExperienceList);
-		teacherInfoDto.setClassSubjectEntity(classSubjectList);
+		if(ObjectUtils.isNotEmpty(entity)) {
+			teacherInfoDto = objectMapper.convertValue(entity, TeacherInfoDto.class);
+			teacherInfoDto.setQualificationList(qualificationList);
+			teacherInfoDto.setWorkExperience(wrokExperienceList);
+			teacherInfoDto.setClassSubjectEntity(classSubjectList);
+		}
 		return teacherInfoDto;
 		
 	}

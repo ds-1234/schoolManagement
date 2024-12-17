@@ -6,6 +6,7 @@ import com.project.school.management.entity.ClassSubjectEntity;
 import com.project.school.management.entity.Qualification;
 import com.project.school.management.entity.WorkExperience;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
@@ -44,5 +45,17 @@ public class TeacherInfoDto {
 	private String branchName;
 	
 	private Long department;
+	
+	private String epfNumber;
+	
+	private String basicSalary;
+	
+	private String contractType;
+	
+	private String workShift;
+	
+	private String workLocation;
+	
+	private String employeeNumber;
 
 }

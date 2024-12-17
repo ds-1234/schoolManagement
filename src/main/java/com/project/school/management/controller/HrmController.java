@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.school.management.request.ExamScheduleRequest;
 import com.project.school.management.request.HrmDetailsDto;
+import com.project.school.management.request.PaySlipRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.HrmService;
 
@@ -38,5 +40,23 @@ public class HrmController {
 		response.setData(hrmService.getLeaveCounterDetailsById(staffId));
 		return ResponseEntity.ok().body(response);
 	}
+	
+	@PostMapping("paySlipCreator")
+	public ResponseEntity<Response> paySlipCreator(@RequestBody PaySlipRequest paySlipRequest) throws JsonProcessingException{
+		Response response = new Response();
+		response.succeed();
+		response.setData(hrmService.paySlipCreator(paySlipRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getPaySlipById/{staffId}")
+	public ResponseEntity<Response> getPaySlipById(@PathVariable Long staffId) throws JsonProcessingException{
+		Response response = new Response();
+		response.succeed();
+		response.setData(hrmService.getPaySlipById(staffId));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	
 
 }
