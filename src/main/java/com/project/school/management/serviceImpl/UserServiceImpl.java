@@ -89,6 +89,9 @@ public class UserServiceImpl implements UserService {
 
 		user.setRole(userRequest.getRole());
 		user.setSchool(userRequest.getSchool());
+		user.setBloodGroup(userRequest.getBloodGroup());
+		user.setReligion(userRequest.getReligion());
+		user.setCasteCategory(userRequest.getCasteCategory());
 		userRepository.save(user);
 		return user;
 
@@ -204,6 +207,9 @@ public class UserServiceImpl implements UserService {
 		user.setIsParent(userRequest.getIsParent());
 		user.setRole(userRequest.getRole());
 		user.setSchool(userRequest.getSchool());
+		user.setBloodGroup(userRequest.getBloodGroup());
+		user.setReligion(userRequest.getReligion());
+		user.setCasteCategory(userRequest.getCasteCategory());
 		userRepository.save(user);
 		return user;
 

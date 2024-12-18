@@ -69,5 +69,11 @@ public class UserRequest {
 	Long school;
 
 	Boolean isActive;
+	
+	String bloodGroup;
+	
+	String religion;
+	
+	String casteCategory;
 
 }
