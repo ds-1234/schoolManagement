@@ -26,6 +26,9 @@ public class StaffAttendanceStatusEntity {
 	@Column(name = "attendance_status")
 	private String attendanceStatus;
 	
+	@Column(name = "color_code")
+	private String colorCode;
+	
 	@Column(name = "status")
 	private Boolean isActive;
 

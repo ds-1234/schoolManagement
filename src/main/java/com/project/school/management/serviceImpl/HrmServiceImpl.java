@@ -40,6 +40,7 @@ public class HrmServiceImpl implements HrmService{
 		entity.setEpfNumber(hrmDetailsDto.getEpfNumber());
 		entity.setWorkLocation(hrmDetailsDto.getWorkLocation());
 		entity.setWorkShift(hrmDetailsDto.getWorkShift());
+		entity.setDateOfJoining(hrmDetailsDto.getDateOfJoining());
 		teacherInfoRepository.save(entity);
 		if(!entity.getEmployeeNumber().isBlank()) {
 			
@@ -106,8 +107,8 @@ public class HrmServiceImpl implements HrmService{
 	}
 
 	@Override
-	public List<PaymentEntity> getPaySlipById(Long staffId) throws JsonProcessingException {
-		return paymentRepository.findAllByUserTableId(staffId);
+	public List<PaymentEntity> getPaySlipById(String staffId, String payPeriod) throws JsonProcessingException {
+		return paymentRepository.findAllByUserTableIdAndPayPeriod(staffId, payPeriod);
 	}
 
 }

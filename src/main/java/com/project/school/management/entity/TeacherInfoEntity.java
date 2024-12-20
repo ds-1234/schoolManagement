@@ -1,6 +1,6 @@
 package com.project.school.management.entity;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import com.project.school.management.dto.LeaveCounterDto;
@@ -77,5 +77,17 @@ public class TeacherInfoEntity {
 	
 	@Column(name = "employee_number")
 	private String employeeNumber;
+	
+	@Column(name = "manager")
+	private Long manager;
+	
+	@Column(name = "reportee")
+	private Long reportee;
+	
+	@Column(name = "date_of_joining")
+	private Date dateOfJoining;
+	
+	@Column(name = "date_of_leaving")
+	private Date dateOfLeaving;
 
 }

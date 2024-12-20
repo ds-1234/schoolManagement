@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.school.management.dto.TeacherInfoDto;
+import com.project.school.management.request.StaffReporteeRequest;
 import com.project.school.management.response.Response;
 import com.project.school.management.service.TeacherInfoService;
 
@@ -65,6 +66,22 @@ public class TeacherInfoController {
 		response.setData(teacherInfoService.getClassSubjectInfoData());
 		return ResponseEntity.ok().body(response);
 
+	}
+	
+	@PostMapping("createStaffReportee")
+	public ResponseEntity<Response> createStaffReportee(@RequestBody StaffReporteeRequest staffReporteeRequest) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(teacherInfoService.createStaffReportee(staffReporteeRequest));
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getReporteeList/{managerId}")
+	public ResponseEntity<Response> getReporteeList(@PathVariable Long managerId) {
+		Response response = new Response();
+		response.succeed();
+		response.setData(teacherInfoService.getReporteeList(managerId));
+		return ResponseEntity.ok().body(response);
 	}
 
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 public class PaySlipRequest {
-	Long userTableId;
+	String userTableId;
 	String schoolName;
 	String schoolAddress;
 	String schoolCity;

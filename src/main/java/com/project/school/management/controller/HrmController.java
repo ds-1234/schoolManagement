@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -49,11 +50,11 @@ public class HrmController {
 		return ResponseEntity.ok().body(response);
 	}
 	
-	@GetMapping("getPaySlipById/{staffId}")
-	public ResponseEntity<Response> getPaySlipById(@PathVariable Long staffId) throws JsonProcessingException{
+	@PostMapping("getPaySlipById")
+	public ResponseEntity<Response> getPaySlipById(@RequestParam String staffId, @RequestParam String payPeriod) throws JsonProcessingException{
 		Response response = new Response();
 		response.succeed();
-		response.setData(hrmService.getPaySlipById(staffId));
+		response.setData(hrmService.getPaySlipById(staffId, payPeriod));
 		return ResponseEntity.ok().body(response);
 	}
 	

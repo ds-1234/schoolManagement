@@ -29,7 +29,7 @@ public class PaymentEntity {
 	private Long id;
 	
 	@Column(name = "user_table_id", nullable = false)
-	private Long userTableId;
+	private String userTableId;
 	
 	@Column(name = "school_name", nullable = false)
 	private String schoolName;

@@ -1,5 +1,6 @@
 package com.project.school.management.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -11,11 +12,15 @@ import com.project.school.management.dto.TeacherInfoDto;
 import com.project.school.management.entity.ClassSubjectEntity;
 import com.project.school.management.entity.Qualification;
 import com.project.school.management.entity.TeacherInfoEntity;
+import com.project.school.management.entity.UserEntity;
 import com.project.school.management.entity.WorkExperience;
+import com.project.school.management.exception.InvalidArgumentException;
 import com.project.school.management.repository.ClassSubjectRepository;
 import com.project.school.management.repository.QualificationRepository;
 import com.project.school.management.repository.TeacherInfoRepository;
+import com.project.school.management.repository.UserRepository;
 import com.project.school.management.repository.WorkExperienceRepository;
+import com.project.school.management.request.StaffReporteeRequest;
 import com.project.school.management.service.TeacherInfoService;
 
 import jakarta.transaction.Transactional;
@@ -34,6 +39,9 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	
 	@Autowired
 	private ClassSubjectRepository classSubjectRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -90,6 +98,31 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@Override
 	public List<TeacherInfoEntity> getTeacherInfoList() {
 		return teacherInfoRepository.findAll();
+	}
+
+	@Override
+	public String createStaffReportee(StaffReporteeRequest staffReporteeRequest) {
+		TeacherInfoEntity entity= teacherInfoRepository.findByTeacherId(staffReporteeRequest.getSeniorStaffId());
+		entity.setManager((long) 0);
+		TeacherInfoEntity entity1= teacherInfoRepository.findByTeacherId(staffReporteeRequest.getStaffId());
+		entity1.setReportee(Long.parseLong(staffReporteeRequest.getSeniorStaffId()));
+		teacherInfoRepository.save(entity);
+		teacherInfoRepository.save(entity1);
+		return "Manager assigned successfully";
+	}
+
+	@Override
+	public List<String> getReporteeList(Long managerId) {
+		List<TeacherInfoEntity> list = teacherInfoRepository.findAllByReportee(managerId);
+		List<String> userList = new ArrayList<>();
+		for(TeacherInfoEntity entity:list) {
+			UserEntity user = userRepository.findById(entity.getReportee())
+					.orElseThrow(()-> new InvalidArgumentException("User not present by given id"));
+			String userName = user.getFirstName() + " " +user.getLastName();
+			userList.add(userName);
+		}
+		
+		return userList;
 	}
 
 }

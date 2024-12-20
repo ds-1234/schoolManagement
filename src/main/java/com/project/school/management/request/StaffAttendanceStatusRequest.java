@@ -11,6 +11,7 @@ public class StaffAttendanceStatusRequest {
 	LocalTime startTime;
 	LocalTime endTime;
 	String attendanceStatus;
+	String colorCode;
 	Boolean isActive;
 
 }

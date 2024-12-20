@@ -16,6 +16,6 @@ public interface HrmService {
 
 	PaymentEntity paySlipCreator(PaySlipRequest paySlipRequest) throws JsonProcessingException;
 
-	List<PaymentEntity> getPaySlipById(Long staffId) throws JsonProcessingException;
+	List<PaymentEntity> getPaySlipById(String staffId, String payPeriod) throws JsonProcessingException;
 
 }

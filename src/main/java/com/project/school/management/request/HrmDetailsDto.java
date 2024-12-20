@@ -1,5 +1,6 @@
 package com.project.school.management.request;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.project.school.management.dto.LeaveCounterDto;
@@ -16,6 +17,7 @@ public class HrmDetailsDto {
 	String workShift;
 	String workLocation;
 	String employeeNumber;
+	Date dateOfJoining;
 	List<LeaveCounterDto> leaveCounterDto;
 
 }
