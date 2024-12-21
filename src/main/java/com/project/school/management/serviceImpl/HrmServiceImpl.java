@@ -3,6 +3,7 @@ package com.project.school.management.serviceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.project.school.management.repository.PaymentRepository;
 import com.project.school.management.repository.TeacherInfoRepository;
 import com.project.school.management.request.HrmDetailsDto;
 import com.project.school.management.request.PaySlipRequest;
+import com.project.school.management.response.PaySlipListResponse;
 import com.project.school.management.service.HrmService;
 @Service
 public class HrmServiceImpl implements HrmService{
@@ -109,6 +111,29 @@ public class HrmServiceImpl implements HrmService{
 	@Override
 	public List<PaymentEntity> getPaySlipById(String staffId, String payPeriod) throws JsonProcessingException {
 		return paymentRepository.findAllByUserTableIdAndPayPeriod(staffId, payPeriod);
+	}
+
+	@Override
+	public List<PaySlipListResponse> getPaySlipListById(String staffId) throws JsonProcessingException {
+		List<PaySlipListResponse> responseList = paymentRepository.findAllByUserTableId(staffId).stream()
+		        .map(entity -> {
+		            PaySlipListResponse response = new PaySlipListResponse();
+		            response.setId(entity.getId());
+		            response.setPayPeriod(entity.getPayPeriod());
+		            return response;
+		        })
+		        .sorted((response1, response2) -> Long.compare(response2.getId(), response1.getId()))  // Sort by ID in descending order
+		        .collect(Collectors.toList());
+
+		    // Check if the response list is empty and add a default response message
+		    if (responseList.isEmpty()) {
+		        PaySlipListResponse noDataResponse = new PaySlipListResponse();
+		        noDataResponse.setId(null);  // Or any default value
+		        noDataResponse.setPayPeriod("No salary slip available");
+		        responseList.add(noDataResponse);  // Add the "no data" message as a response
+		    }
+
+		    return responseList;
 	}
 
 }

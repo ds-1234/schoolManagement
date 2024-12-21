@@ -58,6 +58,14 @@ public class HrmController {
 		return ResponseEntity.ok().body(response);
 	}
 	
+	@GetMapping("getPaySlipListById/{staffId}")
+	public ResponseEntity<Response> getPaySlipListById(@PathVariable String staffId) throws JsonProcessingException{
+		Response response = new Response();
+		response.succeed();
+		response.setData(hrmService.getPaySlipListById(staffId));
+		return ResponseEntity.ok().body(response);
+	}
+	
 	
 
 }

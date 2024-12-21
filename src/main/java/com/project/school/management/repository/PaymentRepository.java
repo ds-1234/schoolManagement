@@ -16,4 +16,7 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Long>{
 	@Query(value = "select * from payment_entity where user_table_id=:staffId and pay_period=:payPeriod", nativeQuery = true)
 	List<PaymentEntity> findAllByUserTableIdAndPayPeriod(String staffId, String payPeriod);
 
+	@Transactional
+	List<PaymentEntity> findAllByUserTableId(String staffId);
+
 }
