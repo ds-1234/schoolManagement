@@ -136,4 +136,9 @@ public class HrmServiceImpl implements HrmService{
 		    return responseList;
 	}
 
+	@Override
+	public List<PaymentEntity> getPaySlipList() throws JsonProcessingException {
+		return paymentRepository.findAll();
+	}
+
 }

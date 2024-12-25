@@ -30,11 +30,12 @@ public class DataLoader implements CommandLineRunner{
 		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(3), "Student", true))));
 		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(4), "Teacher", true))));
 		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(5), "Parents", true))));
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(5), "Non-Teaching Staff", true))));
 	}
 
 	private UserEntity saveData(Role role) {
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		UserEntity userEntity = UserEntity.builder().id(role.getId()).firstName("Admin").lastName("").fatherName("").motherName("")
+		UserEntity userEntity = UserEntity.builder().id(role.getId()).firstName(role.getName()).lastName("last name").fatherName(role.getName()+"@father").motherName(role.getName()+"@mother")
 				.userId(role.getName()).dateOfBirth(new Date()).houseNumber("").street("").city(null).state(null).pinCode("")
 				.country(null).userName(role.getName().toLowerCase()).gender(Gender.Male).role(role.getId()).email(role.getName().toLowerCase() +"@gmail.com")
 				.phone("1234567890").password(bCrypt.encode(role.getName() +"@123")).isActive(true).build();

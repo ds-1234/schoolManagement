@@ -116,7 +116,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		List<TeacherInfoEntity> list = teacherInfoRepository.findAllByReportee(managerId);
 		List<String> userList = new ArrayList<>();
 		for(TeacherInfoEntity entity:list) {
-			UserEntity user = userRepository.findById(entity.getReportee())
+			UserEntity user = userRepository.findById(entity.getTeacherId())
 					.orElseThrow(()-> new InvalidArgumentException("User not present by given id"));
 			String userName = user.getFirstName() + " " +user.getLastName();
 			userList.add(userName);
