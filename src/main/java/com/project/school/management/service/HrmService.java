@@ -21,4 +21,6 @@ public interface HrmService {
 
 	List<PaySlipListResponse> getPaySlipListById(String staffId) throws JsonProcessingException;
 
+	List<PaymentEntity> getPaySlipList() throws JsonProcessingException;
+
 }
