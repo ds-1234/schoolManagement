@@ -28,5 +28,21 @@ public class AdminDashboardController {
 		return ResponseEntity.ok().body(response);
 	}
 	
+	@GetMapping("getTotalIncomeList")
+	public ResponseEntity<Object> getTotalIncomeList() throws IOException {
+		Response response = new Response();
+		response.succeed();
+		response.setData(adminDashboardService.getTotalIncomeList());
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("getTotalExpenseList")
+	public ResponseEntity<Object> getTotalExpenseList() throws IOException {
+		Response response = new Response();
+		response.succeed();
+		response.setData(adminDashboardService.getTotalExpenseList());
+		return ResponseEntity.ok().body(response);
+	}
+	
 
 }

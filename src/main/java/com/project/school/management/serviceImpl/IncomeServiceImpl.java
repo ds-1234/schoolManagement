@@ -7,8 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.school.management.entity.AmountCollections;
 import com.project.school.management.entity.IncomeEntity;
 import com.project.school.management.exception.InvalidRequestException;
+import com.project.school.management.repository.AmountCollectionRepository;
 import com.project.school.management.repository.IncomeRepository;
 import com.project.school.management.request.IncomeRequest;
 import com.project.school.management.service.IncomeService;
@@ -18,6 +20,9 @@ public class IncomeServiceImpl implements IncomeService{
 	
 	@Autowired
 	private IncomeRepository incomeRepository;
+	
+	@Autowired
+	private AmountCollectionRepository amountCollectionRepository;
 	
 	@Autowired
 	private Utils utils;
@@ -44,7 +49,13 @@ public class IncomeServiceImpl implements IncomeService{
 		entity.setPaymentMode(paymentMode);
 		entity.setDescription(incomeRequest.getDescription());
 		entity.setIsActive(incomeRequest.getIsActive());
-		return this.incomeRepository.save(entity);
+		incomeRepository.save(entity);
+		AmountCollections incomeCollection = new AmountCollections();
+		incomeCollection.setAmount(incomeRequest.getAmount());
+		incomeCollection.setDate(incomeRequest.getIncomeDate());
+		incomeCollection.setType("INCOME");
+		amountCollectionRepository.save(incomeCollection);
+		return entity;
 	}
 
 	@Override
