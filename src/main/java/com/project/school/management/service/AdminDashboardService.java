@@ -8,4 +8,8 @@ public interface AdminDashboardService {
 
 	Map<String, RoleUserStats> getCount();
 
+	Map<String, Object> getTotalIncomeList();
+
+	Map<String, Object> getTotalExpenseList();
+
 }

@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.school.management.entity.AmountCollections;
 import com.project.school.management.entity.FeesCollectionEntity;
-import com.project.school.management.entity.FeesGroupEntity;
 import com.project.school.management.exception.InvalidArgumentException;
+import com.project.school.management.repository.AmountCollectionRepository;
 import com.project.school.management.repository.FeesCollectionRepository;
 import com.project.school.management.request.FeesCollectionRequest;
 import com.project.school.management.service.FeesCollectionService;
@@ -25,6 +26,9 @@ public class FeesCollectionServiceImpl implements FeesCollectionService {
 	
 	@Autowired
 	private FeesCollectionRepository feesCollectionRepository;
+	
+	@Autowired
+	private AmountCollectionRepository amountCollectionRepository;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -44,12 +48,26 @@ public class FeesCollectionServiceImpl implements FeesCollectionService {
 			entity.setFeesCollectionId("FC"+feesCollectionId);
 			entity.setCollectionDate(LocalDate.now());
 			feesCollectionRepository.save(entity);
+			AmountCollections incomeCollection = new AmountCollections();
+			incomeCollection.setAmount(feesCollectionRequest.getFeeAmount());
+			incomeCollection.setDate(LocalDate.now());
+			incomeCollection.setType("INCOME");
+			if(feesCollectionRequest.getIsActive()==true) {
+				amountCollectionRepository.save(incomeCollection);
+			}
 			return entity;
 		} else {
 			FeesCollectionEntity dbData = feesCollectionRepository.findById(feesCollectionRequest.getId())
 					.orElseThrow(() -> new InvalidArgumentException("given id is invalid"));
 			objectMapper.updateValue(dbData, feesCollectionRequest);
 			feesCollectionRepository.save(dbData);
+			AmountCollections incomeCollection = new AmountCollections();
+			incomeCollection.setAmount(feesCollectionRequest.getFeeAmount());
+			incomeCollection.setDate(LocalDate.now());
+			incomeCollection.setType("INCOME");
+			if(feesCollectionRequest.getIsActive()==true) {
+				amountCollectionRepository.save(incomeCollection);
+			}
 			return dbData;
 
 		}

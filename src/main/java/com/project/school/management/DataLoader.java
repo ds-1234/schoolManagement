@@ -30,7 +30,7 @@ public class DataLoader implements CommandLineRunner{
 		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(3), "Student", true))));
 		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(4), "Teacher", true))));
 		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(5), "Parents", true))));
-		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(5), "Non-Teaching Staff", true))));
+		this.userRepository.save(saveData(this.roleRepository.save(new Role(Long.valueOf(6), "Non-Teaching Staff", true))));
 	}
 
 	private UserEntity saveData(Role role) {

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.school.management.entity.AmountCollections;
 import com.project.school.management.entity.ExpenseEntity;
 import com.project.school.management.exception.InvalidRequestException;
 import com.project.school.management.repository.ExpenseRepository;
@@ -45,7 +46,12 @@ public class ExpenseServiceImpl implements ExpenseService{
 		entity.setPayment_mode(expenseRequest.getPaymentMode());
 		entity.setDate(expenseRequest.getDate());
 		entity.setIsActive(expenseRequest.getIsActive());
-		return this.expenseRepository.save(entity);
+		expenseRepository.save(entity);
+		AmountCollections amount = new AmountCollections();
+		amount.setAmount(expenseRequest.getAmount());
+		amount.setDate(expenseRequest.getDate());
+		amount.setType("EXPENSE");
+		return entity;
 	}
 
 	@Override
